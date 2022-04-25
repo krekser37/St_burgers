@@ -1,0 +1,28 @@
+/* .Ingredients {
+  
+} */
+
+.IngredientsImage {
+  width: auto;
+}
+.IngredientsLists {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.IngredientsItem{
+    position: relative;
+}
+
+.IngredientsItemPrice{
+    display: flex;
+    justify-content: center;
+}
+
+.IngredientsPrice{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+

@@ -1,0 +1,31 @@
+.BurgerIngredients {
+    
+}
+
+.title {
+  line-height: 40px;
+}
+
+.list {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+}
+.ElementsName {
+  overflow-y: scroll;
+  max-height: 550px;
+  scroll-snap-type: x proximity;
+}
+
+.ElementsName::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ElementsName::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.ElementsName::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+  border: 3px solid #8585ad;
+}
