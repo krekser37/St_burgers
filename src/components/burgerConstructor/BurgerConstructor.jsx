@@ -7,7 +7,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ingredients}) => {
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>

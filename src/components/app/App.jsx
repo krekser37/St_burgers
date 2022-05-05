@@ -12,7 +12,7 @@ function App() {
       <AppHeader />
       <section className={Styles.appMain}>
         {<BurgerIngredients ingredients={data}/>} 
-        { <BurgerConstructor ingredients={data}/>}
+        {<BurgerConstructor ingredients={data}/>}
       </section>
     </div>
   );
