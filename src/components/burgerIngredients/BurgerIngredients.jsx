@@ -2,8 +2,6 @@ import React, { useMemo, useState } from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import PropTypes from "prop-types"; 
-import ingredientsDataPropTypes from "../utils/propTypes";
 
 const BurgerIngredients = ({ ingredients }) => {
   const [current, setCurrent] = useState("buns");
@@ -42,15 +40,11 @@ const BurgerIngredients = ({ ingredients }) => {
       </div>
       <div className={`${Styles.ElementsName}`}>
         <IngredientsList title="Булки" titleId="buns" ingredients={buns} />
-        <IngredientsList title="Соусы" titleId="sauces" ingredients={sauces} />
         <IngredientsList title="Начинки" titleId="mains" ingredients={mains} />
+        <IngredientsList title="Соусы" titleId="sauces" ingredients={sauces} />
       </div>
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes),
 };
 
 export default BurgerIngredients;
