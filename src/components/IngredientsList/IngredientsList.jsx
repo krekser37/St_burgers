@@ -1,8 +1,7 @@
 import React from "react";
 import Styles from "./IngredientsList.module.css";
 import IngredientsItem from "../IngregientsItem/IngredientsItem";
-
-
+import PropTypes from "prop-types"; 
 
 const IngredientsList = ({ title, titleId, ingredients }) => {
   /* const [data]  = this.props; */
@@ -14,15 +13,21 @@ const IngredientsList = ({ title, titleId, ingredients }) => {
       </h3>
       <div className={`${Styles.items}`}>
         {ingredients.map((ingredients) => {
-          return <IngredientsItem 
+          return (<IngredientsItem 
           ingredients={ingredients} 
           key = {ingredients._id}
           count = {1}
-          />
+          />)
         })}
       </div>
     </section>
   );
+};
+
+IngredientsList.propTypes = {
+  title: PropTypes.string.isRequired,
+  titleId: PropTypes.string.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 export default IngredientsList;
