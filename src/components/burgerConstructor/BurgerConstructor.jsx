@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Styles from "./BurgerConstructor.module.css";
 import {
   Button,
@@ -8,6 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types"; 
 import ingredientsDataPropTypes from "../utils/propTypes";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const BurgerConstructor = ({ ingredients }) => {
   const buns = useMemo(
@@ -19,6 +20,8 @@ const BurgerConstructor = ({ ingredients }) => {
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
   );
+
+  const [modal, setModal] = useState(false);
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
@@ -64,9 +67,10 @@ const BurgerConstructor = ({ ingredients }) => {
         <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={()=> setModal(true)}>
           Оформить заказ
         </Button>
+        <ModalOverlay visible={modal} setVisible= {setModal}/>
       </section>
     </section>
   );
