@@ -4,7 +4,7 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import PropTypes from "prop-types"; 
 
 const IngredientsItem = ({ ingredients, count }) => {
   const { name, price, image } = ingredients;
@@ -22,6 +22,11 @@ const IngredientsItem = ({ ingredients, count }) => {
       <Counter count={count} size="default" />
     </section>
   );
+};
+
+IngredientsItem.propTypes = {
+  ingredients: PropTypes.object.isRequired,
+  count: PropTypes.number,
 };
 
 export default IngredientsItem;

@@ -47,4 +47,8 @@ const BurgerIngredients = ({ ingredients }) => {
   );
 };
 
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
+};
+
 export default BurgerIngredients;

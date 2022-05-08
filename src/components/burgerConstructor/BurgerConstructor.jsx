@@ -82,4 +82,8 @@ const BurgerConstructor = ({ingredients}) => {
   );
 };
 
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
+};
+
 export default BurgerConstructor;
