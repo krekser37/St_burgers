@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Styles from "./BurgerConstructor.module.css";
 import {
   Button,
@@ -6,58 +6,68 @@ import {
   CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types"; 
-import ingredientsDataPropTypes from "../utils/propTypes";
 
-const BurgerConstructor = ({ ingredients }) => {
-  const buns = useMemo(
-    () => ingredients.filter((item) => item.type === "bun"),
-    [ingredients]
-  );
-
-  const filling = useMemo(
-    () => ingredients.filter((item) => item.type !== "bun"),
-    [ingredients]
-  );
-
+const BurgerConstructor = ({ingredients}) => {
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>
-        
-      <div className={` mr-4`}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={buns[0].name + ` (верх)`} 
-          price={buns[0].price}
-          thumbnail={buns[0].image}
+          text="Краторная булка N-200i (верх)"
+          price={200}
+          /* thumbnail={img} */
         />
-        </div>
         <ul className={`${Styles.ElementsIngredients}`}>
-          {filling.map((ingredient) => {
-            return (
-              <li className={`${Styles.ElementsItem}`} key={ingredient._id}>
-                <DragIcon className={`mr-2`}/>
-                <div >
-                  <ConstructorElement  className={`${Styles.ElementsConstructor}`}
-                    text={ingredient.name}
-                    price={ingredient.price}
-                    thumbnail={ingredient.image}
-                  />
-                </div>
-              </li>
-            );
-          })}
+          <li className="">
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </li>
+          <li className="">
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </li>
+          <li className="">
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </li>
+          <li className="">
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </li>
+          <li className="">
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </li>
         </ul>
-        <div className={` mr-4`}>
+
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={buns[0].name + ` (низ)`} 
-          price={buns[0].price}
-          thumbnail={buns[0].image}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          /* thumbnail={img} */
         />
-        </div>
       </section>
       <section className={`${Styles.totalElements} mt-10 mr-4`}>
         <p className="text text_type_digits-medium">633</p>
@@ -71,8 +81,6 @@ const BurgerConstructor = ({ ingredients }) => {
     </section>
   );
 };
-
-
 
 BurgerConstructor.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
