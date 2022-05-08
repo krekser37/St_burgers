@@ -2,6 +2,10 @@
   margin-right: 40px;
 } */
 
+/* .BurgerConstructor {
+  margin-right: 40px;
+} */
+
 .elements {
   display: flex;
   flex-direction: column;
@@ -20,7 +24,6 @@
 }
 
 .ElementsIngredients {
-  list-style-type: none;
   display: flex;
   padding: 0;
   flex-direction: column;
@@ -28,6 +31,7 @@
   overflow-y: scroll;
   max-height: 290px;
   scroll-snap-type: x proximity;
+  width: 100%;
 }
 
 .ElementsIngredients::-webkit-scrollbar {
@@ -41,4 +45,18 @@
 .ElementsIngredients::-webkit-scrollbar-thumb {
   background-color: #8585ad;
   border: 3px solid #8585ad;
+}
+
+.ElementsItem {
+  list-style-type: none;
+  width: 100%;
+  width: 568px;
+  display: flex;
+  align-items: center;
+
+}
+
+.ElementsConstructor {
+  width: 100%;
+  width: 488px;
 }
