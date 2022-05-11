@@ -1,19 +1,13 @@
 import React from "react";
 import Styles from "./ModalOverlay.module.css";
+import PropTypes from "prop-types";
 
-const ModalOverlay = ({ children, visible, setVisible }) => {
+const ModalOverlay = ({onClick}) => {
+  return <div className={`${Styles.ModalOverlay}`} onClick={onClick}></div>;
+};
 
-    const modalVisible = [Styles.ModalOverlay]
-
-if (visible) {
-    modalVisible.push(Styles.active);
-}
-
-  return (
-    <div className={`${modalVisible.join(' ')}`} onClick={() => setVisible(false)}>
-      <div className={`${Styles.ModalOverlayContent}`} onClick={(e) => e.stopPropagation()}>{children}</div>
-    </div>
-  );
+ModalOverlay.propTypes = {
+  isOpen: PropTypes.func.isRequired,
 };
 
 export default ModalOverlay;

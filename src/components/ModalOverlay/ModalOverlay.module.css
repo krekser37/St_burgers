@@ -1,5 +1,4 @@
 .ModalOverlay {
-  /* overflow: hidden; */
   position: fixed;
   top: 0;
   bottom: 0;
@@ -7,21 +6,4 @@
   left: 0;
   display: none;
   background: rgba(0, 0, 0, 0.6);
-  transition: 0.5s;
-}
-
-.ModalOverlayContent {
-  padding: 25px;
-  background: #1C1C21;
-  min-width: 720px;
-  border: 1px solid rgba(76, 76, 255, 0.2);
-  border-radius: 40px;
-  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
-}
-
-.ModalOverlay.active {
-  /* overflow: visible; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

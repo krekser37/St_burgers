@@ -6,9 +6,10 @@ import {
   CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import Modal from "../Modal/Modal";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 const BurgerConstructor = ({ ingredients }) => {
   const buns = useMemo(
@@ -21,28 +22,33 @@ const BurgerConstructor = ({ ingredients }) => {
     [ingredients]
   );
 
-  const [modal, setModal] = useState(false);
+  const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
+
+
+  const handleOpenOrderDetailsModal = () => {
+    setOpenOrderDetailsModal(true);
+  };
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>
-
-      <div className={` mr-4`}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text={buns[0].name + ` (верх)`} 
-          price={buns[0].price}
-          thumbnail={buns[0].image}
-        />
+        <div className={` mr-4`}>
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={buns[0].name + ` (верх)`}
+            price={buns[0].price}
+            thumbnail={buns[0].image}
+          />
         </div>
         <ul className={`${Styles.ElementsIngredients}`}>
           {filling.map((ingredient) => {
             return (
               <li className={`${Styles.ElementsItem}`} key={ingredient._id}>
-                <DragIcon className={`mr-2`}/>
-                <div >
-                  <ConstructorElement  className={`${Styles.ElementsConstructor}`}
+                <DragIcon className={`mr-2`} />
+                <div>
+                  <ConstructorElement
+                    className={`${Styles.ElementsConstructor}`}
                     text={ingredient.name}
                     price={ingredient.price}
                     thumbnail={ingredient.image}
@@ -53,13 +59,13 @@ const BurgerConstructor = ({ ingredients }) => {
           })}
         </ul>
         <div className={` mr-4`}>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text={buns[0].name + ` (низ)`} 
-          price={buns[0].price}
-          thumbnail={buns[0].image}
-        />
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={buns[0].name + ` (низ)`}
+            price={buns[0].price}
+            thumbnail={buns[0].image}
+          />
         </div>
       </section>
       <section className={`${Styles.totalElements} mt-10 mr-4`}>
@@ -67,17 +73,22 @@ const BurgerConstructor = ({ ingredients }) => {
         <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="large" onClick={()=> setModal(true)}>
+        <Button type="primary" size="large" onClick={handleOpenOrderDetailsModal}>
           Оформить заказ
         </Button>
-        <ModalOverlay visible={modal} setVisible= {setModal}/>
+        {isOpenOrderDetailsModal && (
+          <Modal>
+            <OrderDetails orderNumber="034536"/>
+          </Modal>
+        )}
       </section>
     </section>
   );
 };
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
+    .isRequired,
 };
 
 export default BurgerConstructor;
