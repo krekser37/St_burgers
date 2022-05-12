@@ -7,7 +7,7 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const modalRoot = document.getElementById("modalRoot");
 
-const Modal = ({ onClose, children/* , title */ }) => {
+const Modal = ({ onClose, children , title  }) => {
 
   const onEscDown = (e) => {
     e.key === 'Escape' && onClose()
@@ -24,7 +24,7 @@ const Modal = ({ onClose, children/* , title */ }) => {
     <>
       <div className={`${Styles.Modal} pl-10 pr-10`} /* onClick={onClose} */>
         <div className= {`${Styles.ModalHeader } mt-10`}>
-          <h2 className={`${Styles.ModalTitle} text text_type_main-large `}>{/* {title} */}</h2>
+          <h2 className={`${Styles.ModalTitle} text text_type_main-large `}>{title}</h2>
           <button className= {`${Styles.ModalCloseButton }`} ><CloseIcon type='primary' onClick={onClose}/></button>
         </div>
         <div className={`${Styles.ModalContent}`}>
@@ -39,8 +39,8 @@ const Modal = ({ onClose, children/* , title */ }) => {
 
 Modal.propTypes = {
   title: PropTypes.string,
-  onClose: PropTypes.func,
-  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Modal;

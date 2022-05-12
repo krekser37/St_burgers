@@ -32,6 +32,9 @@ const BurgerConstructor = ({ ingredients }) => {
     setOpenOrderDetailsModal(false);
   };
 
+  const ordertTitle = " ";
+  
+
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>
@@ -80,7 +83,7 @@ const BurgerConstructor = ({ ingredients }) => {
           Оформить заказ
         </Button>
         {isOpenOrderDetailsModal && (
-          <Modal onClose={handleCloseOrderDetailsModal}/*  title=" " */>
+          <Modal onClose={handleCloseOrderDetailsModal} title={ordertTitle}>
             <OrderDetails orderNumber="034536"/>
           </Modal>
         )}
@@ -90,8 +93,7 @@ const BurgerConstructor = ({ ingredients }) => {
 };
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
-    .isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
 };
 
 export default BurgerConstructor;

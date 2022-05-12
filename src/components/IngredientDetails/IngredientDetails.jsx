@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "./IngredientDetails.module.css";
-/* import PropTypes from "prop-types"; */
+import PropTypes from "prop-types";
 
 const IngredientDetails = ({ ingredient }) => {
   return (
@@ -51,6 +51,8 @@ const IngredientDetails = ({ ingredient }) => {
   );
 };
 
-IngredientDetails.propTypes = {};
+IngredientDetails.propTypes = {
+  ingredient: PropTypes.shape.isRequired,
+};
 
 export default IngredientDetails;

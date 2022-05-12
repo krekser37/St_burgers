@@ -24,6 +24,8 @@ const IngredientsItem = ({ ingredients, count }) => {
     setOpeningredientInModal(false);
   };
 
+  const ingredientTitle = "Детали ингредиента";
+
   return (
     <>
       <section
@@ -40,7 +42,7 @@ const IngredientsItem = ({ ingredients, count }) => {
         <Counter count={count} size="default" />
       </section>
       {isOpeningredientInModal && (
-        <Modal onClose={handleCloseIngredientInModal} /* title="Детали ингредиента" */>
+        <Modal onClose={handleCloseIngredientInModal}  title={ingredientTitle} >
           <IngredientDetails ingredient={currentIngredient} />
         </Modal>
       )};
