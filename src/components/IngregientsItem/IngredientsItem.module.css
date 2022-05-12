@@ -13,6 +13,10 @@
   width: 272px;
 }
 
+.IngredientsItem:hover {
+  cursor: pointer;
+}
+
 .IngredientsItemPrice {
   display: flex;
   justify-content: center;

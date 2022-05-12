@@ -80,7 +80,7 @@ const BurgerConstructor = ({ ingredients }) => {
           Оформить заказ
         </Button>
         {isOpenOrderDetailsModal && (
-          <Modal onClose={handleCloseOrderDetailsModal}>
+          <Modal onClose={handleCloseOrderDetailsModal}/*  title=" " */>
             <OrderDetails orderNumber="034536"/>
           </Modal>
         )}

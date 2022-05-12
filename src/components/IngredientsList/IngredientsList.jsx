@@ -4,8 +4,6 @@ import IngredientsItem from "../IngregientsItem/IngredientsItem";
 import PropTypes from "prop-types"; 
 
 const IngredientsList = ({ title, titleId, ingredients }) => {
-  /* const [data]  = this.props; */
-  /* const [current, setCurrent] = React.useState("one"); */
   return (
     <section className={`${Styles.IngredientsList}`}>
       <h3 className={`${Styles.title} text text_type_main-medium mt-10 mb-6`} id={titleId}>

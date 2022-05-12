@@ -1,0 +1,22 @@
+.IngredientImage{
+    width: 480px;
+    height: 240px;
+}
+
+.IngredientDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.IngredientDetailsItem {
+    list-style-type: none;
+    text-align: center;
+}
+
+.IngredientDetailsList {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+}

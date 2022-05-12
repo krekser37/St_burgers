@@ -4,7 +4,6 @@ import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes";
-import Modal from "../Modal/Modal";
 
 const BurgerIngredients = ({ ingredients }) => {
   const [current, setCurrent] = useState("buns");
@@ -24,10 +23,7 @@ const BurgerIngredients = ({ ingredients }) => {
     [ingredients]
   );
 
-  const [ingredientInModal, setIngredientInModal] = React.useState(null);
-
   return (
-    <>
       <section className={`${Styles.BurgerIngredients} mr-10`}>
         <h2 className={`${Styles.title} mt-10 mb-5 text text_type_main-large`}>
           Соберите бургер
@@ -62,12 +58,6 @@ const BurgerIngredients = ({ ingredients }) => {
           />
         </div>
       </section>
-      {ingredientInModal && (
-        <Modal onClose={closeIngredientInModal} title="Детали ингредиента">
-          <IngredientDetails ingredientData={ingredientInModal} />
-        </Modal>
-      )}
-    </>
   );
 };
 

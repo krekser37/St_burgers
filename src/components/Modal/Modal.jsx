@@ -7,7 +7,7 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const modalRoot = document.getElementById("modalRoot");
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({ onClose, children/* , title */ }) => {
 
   const onEscDown = (e) => {
     e.key === 'Escape' && onClose()
@@ -18,7 +18,7 @@ const Modal = ({ onClose, children }) => {
     return () => {
       document.removeEventListener("keydown", onEscDown)
     }
-  }, []);
+  }, [onEscDown]);
 
   return ReactDOM.createPortal(
     <>
@@ -27,10 +27,7 @@ const Modal = ({ onClose, children }) => {
           <h2 className={`${Styles.ModalTitle} text text_type_main-large `}>{/* {title} */}</h2>
           <button className= {`${Styles.ModalCloseButton }`} ><CloseIcon type='primary' onClick={onClose}/></button>
         </div>
-        <div
-          className={`${Styles.ModalContent}`}
-          /* onClick={(e) => e.stopPropagation()} */
-        >
+        <div className={`${Styles.ModalContent}`}>
           {children}
         </div>
       </div>
