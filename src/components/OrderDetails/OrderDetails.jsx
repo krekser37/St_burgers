@@ -1,13 +1,13 @@
 import React from "react";
 import Styles from "./OrderDetails.module.css";
-import Done from "./img/Done";
+import Done from "./img/done.svg";
 /* import PropTypes from "prop-types"; */
 
 const OrderDetails = ({ orderNumber }) => {
   return (
     <div className={Styles.OrderDetails}>
       <h3
-        className="text text_type_digits-large mt-30" /* onClick={onClick} */
+        className="text text_type_digits-large mt-4" /* onClick={onClick} */
       >
         {orderNumber}
       </h3>

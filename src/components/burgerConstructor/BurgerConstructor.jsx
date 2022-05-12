@@ -24,9 +24,12 @@ const BurgerConstructor = ({ ingredients }) => {
 
   const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
 
-
   const handleOpenOrderDetailsModal = () => {
     setOpenOrderDetailsModal(true);
+  };
+
+  const handleCloseOrderDetailsModal = () => {
+    setOpenOrderDetailsModal(false);
   };
 
   return (
@@ -77,7 +80,7 @@ const BurgerConstructor = ({ ingredients }) => {
           Оформить заказ
         </Button>
         {isOpenOrderDetailsModal && (
-          <Modal>
+          <Modal onClose={handleCloseOrderDetailsModal}>
             <OrderDetails orderNumber="034536"/>
           </Modal>
         )}
