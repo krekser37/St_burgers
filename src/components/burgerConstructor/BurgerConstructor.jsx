@@ -33,7 +33,6 @@ const BurgerConstructor = ({ ingredients }) => {
   };
 
   const ordertTitle = " ";
-  
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
@@ -42,7 +41,7 @@ const BurgerConstructor = ({ ingredients }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={buns[0].name + ` (верх)`}
+            text={buns[0].name + `(верх)`}
             price={buns[0].price}
             thumbnail={buns[0].image}
           />
@@ -79,12 +78,16 @@ const BurgerConstructor = ({ ingredients }) => {
         <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="large" onClick={handleOpenOrderDetailsModal}>
+        <Button
+          type="primary"
+          size="large"
+          onClick={handleOpenOrderDetailsModal}
+        >
           Оформить заказ
         </Button>
         {isOpenOrderDetailsModal && (
           <Modal onClose={handleCloseOrderDetailsModal} title={ordertTitle}>
-            <OrderDetails orderNumber="034536"/>
+            <OrderDetails orderNumber="034536" />
           </Modal>
         )}
       </section>
@@ -93,7 +96,8 @@ const BurgerConstructor = ({ ingredients }) => {
 };
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
+    .isRequired,
 };
 
 export default BurgerConstructor;

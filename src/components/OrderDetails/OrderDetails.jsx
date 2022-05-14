@@ -1,13 +1,13 @@
 import React from "react";
 import Styles from "./OrderDetails.module.css";
 import Done from "./img/done.svg";
-/* import PropTypes from "prop-types"; */
+import PropTypes from "prop-types";
 
 const OrderDetails = ({ orderNumber }) => {
   return (
     <div className={Styles.OrderDetails}>
       <h3
-        className="text text_type_digits-large mt-4" /* onClick={onClick} */
+        className="text text_type_digits-large mt-4"
       >
         {orderNumber}
       </h3>
@@ -25,8 +25,8 @@ const OrderDetails = ({ orderNumber }) => {
   );
 };
 
-/* OrderDetails.propTypes = {
+OrderDetails.propTypes = {
   orderNumber: PropTypes.number.isRequired,
-}; */
+};
 
 export default OrderDetails;

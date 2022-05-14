@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
@@ -20,7 +20,6 @@ const IngredientsItem = ({ ingredients, count }) => {
   };
 
   const handleCloseIngredientInModal = () => {
-    /* setCurrentIngredient(null); */
     setOpeningredientInModal(false);
   };
 
@@ -29,7 +28,8 @@ const IngredientsItem = ({ ingredients, count }) => {
   return (
     <>
       <section
-        className={`${Styles.IngredientsItem} mb-8`} onClick={() => handleOpenIngredientInModal(ingredients)}
+        className={`${Styles.IngredientsItem} mb-8`}
+        onClick={() => handleOpenIngredientInModal(ingredients)}
       >
         <img src={image} alt={name} className={Styles.IngredientsImage} />
         <div className={`${Styles.IngredientsItemPrice} mt-1 mb-1`}>
@@ -42,10 +42,10 @@ const IngredientsItem = ({ ingredients, count }) => {
         <Counter count={count} size="default" />
       </section>
       {isOpeningredientInModal && (
-        <Modal onClose={handleCloseIngredientInModal}  title={ingredientTitle} >
+        <Modal onClose={handleCloseIngredientInModal} title={ingredientTitle}>
           <IngredientDetails ingredient={currentIngredient} />
         </Modal>
-      )};
+      )}
     </>
   );
 };

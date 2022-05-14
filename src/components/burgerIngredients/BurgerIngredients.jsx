@@ -31,21 +31,17 @@ const BurgerIngredients = ({ ingredients }) => {
 
       <div className={`${Styles.list}`}>
         <a href="#buns" className={`${Styles.item}`}>
-          <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
+          <Tab active={current === "buns"} onClick={setCurrent}>
             Булки
           </Tab>
         </a>
         <a href="#sauces" className={`${Styles.item}`}>
-          <Tab
-            value="sauces"
-            active={current === "sauces"}
-            onClick={setCurrent}
-          >
+          <Tab active={current === "sauces"} onClick={setCurrent}>
             Соусы
           </Tab>
         </a>
         <a href="#mains" className={`${Styles.item}`}>
-          <Tab value="mains" active={current === "mains"} onClick={setCurrent}>
+          <Tab active={current === "mains"} onClick={setCurrent}>
             Начинки
           </Tab>
         </a>
