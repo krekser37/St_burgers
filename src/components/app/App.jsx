@@ -5,7 +5,7 @@ import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 import Styles from "./App.module.css";
-import {getApiResponse} from "../Api/Api.js";
+import {getApiResponse, getResponseData} from "../utils/burger-api.js";
 
 
 const App = () => {
@@ -15,8 +15,8 @@ const App = () => {
     getApiResponse()
     .then((result) => {
           setIngredients(result.data);
-        }
-    );
+        })
+    .catch(getResponseData);
 }, []);
 
 
