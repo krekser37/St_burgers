@@ -1,0 +1,31 @@
+.Modal {
+  z-index: 2;
+  position: absolute;
+  background: #1c1c21;
+  min-width: 640px;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  border-radius: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+.ModalCloseButton {
+  background-color: inherit;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.ModalCloseButton:hover {
+cursor: pointer;
+}
+
+.ModalHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes";
 
 const BurgerIngredients = ({ ingredients }) => {
@@ -30,15 +30,21 @@ const BurgerIngredients = ({ ingredients }) => {
       </h2>
 
       <div className={`${Styles.list}`}>
-        <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
-          Булки
-        </Tab>
-        <Tab value="sauces" active={current === "sauces"} onClick={setCurrent}>
-          Соусы
-        </Tab>
-        <Tab value="mains" active={current === "mains"} onClick={setCurrent}>
-          Начинки
-        </Tab>
+        <a href="#buns" className={`${Styles.item}`}>
+          <Tab active={current === "buns"} onClick={setCurrent}>
+            Булки
+          </Tab>
+        </a>
+        <a href="#sauces" className={`${Styles.item}`}>
+          <Tab active={current === "sauces"} onClick={setCurrent}>
+            Соусы
+          </Tab>
+        </a>
+        <a href="#mains" className={`${Styles.item}`}>
+          <Tab active={current === "mains"} onClick={setCurrent}>
+            Начинки
+          </Tab>
+        </a>
       </div>
       <div className={`${Styles.ElementsName}`}>
         <IngredientsList title="Булки" titleId="buns" ingredients={buns} />
@@ -50,7 +56,8 @@ const BurgerIngredients = ({ ingredients }) => {
 };
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
+    .isRequired,
 };
 
 export default BurgerIngredients;

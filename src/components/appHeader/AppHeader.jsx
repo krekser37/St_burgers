@@ -21,9 +21,7 @@ const AppHeader = () => {
             <p className={`${Styles.headerText} ml-2 text text_color_inactive`}>Лента заказов</p>
           </li>
         </ul>
-     {/*    <div className={Styles.appLogo}> */}
           <Logo />
-        {/* </div> */}
         <img src="" alt="" />
         <ul className={`${Styles.headerList}`}>
           <li className={`${Styles.headerButton} pr-5 pl-5 pt-4 pb-4 `}>
