@@ -9,3 +9,9 @@ export const getApiResponse = () => {
     .then(getResponseData)
     .catch(getResponseData);
 };
+
+export const getOrderNumberResponse = () => {
+  return fetch(`${baseUrl}/orders`)
+    .then(getResponseData)
+    .catch(getResponseData);
+};

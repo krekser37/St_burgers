@@ -1,17 +1,15 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useContext } from "react";
 import Styles from "./BurgerConstructor.module.css";
-import {
-  Button,
-  ConstructorElement,
-  CurrencyIcon,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, DragIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes";
-import Modal from "../Modal/Modal";
-import OrderDetails from "../OrderDetails/OrderDetails";
+import OrderTotal from "../OrderTotal/OrderTotal";
+import { IngredientsContext, TotalPriceContext } from "../../services/AppContext";
 
-const BurgerConstructor = ({ ingredients }) => {
+const BurgerConstructor = () => {
+  const { ingredients } = useContext(IngredientsContext);
+  const { totalPrice} = useContext(TotalPriceContext);
+
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
     [ingredients]
@@ -22,17 +20,7 @@ const BurgerConstructor = ({ ingredients }) => {
     [ingredients]
   );
 
-  const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
 
-  const handleOpenOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(true);
-  };
-
-  const handleCloseOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(false);
-  };
-
-  const ordertTitle = " ";
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
@@ -73,24 +61,7 @@ const BurgerConstructor = ({ ingredients }) => {
           />
         </div>
       </section>
-      <section className={`${Styles.totalElements} mt-10 mr-4`}>
-        <p className="text text_type_digits-medium">633</p>
-        <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
-          <CurrencyIcon />
-        </div>
-        <Button
-          type="primary"
-          size="large"
-          onClick={handleOpenOrderDetailsModal}
-        >
-          Оформить заказ
-        </Button>
-        {isOpenOrderDetailsModal && (
-          <Modal onClose={handleCloseOrderDetailsModal} title={ordertTitle}>
-            <OrderDetails orderNumber="034536" />
-          </Modal>
-        )}
-      </section>
+      <OrderTotal /* totalIngredients={orderTotal.ingredients} */ totalPrice={totalPrice} />
     </section>
   );
 };

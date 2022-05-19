@@ -12,17 +12,6 @@
   align-items: flex-end;
 }
 
-.totalElements {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.totalCurrencyIcon {
-  width: 33px;
-  height: 33px;
-}
-
 .ElementsIngredients {
   display: flex;
   padding: 0;
