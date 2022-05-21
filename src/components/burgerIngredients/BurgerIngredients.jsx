@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useContext } from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes";
+import { IngredientsContext } from "../../services/AppContext";
 
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = () => {
   const [current, setCurrent] = useState("buns");
+  const { ingredients } = useContext(IngredientsContext);
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
@@ -56,8 +58,7 @@ const BurgerIngredients = ({ ingredients }) => {
 };
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
-    .isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
 };
 
 export default BurgerIngredients;
