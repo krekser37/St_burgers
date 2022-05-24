@@ -11,6 +11,12 @@ function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
   const selectIngredients = useContext(IngredientsContext);
 
+  const tabClick = (id) => {
+    setCurrent(id);
+    const element = document.getElementById(id);
+    element.scrollIntoView({behavior: "smooth"});
+  }
+
   const buns = useMemo(
     () => selectIngredients.filter((item) => item.type === "bun"),
     [selectIngredients],
@@ -34,25 +40,25 @@ function BurgerIngredients() {
 
       <div className={`${Styles.list}`}>
         <a href="#buns" className={`${Styles.item}`}>
-          <Tab active={current === "buns"} onClick={setCurrent}>
+          <Tab active={current === "buns"} onClick={() => tabClick("buns")}>
             Булки
           </Tab>
         </a>
         <a href="#sauces" className={`${Styles.item}`}>
-          <Tab active={current === "sauces"} onClick={setCurrent}>
+          <Tab active={current === "sauces"} onClick={() => tabClick("sauces")}>
             Соусы
           </Tab>
         </a>
         <a href="#mains" className={`${Styles.item}`}>
-          <Tab active={current === "mains"} onClick={setCurrent}>
+          <Tab active={current === "mains"} onClick={() => tabClick("mains")}>
             Начинки
           </Tab>
         </a>
       </div>
       <div className={`${Styles.ElementsName}`}>
-        <IngredientsList title="Булки" titleId="buns" ingredients={buns} />
-        <IngredientsList title="Соусы" titleId="sauces" ingredients={sauces} />
-        <IngredientsList title="Начинки" titleId="mains" ingredients={mains} />
+        <IngredientsList title="Булки" titleId="buns" ingredients={buns} id="buns"/>
+        <IngredientsList title="Соусы" titleId="sauces" ingredients={sauces} id="sauces"/>
+        <IngredientsList title="Начинки" titleId="mains" ingredients={mains} id="mains"/>
       </div>
     </section>
   );
