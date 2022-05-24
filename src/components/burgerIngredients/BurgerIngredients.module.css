@@ -19,7 +19,6 @@
   overflow-y: scroll;
   max-height: 550px;
   scroll-snap-type: x proximity;
-/*   max-width: 600px; */
 }
 
 .ElementsName::-webkit-scrollbar {

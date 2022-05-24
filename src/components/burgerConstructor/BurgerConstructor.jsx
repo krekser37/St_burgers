@@ -1,11 +1,13 @@
-import React, { useMemo, useContext, useReducer, useEffect } from "react";
-import Styles from "./BurgerConstructor.module.css";
+import React, {
+  useMemo, useContext, useEffect, useReducer,
+} from "react";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes";
+import PropTypes from 'prop-types';
+import Styles from "./BurgerConstructor.module.css";
+import ingredientsDataPropTypes from '../utils/propTypes';
 import OrderTotal from "../OrderTotal/OrderTotal";
 import { IngredientsContext } from "../../services/AppContext";
 
@@ -13,8 +15,10 @@ const initialTotalPrice = { price: 0 };
 
 function reducer(totalPrice, action) {
   switch (action.type) {
-    case "increase":
-      return { price: totalPrice.price + action.price };
+    // case "increase":
+    // return { price: totalPrice.price + action.price };
+    case "set":
+      return { price: totalPrice.price +action.payload };
     case "reset":
       return initialTotalPrice;
     default:
@@ -22,82 +26,75 @@ function reducer(totalPrice, action) {
   }
 }
 
-const BurgerConstructor = () => {
-  const { ingredients } = useContext(IngredientsContext);
+function BurgerConstructor() {
+  const selectIngredients = useContext(IngredientsContext);
   const [totalPrice, dispatchTotalPrice] = useReducer(
     reducer,
-    initialTotalPrice
-  );
-  /* console.log(totalPrice); */
-  //получаем массив булок
-  const buns = useMemo(
-    () => ingredients.filter((item) => item.type === "bun"),
-    [ingredients]
+    initialTotalPrice,
   );
 
-  const mainBun = buns[0];
+  const mainBun = useMemo(
+    () => selectIngredients.find((item) => item.name === "Краторная булка N-200i"),
+    [selectIngredients],
+  );
 
-  //получаем массив ингредиентов
   const filling = useMemo(
-    () => ingredients.filter((item) => item.type !== "bun"),
-    [ingredients]
+    () => selectIngredients.filter((item) => item.type !== "bun"),
+    [selectIngredients],
   );
-  /* console.log(filling); */
 
   useEffect(() => {
-    filling.map((ingredient) =>
-      dispatchTotalPrice({ type: "increase", price: ingredient.price })
-    );
-  }, []);
-
-  useEffect(() => {
-    console.log(mainBun);
-    dispatchTotalPrice({ type: "increase", price: mainBun.price });
-  }, []);
+    selectIngredients.forEach((ingredient) => {
+      dispatchTotalPrice({ type: "set", payload: ingredient.price });
+    });
+  }, [selectIngredients]);
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>
-        <div className={` mr-4`}>
+        <div className="mr-4">
           <ConstructorElement
             type="top"
-            isLocked={true}
-            text={mainBun.name + `(верх)`}
+            /* isLocked={true} */
+            text={mainBun.name + " (верх)"}
             price={mainBun.price}
             thumbnail={mainBun.image}
+            key={mainBun.id}
           />
         </div>
         <ul className={`${Styles.ElementsIngredients}`}>
-          {filling.map((ingredient) => {
-            return (
-              <li className={`${Styles.ElementsItem}`} key={ingredient._id}>
-                <DragIcon className={`mr-2`} />
-                <div>
-                  <ConstructorElement
-                    className={`${Styles.ElementsConstructor}`}
-                    text={ingredient.name}
-                    price={ingredient.price}
-                    thumbnail={ingredient.image}
-                  />
-                </div>
-              </li>
-            );
-          })}
+          {filling.map((ingredient) => (
+            <li
+              className={Styles.ElementsItem}
+              key={ingredient.id}
+            >
+              <DragIcon className="mr-2" />
+              <div>
+                <ConstructorElement
+                  className={`${Styles.ElementsConstructor}`}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              </div>
+            </li>
+          ))}
         </ul>
-        <div className={` mr-4`}>
+        <div className="mr-4">
           <ConstructorElement
             type="bottom"
-            isLocked={true}
-            text={mainBun.name + ` (низ)`}
+            /* isLocked={true} */
+            text={mainBun.name + " (низ)"}
             price={mainBun.price}
             thumbnail={mainBun.image}
+            key={mainBun.id}
           />
         </div>
       </section>
       <OrderTotal totalPrice={totalPrice} />
     </section>
   );
-};
+}
 
 BurgerConstructor.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),

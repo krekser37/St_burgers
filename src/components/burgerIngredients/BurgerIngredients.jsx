@@ -1,28 +1,29 @@
-import React, { useMemo, useState,useContext } from "react";
+import React, { useMemo, useState, useContext }
+  from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes";
+/* import PropTypes from "prop-types";
+import ingredientsDataPropTypes from "../utils/propTypes"; */
 import { IngredientsContext } from "../../services/AppContext";
 
-const BurgerIngredients = () => {
+function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
-  const { ingredients } = useContext(IngredientsContext);
+  const selectIngredients = useContext(IngredientsContext);
 
   const buns = useMemo(
-    () => ingredients.filter((item) => item.type === "bun"),
-    [ingredients]
+    () => selectIngredients.filter((item) => item.type === "bun"),
+    [selectIngredients],
   );
 
   const sauces = useMemo(
-    () => ingredients.filter((item) => item.type === "sauce"),
-    [ingredients]
+    () => selectIngredients.filter((item) => item.type === "sauce"),
+    [selectIngredients],
   );
 
   const mains = useMemo(
-    () => ingredients.filter((item) => item.type === "main"),
-    [ingredients]
+    () => selectIngredients.filter((item) => item.type === "main"),
+    [selectIngredients],
   );
 
   return (
@@ -55,10 +56,10 @@ const BurgerIngredients = () => {
       </div>
     </section>
   );
-};
+}
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
-};
+/* BurgerIngredients.propTypes = {
+  selectIngredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
+}; */
 
 export default BurgerIngredients;
