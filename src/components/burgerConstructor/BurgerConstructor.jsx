@@ -16,14 +16,15 @@ const initialTotalPrice = { price: 0 };
 
 function reducer(totalPrice, action) {
   switch (action.type) {
-    // case "increase":
-    // return { price: totalPrice.price + action.price };
     case "set":
-      return { price: totalPrice.price +action.payload };
+      const mainBunPrice = action.payload.mainBun.price*2;
+      const sum = action.payload.filling.reduce((prevVal, item) => {
+        return prevVal + item.price}, mainBunPrice);
+      return { price: sum };
     case "reset":
       return initialTotalPrice;
     default:
-      throw new Error(`Wrong type of action: ${action.type}`);
+      throw totalPrice;
   }
 }
 
@@ -45,10 +46,13 @@ function BurgerConstructor() {
   );
 
   useEffect(() => {
-    selectIngredients.forEach((ingredient) => {
-      dispatchTotalPrice({ type: "set", payload: ingredient.price });
-    });
-  }, [selectIngredients]);
+    dispatchTotalPrice({ type: "set", payload: {filling: filling, mainBun: mainBun} });
+  }, [selectIngredients])
+
+/*   useEffect(() => {
+    const totalPrice = filling.reduce((prevVal, item) => {prevVal + item.price}, mainBun.price*2);
+    dispatchTotalPrice({ type: "set", payload: totalPrice  });
+  }, [selectIngredients]) */
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
