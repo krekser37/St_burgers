@@ -10,6 +10,7 @@ import Styles from "./BurgerConstructor.module.css";
 import ingredientsDataPropTypes from '../utils/propTypes';
 import OrderTotal from "../OrderTotal/OrderTotal";
 import { IngredientsContext } from "../../services/AppContext";
+import { nanoid } from "nanoid";
 
 const initialTotalPrice = { price: 0 };
 
@@ -59,14 +60,14 @@ function BurgerConstructor() {
             text={mainBun.name + " (верх)"}
             price={mainBun.price}
             thumbnail={mainBun.image}
-            key={mainBun.id}
+            key={mainBun.id = nanoid()}
           />
         </div>
         <ul className={`${Styles.ElementsIngredients}`}>
           {filling.map((ingredient) => (
             <li
               className={Styles.ElementsItem}
-              key={ingredient.id}
+              key={ingredient.id = nanoid()}
             >
               <DragIcon className="mr-2" />
               <div>
@@ -87,7 +88,7 @@ function BurgerConstructor() {
             text={mainBun.name + " (низ)"}
             price={mainBun.price}
             thumbnail={mainBun.image}
-            key={mainBun.id}
+            key={mainBun.id = nanoid()}
           />
         </div>
       </section>
