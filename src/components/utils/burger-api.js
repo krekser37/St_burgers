@@ -9,3 +9,9 @@ export const getApiResponse = () => {
     .then(getResponseData)
     .catch(getResponseData);
 };
+
+/* export const sendOrder = (ingredients) => {
+  const ids = ingredients.map((ingredient) => ingredient._id);
+  const body = JSON.stringify({ ingredients: ids });
+  return sendRequest("POST", body, `${baseURL}/orders`);
+}; */

@@ -1,0 +1,18 @@
+.totalElements {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .totalCurrencyIcon {
+    width: 33px;
+    height: 33px;
+  }
+
+  .OrderDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}

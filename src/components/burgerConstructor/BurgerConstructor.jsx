@@ -1,103 +1,108 @@
-import React, { useMemo, useState } from "react";
-import Styles from "./BurgerConstructor.module.css";
+import React, {
+  useMemo, useContext, useEffect, useReducer,
+} from "react";
 import {
-  Button,
   ConstructorElement,
-  CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes";
-import Modal from "../Modal/Modal";
-import OrderDetails from "../OrderDetails/OrderDetails";
+import PropTypes from 'prop-types';
+import Styles from "./BurgerConstructor.module.css";
+import ingredientsDataPropTypes from '../utils/propTypes';
+import OrderTotal from "../OrderTotal/OrderTotal";
+import { IngredientsContext } from "../../services/AppContext";
+import { nanoid } from "nanoid";
 
-const BurgerConstructor = ({ ingredients }) => {
-  const buns = useMemo(
-    () => ingredients.filter((item) => item.type === "bun"),
-    [ingredients]
+const initialTotalPrice = { price: 0 };
+
+function reducer(totalPrice, action) {
+  switch (action.type) {
+    case "set":
+      const mainBunPrice = action.payload.mainBun.price*2;
+      const sum = action.payload.filling.reduce((prevVal, item) => {
+        return prevVal + item.price}, mainBunPrice);
+      return { price: sum };
+    case "reset":
+      return initialTotalPrice;
+    default:
+      throw totalPrice;
+  }
+}
+
+function BurgerConstructor() {
+  const selectIngredients = useContext(IngredientsContext);
+  const [totalPrice, dispatchTotalPrice] = useReducer(
+    reducer,
+    initialTotalPrice,
+  );
+
+  const mainBun = useMemo(
+    () => selectIngredients.find((item) => item.name === "Краторная булка N-200i"),
+    [selectIngredients],
   );
 
   const filling = useMemo(
-    () => ingredients.filter((item) => item.type !== "bun"),
-    [ingredients]
+    () => selectIngredients.filter((item) => item.type !== "bun"),
+    [selectIngredients],
   );
 
-  const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
+  useEffect(() => {
+    dispatchTotalPrice({ type: "set", payload: {filling: filling, mainBun: mainBun} });
+  }, [selectIngredients])
 
-  const handleOpenOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(true);
-  };
-
-  const handleCloseOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(false);
-  };
-
-  const ordertTitle = " ";
+/*   useEffect(() => {
+    const totalPrice = filling.reduce((prevVal, item) => {prevVal + item.price}, mainBun.price*2);
+    dispatchTotalPrice({ type: "set", payload: totalPrice  });
+  }, [selectIngredients]) */
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section className={`${Styles.elements} mt-25`}>
-        <div className={` mr-4`}>
+        <div className="mr-4">
           <ConstructorElement
             type="top"
-            isLocked={true}
-            text={buns[0].name + `(верх)`}
-            price={buns[0].price}
-            thumbnail={buns[0].image}
+            /* isLocked={true} */
+            text={mainBun.name + " (верх)"}
+            price={mainBun.price}
+            thumbnail={mainBun.image}
+            key={mainBun.id = nanoid()}
           />
         </div>
         <ul className={`${Styles.ElementsIngredients}`}>
-          {filling.map((ingredient) => {
-            return (
-              <li className={`${Styles.ElementsItem}`} key={ingredient._id}>
-                <DragIcon className={`mr-2`} />
-                <div>
-                  <ConstructorElement
-                    className={`${Styles.ElementsConstructor}`}
-                    text={ingredient.name}
-                    price={ingredient.price}
-                    thumbnail={ingredient.image}
-                  />
-                </div>
-              </li>
-            );
-          })}
+          {filling.map((ingredient) => (
+            <li
+              className={Styles.ElementsItem}
+              key={ingredient.id = nanoid()}
+            >
+              <DragIcon className="mr-2" />
+              <div>
+                <ConstructorElement
+                  className={`${Styles.ElementsConstructor}`}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              </div>
+            </li>
+          ))}
         </ul>
-        <div className={` mr-4`}>
+        <div className="mr-4">
           <ConstructorElement
             type="bottom"
-            isLocked={true}
-            text={buns[0].name + ` (низ)`}
-            price={buns[0].price}
-            thumbnail={buns[0].image}
+            /* isLocked={true} */
+            text={mainBun.name + " (низ)"}
+            price={mainBun.price}
+            thumbnail={mainBun.image}
+            key={mainBun.id = nanoid()}
           />
         </div>
       </section>
-      <section className={`${Styles.totalElements} mt-10 mr-4`}>
-        <p className="text text_type_digits-medium">633</p>
-        <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
-          <CurrencyIcon />
-        </div>
-        <Button
-          type="primary"
-          size="large"
-          onClick={handleOpenOrderDetailsModal}
-        >
-          Оформить заказ
-        </Button>
-        {isOpenOrderDetailsModal && (
-          <Modal onClose={handleCloseOrderDetailsModal} title={ordertTitle}>
-            <OrderDetails orderNumber="034536" />
-          </Modal>
-        )}
-      </section>
+      <OrderTotal totalPrice={totalPrice} />
     </section>
   );
-};
+}
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired)
-    .isRequired,
+  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
 };
 
 export default BurgerConstructor;
