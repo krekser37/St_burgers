@@ -6,10 +6,14 @@ import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-
 /* import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes"; */
 import { IngredientsContext } from "../../services/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 function BurgerIngredients() {
-  const [current, setCurrent] = useState("buns");
-  const selectIngredients = useContext(IngredientsContext);
+/*   const [current, setCurrent] = useState("buns");
+  const selectIngredients = useContext(IngredientsContext); */
+
+  const dispatch = useDispatch();
+  const ingredients = useSelector(state => state.initialIngredients);
 
   const tabClick = (id) => {
     setCurrent(id);
@@ -18,18 +22,18 @@ function BurgerIngredients() {
   }
 
   const buns = useMemo(
-    () => selectIngredients.filter((item) => item.type === "bun"),
-    [selectIngredients],
+    () => ingredients.filter((item) => item.type === "bun"),
+    [ingredients],
   );
 
   const sauces = useMemo(
-    () => selectIngredients.filter((item) => item.type === "sauce"),
-    [selectIngredients],
+    () => ingredients.filter((item) => item.type === "sauce"),
+    [ingredients],
   );
 
   const mains = useMemo(
-    () => selectIngredients.filter((item) => item.type === "main"),
-    [selectIngredients],
+    () => ingredients.filter((item) => item.type === "main"),
+    [ingredients],
   );
 
   return (

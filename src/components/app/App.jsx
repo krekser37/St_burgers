@@ -1,29 +1,22 @@
 import React,
-{ useState, useEffect } from "react";
+{ useEffect } from "react";
 import { IngredientsContext } from "../../services/AppContext";
 import "@ya.praktikum/react-developer-burger-ui-components";
 import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 import Styles from "./App.module.css";
-import { getApiResponse } from "../utils/burger-api";
+import { useDispatch, useSelector } from "react-redux";
+import {getIngredients} from "../../../src/services/actions/index";
 
 function App() {
-  const [ingredients, setIngredients] = useState(null);
+  const dispatch = useDispatch();
+  const ingredients =  useSelector(state => state.ingredients.ingredients);
+console.log(ingredients);
 
-  function getIngredients() {
-    getApiResponse()
-      .then((result) => {
-        setIngredients(result.data);
-      })
-      .catch((e) => console.log(e.message));
-  }
-
-  useEffect(
-    () => {
-      getIngredients();
-    },
-    [],
+  useEffect(() => {
+      dispatch(getIngredients());
+    },[dispatch],
   );
 
   if (!ingredients) {
@@ -34,10 +27,10 @@ function App() {
       <AppHeader />
       {ingredients && (
         <main className={Styles.appMain}>
-          <IngredientsContext.Provider value={ingredients}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </IngredientsContext.Provider>
+          {/* <IngredientsContext.Provider value={ingredients}> */}
+          {/*   {<BurgerIngredients />} */}
+            {/* <BurgerConstructor /> */}
+          {/* </IngredientsContext.Provider> */}
         </main>
       )}
     </div>

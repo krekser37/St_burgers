@@ -10,6 +10,7 @@ import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
 import PropTypes from "prop-types";
+import { useSelector } from 'react-redux';
 
 function OrderTotal({ totalPrice }) {
   const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
@@ -59,6 +60,10 @@ function OrderTotal({ totalPrice }) {
   }
 
   const ordertTitle = " ";
+
+/*   const totalPrice = useSelector(store =>
+    store.selectedIngredients.items.reduce((acc, item) => acc + item.price * item.qty, 0)
+  ); */
 
   return (
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
