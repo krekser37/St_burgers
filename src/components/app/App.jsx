@@ -28,7 +28,7 @@ console.log(ingredients);
       {ingredients && (
         <main className={Styles.appMain}>
           {/* <IngredientsContext.Provider value={ingredients}> */}
-          {/*   {<BurgerIngredients />} */}
+            {<BurgerIngredients />}
             {/* <BurgerConstructor /> */}
           {/* </IngredientsContext.Provider> */}
         </main>

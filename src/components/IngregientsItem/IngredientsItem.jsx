@@ -7,8 +7,13 @@ import {
 import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { useDispatch, useSelector } from 'react-redux';
 
 const IngredientsItem = ({ ingredients, count }) => {
+  const dispatch = useDispatch();
+
+  const discount = useSelector(store => store.ingredients.ingredients);
+
   const { name, price, image } = ingredients;
 
   const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
