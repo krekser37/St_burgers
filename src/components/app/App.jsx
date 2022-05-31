@@ -27,10 +27,10 @@ console.log(ingredients);
       <AppHeader />
       {ingredients && (
         <main className={Styles.appMain}>
-          {/* <IngredientsContext.Provider value={ingredients}> */}
             {<BurgerIngredients />}
-            {/* <BurgerConstructor /> */}
-          {/* </IngredientsContext.Provider> */}
+        {/* { <IngredientsContext.Provider value={ingredients}> */}
+            {<BurgerConstructor />}
+          {/* </IngredientsContext.Provider> }  */}
         </main>
       )}
     </div>

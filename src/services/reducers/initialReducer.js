@@ -14,19 +14,21 @@ const initialIngredients = {
 
 export const initialReducer = (state = initialIngredients, action) => {
   switch (action.type) {
+    //устанавливаем переключатель таб
     case SET_CURRENT_TAB: {
       return {
         ...state,
-        currentTab: /* state.currentTab ===  */action.currentTab,
+        currentTab: action.currentTab,
       };
     }
-
+    //ЗАПРОС НА ПОЛУЧЕНИЕ ИНГРЕДИЕНТОВ
     case GET_INGREDIENS_REQUEST: {
       return {
         ...state,
         ingredientsRequest: true,
       };
     }
+    //ПОЛУЧЕНИЕ ИНГРЕДИЕНТОВ ОТВЕТ УСПЕХ
     case GET_INGREDIENS_SUCCESS: {
       return {
         ...state,
@@ -36,6 +38,7 @@ export const initialReducer = (state = initialIngredients, action) => {
         ingredientsFailed: false
       };
     }
+    //ПОЛУЧИТЬ ИНГРЕДИЕНТЫ НЕ УДАЛОСЬ
     case GET_INGREDIENS_FAILED: {
       return {
         ...state,
@@ -43,10 +46,7 @@ export const initialReducer = (state = initialIngredients, action) => {
         ingredientsFailed: false,
       };
     }
-
     default:
       return state;
   }
 };
-
-

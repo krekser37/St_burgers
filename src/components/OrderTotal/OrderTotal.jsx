@@ -10,32 +10,36 @@ import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
 import PropTypes from "prop-types";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import {getOrder} from "../../services/actions/index";
 
 function OrderTotal({ totalPrice }) {
+  const dispatch = useDispatch();
+  const orderIngredients = useSelector((state) => state.order.orderIngredients);
+  /* const totalPrice = useSelector(state => state.order.totalPrice); */
   const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
   const [ingredientsLoading, setIngredientsLoading] = useState(true);
   const [orderNumber, setOrderNumber] = useState(null);
-  const selectIngredients = useContext(IngredientsContext);
-  const selectingredientsId = selectIngredients.map((item) => item._id);
+  //const selectIngredients = useContext(IngredientsContext);
+  //const selectingredientsId = selectIngredients.map((item) => item._id);
   /*   console.log(selectIngredients); 
   console.log(selectingredientsId);  */
 
   const handleOpenOrderDetailsModal = () => {
     setIngredientsLoading(true);
     setOpenOrderDetailsModal(true);
-    getOrder();
+    (orderIngredients && dispatch(getOrder(orderIngredients)));
   };
 
   const handleCloseOrderDetailsModal = () => {
     setOpenOrderDetailsModal(false);
   };
 
-  const ingredientsId = selectIngredients.map((item) => {
+/*   const ingredientsId = selectIngredients.map((item) => {
     return item._id;
-  });
+  }); */
 
-  function getOrder() {
+/*   function getOrder() {
     fetch("https://norma.nomoreparties.space/api/orders", {
       method: "POST",
       headers: {
@@ -57,7 +61,7 @@ function OrderTotal({ totalPrice }) {
         setIngredientsLoading(false);
       })
       .catch((err) => console.log(err));
-  }
+  } */
 
   const ordertTitle = " ";
 
@@ -67,7 +71,7 @@ function OrderTotal({ totalPrice }) {
 
   return (
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
-      <p className="text text_type_digits-medium">{totalPrice.price}</p>
+      <p className="text text_type_digits-medium">{totalPrice}</p>
       <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
         <CurrencyIcon />
       </div>

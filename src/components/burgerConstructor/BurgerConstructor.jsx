@@ -1,58 +1,78 @@
-import React, {
-  useMemo, useContext, useEffect, useReducer,
-} from "react";
+import React, { useMemo, useContext, useEffect, useReducer } from "react";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Styles from "./BurgerConstructor.module.css";
-import ingredientsDataPropTypes from '../utils/propTypes';
+import ingredientsDataPropTypes from "../utils/propTypes";
 import OrderTotal from "../OrderTotal/OrderTotal";
 import { IngredientsContext } from "../../services/AppContext";
 import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
 
-const initialTotalPrice = { price: 0 };
+/* const initialTotalPrice = { price: 0 };
 
 function reducer(totalPrice, action) {
   switch (action.type) {
     case "set":
-      const mainBunPrice = action.payload.mainBun.price*2;
+      const mainBunPrice = action.payload.mainBun.price * 2;
       const sum = action.payload.filling.reduce((prevVal, item) => {
-        return prevVal + item.price}, mainBunPrice);
+        return prevVal + item.price;
+      }, mainBunPrice);
       return { price: sum };
     case "reset":
       return initialTotalPrice;
     default:
       throw totalPrice;
   }
-}
+} */
 
 function BurgerConstructor() {
-  const selectIngredients = useContext(IngredientsContext);
-  const [totalPrice, dispatchTotalPrice] = useReducer(
+  const dispatch = useDispatch();
+  const filling = useSelector((state) => state.burgerConstructor.filling);
+  const mainBun = useSelector((state) => state.burgerConstructor.mainBun);
+  //const orderIngredients = useSelector((state) => state.order.orderIngredients);
+
+  const totalPrice = useMemo(() => {
+    return (
+      (mainBun ? mainBun.price * 2 : 0) +
+      filling.reduce((s, v) => s + v.price, 0)
+    );
+  }, [mainBun, filling]);
+
+  //const orderIngredients = useSelector((state) => state.order.orderIngredients);
+  //console.log(orderIngredients);
+
+ /*  const selectIngredients = useContext(IngredientsContext); */
+/*     const [totalPrice, dispatchTotalPrice] = useReducer(
     reducer,
-    initialTotalPrice,
+    initialTotalPrice
+  ); */
+  console.log(filling);
+  console.log(mainBun);
+  console.log(totalPrice);
+  /*   const mainBun = useMemo(
+    () =>
+      selectIngredients.find((item) => item.name === "Краторная булка N-200i"),
+    [selectIngredients]
   );
-
-  const mainBun = useMemo(
-    () => selectIngredients.find((item) => item.name === "Краторная булка N-200i"),
-    [selectIngredients],
-  );
-
+  
   const filling = useMemo(
     () => selectIngredients.filter((item) => item.type !== "bun"),
-    [selectIngredients],
-  );
+    [selectIngredients]
+  ); */
 
-  useEffect(() => {
+/*       useEffect(() => {
     dispatchTotalPrice({ type: "set", payload: {filling: filling, mainBun: mainBun} });
-  }, [selectIngredients])
+  }, [filling , mainBun ]) */
 
-/*   useEffect(() => {
-    const totalPrice = filling.reduce((prevVal, item) => {prevVal + item.price}, mainBun.price*2);
-    dispatchTotalPrice({ type: "set", payload: totalPrice  });
-  }, [selectIngredients]) */
+  /*   useEffect(() => {
+    const totalPrice = filling.reduce((prevVal, item) => {
+      prevVal + item.price;
+    }, mainBun.price * 2);
+    dispatchTotalPrice({ type: "set", payload: totalPrice });
+  }, [selectIngredients]); */
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
@@ -60,18 +80,17 @@ function BurgerConstructor() {
         <div className="mr-4">
           <ConstructorElement
             type="top"
-            /* isLocked={true} */
-            text={mainBun.name + " (верх)"}
+            text= {`${mainBun.name} (верх)`}
             price={mainBun.price}
             thumbnail={mainBun.image}
-            key={mainBun.id = nanoid()}
+            key={(mainBun.id = nanoid())}
           />
         </div>
         <ul className={`${Styles.ElementsIngredients}`}>
           {filling.map((ingredient) => (
             <li
               className={Styles.ElementsItem}
-              key={ingredient.id = nanoid()}
+              key={(ingredient.id = nanoid())}
             >
               <DragIcon className="mr-2" />
               <div>
@@ -88,15 +107,14 @@ function BurgerConstructor() {
         <div className="mr-4">
           <ConstructorElement
             type="bottom"
-            /* isLocked={true} */
-            text={mainBun.name + " (низ)"}
+            text= {`${mainBun.name} (низ)`}
             price={mainBun.price}
             thumbnail={mainBun.image}
-            key={mainBun.id = nanoid()}
+            key={(mainBun.id = nanoid())}
           />
         </div>
       </section>
-      <OrderTotal totalPrice={totalPrice} />
+      <OrderTotal totalPrice={totalPrice}  />
     </section>
   );
 }

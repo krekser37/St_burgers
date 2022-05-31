@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
@@ -7,26 +7,55 @@ import {
 import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openIngredientDetails,
+  closeIngredientDetails,
+} from "../../services/actions/index";
 
 const IngredientsItem = ({ ingredients, count }) => {
   const dispatch = useDispatch();
-
-  const discount = useSelector(store => store.ingredients.ingredients);
-
+  /*   const currentIngredient = useSelector(store => store.ingredients.currentIngredient); */
+  const isOpeningredientInModal = useSelector(
+    (store) => store.ingredientDetails.isOpen
+  );
   const { name, price, image } = ingredients;
 
-  const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
-  const [currentIngredient, setCurrentIngredient] = useState(null);
+  //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
+  //const [currentIngredient, setCurrentIngredient] = useState(null);
 
-  const handleOpenIngredientInModal = (ingredient) => {
+  /*   const handleOpenIngredientInModal = (ingredient) => {
     setCurrentIngredient(ingredient);
     setOpeningredientInModal(true);
   };
 
   const handleCloseIngredientInModal = () => {
     setOpeningredientInModal(false);
-  };
+  }; */
+
+  /*   const handleOpenIngredientInModal = (ingredients) => {
+    dispatch({ type: SET_CURRENT_INGREDIENT_MODAL, payload: ingredients });
+    setOpeningredientInModal(true);
+  }; */
+
+  /*   const handleCloseIngredientInModal = () => {
+    dispatch({ type: RESET_CURRENT_INGREDIENT_MODAL });
+    /* setOpeningredientInModal(false); 
+  }; */
+
+  const handleCloseIngredientInModal = useCallback(
+    (item) => {
+      dispatch(closeIngredientDetails(item));
+    },
+    [dispatch]
+  );
+
+  const handleOpenIngredientInModal = useCallback(
+    (item) => {
+      dispatch(openIngredientDetails(item));
+    },
+    [dispatch]
+  );
 
   const ingredientTitle = "Детали ингредиента";
 
@@ -48,7 +77,7 @@ const IngredientsItem = ({ ingredients, count }) => {
       </section>
       {isOpeningredientInModal && (
         <Modal onClose={handleCloseIngredientInModal} title={ingredientTitle}>
-          <IngredientDetails ingredient={currentIngredient} />
+          <IngredientDetails /* ingredient={currentIngredient} */ />
         </Modal>
       )}
     </>
