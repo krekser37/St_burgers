@@ -1,4 +1,11 @@
-import React, { useMemo, useState, useContext, useRef } from "react";
+import React, {
+  useMemo,
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
@@ -6,33 +13,18 @@ import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-
 import ingredientsDataPropTypes from "../utils/propTypes"; */
 import { IngredientsContext } from "../../services/AppContext";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_CURRENT_TAB } from "../../services/actions/index";
-import { setCurrentTab } from "../../services/actions/index";
+import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
   /*  const selectIngredients = useContext(IngredientsContext); */
+  const [bunsRef, inViewBuns] = useInView({ threshold: 1 });
+  const [saucesRef, inViewSauces] = useInView({ threshold: 0.5 });
+  const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });
 
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   //const current = useSelector((state) => state.ingredients.currentTab);
-  console.log(current);
-  const bunsSection = useRef(null);
-  const saucesSection = useRef(null);
-  const mainsSection = useRef(null);
-
-  /*   const switchTab = (id) => {
-    setCurrentTab(id);
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
-  } */
-  const switchTab = (type, ref) => {
-    setCurrent(type);
-    if (!ref.current) return null;
-    else {
-      ref.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
@@ -48,6 +40,21 @@ function BurgerIngredients() {
     () => ingredients.filter((item) => item.type === "main"),
     [ingredients]
   );
+  useEffect(() => {
+    if (inViewBuns) {
+      setCurrent("buns");
+    } else if (inViewSauces) {
+      setCurrent("sauces");
+    } else if (inViewMains) {
+      setCurrent("mains");
+    }
+  }, [inViewBuns, inViewMains, inViewSauces]);
+
+  const switchTab = (tab) => {
+    setCurrent(tab);
+    const element = document.getElementById(tab);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section className={`${Styles.BurgerIngredients} mr-10`}>
@@ -58,56 +65,55 @@ function BurgerIngredients() {
       <div className={`${Styles.list}`}>
         <a href="#buns" className={`${Styles.item}`}>
           <Tab
+          inViewBuns={inViewBuns}
+            value={"buns"}
             active={current === "buns"}
-            onClick={() => {
-              switchTab("buns", bunsSection);
-            }}
+            onClick={switchTab}
           >
             Булки
           </Tab>
         </a>
         <a href="#sauces" className={`${Styles.item}`}>
           <Tab
+          inViewSauces={inViewSauces}
+            value={"sauces"}
             active={current === "sauces"}
-            onClick={() => {
-              switchTab("sauces", saucesSection);
-            }}
+            onClick={switchTab}
           >
             Соусы
           </Tab>
         </a>
         <a href="#mains" className={`${Styles.item}`}>
           <Tab
+          inViewMains={inViewMains}
+            value={"mains"}
             active={current === "mains"}
-            onClick={() => {
-              switchTab("mains", mainsSection);
-            }}
+            onClick={switchTab}
           >
             Начинки
           </Tab>
         </a>
       </div>
-      <div className={`${Styles.ElementsName}`}>
+      <div
+        className={`${Styles.ElementsName}`}
+      >
         <IngredientsList
-          listRef={bunsSection}
+          ref={bunsRef}
           title="Булки"
           titleId="buns"
           ingredients={buns}
-          id="buns"
         />
         <IngredientsList
-          listRef={saucesSection}
+          ref={saucesRef}
           title="Соусы"
           titleId="sauces"
           ingredients={sauces}
-          id="sauces"
         />
         <IngredientsList
-          listRef={mainsSection}
+          ref={mainsRef}
           title="Начинки"
           titleId="mains"
           ingredients={mains}
-          id="mains"
         />
       </div>
     </section>

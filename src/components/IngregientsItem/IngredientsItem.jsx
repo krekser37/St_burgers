@@ -11,48 +11,31 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   openIngredientDetails,
   closeIngredientDetails,
+  SET_CURRENT_INGREDIENT_MODAL,
 } from "../../services/actions/index";
 
 const IngredientsItem = ({ ingredients, count }) => {
   const dispatch = useDispatch();
-  /*   const currentIngredient = useSelector(store => store.ingredients.currentIngredient); */
+
   const isOpeningredientInModal = useSelector(
     (store) => store.ingredientDetails.isOpen
   );
+  
   const { name, price, image } = ingredients;
 
   //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
   //const [currentIngredient, setCurrentIngredient] = useState(null);
 
-  /*   const handleOpenIngredientInModal = (ingredient) => {
-    setCurrentIngredient(ingredient);
-    setOpeningredientInModal(true);
-  };
-
-  const handleCloseIngredientInModal = () => {
-    setOpeningredientInModal(false);
-  }; */
-
-  /*   const handleOpenIngredientInModal = (ingredients) => {
-    dispatch({ type: SET_CURRENT_INGREDIENT_MODAL, payload: ingredients });
-    setOpeningredientInModal(true);
-  }; */
-
-  /*   const handleCloseIngredientInModal = () => {
-    dispatch({ type: RESET_CURRENT_INGREDIENT_MODAL });
-    /* setOpeningredientInModal(false); 
-  }; */
-
-  const handleCloseIngredientInModal = useCallback(
+  const handleOpenIngredientInModal = useCallback(
     (item) => {
-      dispatch(closeIngredientDetails(item));
+      dispatch(openIngredientDetails(item));
     },
     [dispatch]
   );
 
-  const handleOpenIngredientInModal = useCallback(
+  const handleCloseIngredientInModal = useCallback(
     (item) => {
-      dispatch(openIngredientDetails(item));
+      dispatch(closeIngredientDetails(item));
     },
     [dispatch]
   );
@@ -77,7 +60,7 @@ const IngredientsItem = ({ ingredients, count }) => {
       </section>
       {isOpeningredientInModal && (
         <Modal onClose={handleCloseIngredientInModal} title={ingredientTitle}>
-          <IngredientDetails /* ingredient={currentIngredient} */ />
+          <IngredientDetails />
         </Modal>
       )}
     </>
@@ -85,7 +68,7 @@ const IngredientsItem = ({ ingredients, count }) => {
 };
 
 IngredientsItem.propTypes = {
-  ingredients: PropTypes.object.isRequired,
+  /* ingredients: PropTypes.object.isRequired, */
   count: PropTypes.number,
 };
 
