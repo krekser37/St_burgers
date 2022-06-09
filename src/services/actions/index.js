@@ -85,19 +85,24 @@ export function getOrder(orderIngredients) {
 export const ADD_BUN = "ADD_BUN";
 export const ADD_FILLING = "ADD_FILLING";
 export const DELETE_FILLING = "DELETE_FILLING";
-export const CHANGE_ITEM_POSITION = "CHANGE_ITEM_POSITION";
+export const CHANGE_FILLING_POSITION = "CHANGE_FILLING_POSITION";
 
 export const addToConstructorBun = (ingredient) => ({
   type: ADD_BUN,
-  ingredient: { ...ingredient},
+  ingredient: { ...ingredient },
 });
 
 export const addToConstructorFilling = (ingredient) => ({
   type: ADD_FILLING,
-  ingredient: { ...ingredient, id: nanoid(), },
+  ingredient: { ...ingredient, id: nanoid() },
 });
 
 export const deleteFromConstructor = (id) => ({
-    type: DELETE_FILLING,
-    id,
-  });
+  type: DELETE_FILLING,
+  id,
+});
+
+export const changeFillingPosition = (newFilling) => ({
+  type: CHANGE_FILLING_POSITION,
+  newFilling,
+});

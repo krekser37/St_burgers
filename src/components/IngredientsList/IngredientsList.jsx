@@ -18,7 +18,7 @@ const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {
             <IngredientsItem
               ingredients={ingredients}
               key={ingredients._id}
-              count={1}
+              /* count={1} */
             />
           );
         })}

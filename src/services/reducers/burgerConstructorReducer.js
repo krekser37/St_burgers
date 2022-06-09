@@ -2,7 +2,7 @@ import {
   ADD_BUN,
   ADD_FILLING,
   DELETE_FILLING,
-  CHANGE_ITEM_POSITION,
+  CHANGE_FILLING_POSITION,
 } from "../actions/index";
 
 const initialState = {
@@ -30,10 +30,10 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         filling: [...state.filling].filter((item) => item.id !== action.id),
       };
     }
-    case CHANGE_ITEM_POSITION: {
+    case CHANGE_FILLING_POSITION: {
       return {
         ...state,
-        filling: action.newFillings,
+        filling: action.newFilling,
       };
     }
 

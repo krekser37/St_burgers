@@ -112,6 +112,7 @@ function BurgerConstructor() {
               <li
                 className={Styles.ElementsItem}
                 key={(ingredient.id = nanoid())}
+               /*  index={index} */
               >
                 <DragIcon className="mr-2" />
                 <div>

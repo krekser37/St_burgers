@@ -14,7 +14,7 @@ import {
 } from "../../services/actions/index";
 import { useDrag } from "react-dnd";
 
-const IngredientsItem = ({ ingredients, count }) => {
+const IngredientsItem = ({ ingredients }) => {
   const dispatch = useDispatch();
 
   const isOpeningredientInModal = useSelector(
@@ -49,6 +49,15 @@ const IngredientsItem = ({ ingredients, count }) => {
       opacity: monitor.isDragging()?0.5 :1
     })
   }/* , [ingredients] */);
+
+  const filling = useSelector((state) => state.burgerConstructor.filling);
+  const bun = useSelector((state) => state.burgerConstructor.bun);
+
+  let count = filling.filter((item)=> item._id === ingredients._id).length;
+
+  if(ingredients._id === bun._id){
+  count = 2;
+  };
 
   return (
     <>
