@@ -61,7 +61,6 @@ function BurgerIngredients() {
       <h2 className={`${Styles.title} mt-10 mb-5 text text_type_main-large`}>
         Соберите бургер
       </h2>
-
       <div className={`${Styles.list}`}>
         <a href="#buns" className={`${Styles.item}`}>
           <Tab

@@ -49,3 +49,7 @@
   width: 100%;
   width: 488px;
 }
+
+.onHover {
+  border-radius: 5px solid blue;
+}

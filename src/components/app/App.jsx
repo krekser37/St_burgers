@@ -8,6 +8,8 @@ import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 import Styles from "./App.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {getIngredients} from "../../../src/services/actions/index";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,12 +28,12 @@ console.log(ingredients);
     <div className={`${Styles.app}`}>
       <AppHeader />
       {ingredients && (
+        <DndProvider backend={HTML5Backend}>
         <main className={Styles.appMain}>
             {<BurgerIngredients />}
-        {/* { <IngredientsContext.Provider value={ingredients}> */}
             {<BurgerConstructor />}
-          {/* </IngredientsContext.Provider> }  */}
         </main>
+        </DndProvider>
       )}
     </div>
   );

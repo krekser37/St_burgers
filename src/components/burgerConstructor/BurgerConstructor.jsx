@@ -10,7 +10,14 @@ import OrderTotal from "../OrderTotal/OrderTotal";
 import { IngredientsContext } from "../../services/AppContext";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useDrop } from "react-dnd";
+import { type } from "@testing-library/user-event/dist/type";
+import {
+  addToConstructor,
+  /*   addToConstructorMainbun,
+  addToConstructorFilling, */
+} from "../../services/actions/index";
+import EmptyConstructorElement from "../EmptyConstructorElement/EmptyConstructorElement";
 /* const initialTotalPrice = { price: 0 };
 
 function reducer(totalPrice, action) {
@@ -30,91 +37,116 @@ function reducer(totalPrice, action) {
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const filling = useSelector((state) => state.burgerConstructor.filling);
-  const mainBun = useSelector((state) => state.burgerConstructor.mainBun);
-  //const orderIngredients = useSelector((state) => state.order.orderIngredients);
+  const { bun, filling } = useSelector(
+    (state) => state.burgerConstructor.currentIngredients
+  );
+  /*  const filling = useSelector((state) => state.burgerConstructor.filling);
+  const mainBun = useSelector((state) => state.burgerConstructor.mainBun); */
 
-  const totalPrice = useMemo(() => {
+  console.log(filling);
+  console.log(bun);
+  console.log(typeof filling);
+  console.log(typeof bun);
+  
+  const [{ isHover }, dropTarget] = useDrop(() => ({
+    accept: "ingredient",
+    drop(ingredient) {
+      dispatch(addToConstructor(ingredient));
+    },
+    //drop(ingredient) {ingredient.type === "bun" ? dispatch(addToConstructorMainbun(ingredient)) : dispatch(addToConstructorFilling(ingredient))},
+    /*     drop: (ingredient) => {
+      if (ingredient.type !== "bun") {
+        dispatch(addToConstructorFilling(ingredient));
+      } else {
+        dispatch(addToConstructorMainbun(ingredient));
+      }
+    }, */
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  }));
+
+  const classIsHover = isHover ? "onHover" : "none";
+  /* const classIsHover = isHover ? "5px solid blue" : "none"; */
+  /*   const totalPrice = useMemo(() => {
     return (
-      (mainBun ? mainBun.price * 2 : 0) +
+      (bun ? bun.price * 2 : 0) +
       filling.reduce((s, v) => s + v.price, 0)
     );
-  }, [mainBun, filling]);
-
-  //const orderIngredients = useSelector((state) => state.order.orderIngredients);
-  //console.log(orderIngredients);
-
- /*  const selectIngredients = useContext(IngredientsContext); */
-/*     const [totalPrice, dispatchTotalPrice] = useReducer(
-    reducer,
-    initialTotalPrice
-  ); */
-  console.log(filling);
-  console.log(mainBun);
-  console.log(totalPrice);
-  /*   const mainBun = useMemo(
-    () =>
-      selectIngredients.find((item) => item.name === "Краторная булка N-200i"),
-    [selectIngredients]
-  );
-  
-  const filling = useMemo(
-    () => selectIngredients.filter((item) => item.type !== "bun"),
-    [selectIngredients]
-  ); */
-
-/*       useEffect(() => {
-    dispatchTotalPrice({ type: "set", payload: {filling: filling, mainBun: mainBun} });
-  }, [filling , mainBun ]) */
-
-  /*   useEffect(() => {
-    const totalPrice = filling.reduce((prevVal, item) => {
-      prevVal + item.price;
-    }, mainBun.price * 2);
-    dispatchTotalPrice({ type: "set", payload: totalPrice });
-  }, [selectIngredients]); */
+  }, [bun, filling]);
+  console.log(totalPrice); */
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
-      <section className={`${Styles.elements} mt-25`}>
-        <div className="mr-4">
-          <ConstructorElement
-            type="top"
-            text= {`${mainBun.name} (верх)`}
-            price={mainBun.price}
-            thumbnail={mainBun.image}
-            key={(mainBun.id = nanoid())}
+      <section
+        сlassName={
+          isHover
+            ? `${Styles.elements} mt-25 ${Styles.onHover}`
+            : `${Styles.elements} mt-25`
+        }
+        ref={dropTarget}
+        className={`${Styles.elements} mt-25`}
+      >
+        {bun._id ? (
+          <div className="mr-4">
+            <ConstructorElement
+              type="top"
+              text={bun.name + "(верх)"}
+              price={bun.price}
+              thumbnail={bun.image}
+              /* key={(bun.id = nanoid())} */
+            />
+          </div>
+        ) : (
+          <EmptyConstructorElement
+            text={`Вы можете добавить выбранную булку, перетащив ее карточку из ингредиентов сюда.`}
           />
-        </div>
-        <ul className={`${Styles.ElementsIngredients}`}>
-          {filling.map((ingredient) => (
-            <li
-              className={Styles.ElementsItem}
-              key={(ingredient.id = nanoid())}
-            >
-              <DragIcon className="mr-2" />
-              <div>
-                <ConstructorElement
-                  className={`${Styles.ElementsConstructor}`}
-                  text={ingredient.name}
-                  price={ingredient.price}
-                  thumbnail={ingredient.image}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="mr-4">
-          <ConstructorElement
-            type="bottom"
-            text= {`${mainBun.name} (низ)`}
-            price={mainBun.price}
-            thumbnail={mainBun.image}
-            key={(mainBun.id = nanoid())}
+        )}
+        {filling.length > 0 ? (
+          <ul className={`${Styles.ElementsIngredients}`}>
+            {filling.map((ingredient) => (
+              <li
+                className={Styles.ElementsItem}
+                key={(ingredient.id = nanoid())}
+              >
+                <DragIcon className="mr-2" />
+                <div>
+                  <ConstructorElement
+                    className={`${Styles.ElementsConstructor}`}
+                    text={ingredient.name}
+                    price={ingredient.price}
+                    thumbnail={ingredient.image}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyConstructorElement
+            text={`Вы можете добавить выбранные начинки, перетащив их карточку из ингредиентов сюда.`}
           />
-        </div>
+        )}
+        {bun._id ? (
+          <div className="mr-4">
+            <ConstructorElement
+              type="bottom"
+              text={bun.name + "(низ_"}
+              price={bun.price}
+              thumbnail={bun.image}
+              /* key={(bun.id = nanoid())} */
+            />
+          </div>
+        ) : (
+          <EmptyConstructorElement
+            text={`Вы можете добавить выбранную булку, перетащив ее карточку из ингредиентов сюда.`}
+          />
+        )}
       </section>
-      <OrderTotal totalPrice={totalPrice}  />
+      {/*       {totalPrice ? (
+        <OrderTotal totalPrice={totalPrice} />
+      ) : (
+        <OrderTotal totalPrice={"0"} />
+      )} */}
     </section>
   );
 }
@@ -124,3 +156,22 @@ BurgerConstructor.propTypes = {
 };
 
 export default BurgerConstructor;
+
+/* const [{ isHovered }, ConstructorDrop] = useDrop(() => ({
+  accept: "INGREDIENT_NEW",
+  drop(item) {
+    dispatch(addElementToConstructor(item));
+  },
+  collect: (monitor) => ({
+    isHovered: monitor.isOver(),
+  }),
+})); 
+
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "INGREDIENT_NEW",
+    item: ingredient,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));*/

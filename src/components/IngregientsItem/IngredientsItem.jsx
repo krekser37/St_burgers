@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   openIngredientDetails,
   closeIngredientDetails,
-  SET_CURRENT_INGREDIENT_MODAL,
 } from "../../services/actions/index";
+import { useDrag } from "react-dnd";
 
 const IngredientsItem = ({ ingredients, count }) => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const IngredientsItem = ({ ingredients, count }) => {
   const isOpeningredientInModal = useSelector(
     (store) => store.ingredientDetails.isOpen
   );
-  
+
   const { name, price, image } = ingredients;
 
   //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
@@ -42,11 +42,21 @@ const IngredientsItem = ({ ingredients, count }) => {
 
   const ingredientTitle = "Детали ингредиента";
 
+  const [{opacity}, dragRef] = useDrag({
+    type: "ingredient",
+    item: ingredients,
+    collect: monitor => ({
+      opacity: monitor.isDragging()?0.5 :1
+    })
+  }/* , [ingredients] */);
+
   return (
     <>
       <section
+        ref={dragRef}
         className={`${Styles.IngredientsItem} mb-8`}
         onClick={() => handleOpenIngredientInModal(ingredients)}
+        style={{opacity}}
       >
         <img src={image} alt={name} className={Styles.IngredientsImage} />
         <div className={`${Styles.IngredientsItemPrice} mt-1 mb-1`}>

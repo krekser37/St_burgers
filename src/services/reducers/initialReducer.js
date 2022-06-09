@@ -10,6 +10,7 @@ const initialIngredients = {
   currentTab: "buns",
   ingredientsRequest: false,
   ingredientsFailed: false,
+  currentIngredient: null,
 };
 
 export const initialReducer = (state = initialIngredients, action) => {
