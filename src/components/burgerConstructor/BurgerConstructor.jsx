@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { type } from "@testing-library/user-event/dist/type";
 import {
-  addToConstructor,
-  /*   addToConstructorMainbun,
-  addToConstructorFilling, */
+  addToConstructorBun,
+  addToConstructorFilling,
+  deleteFromConstructor,
 } from "../../services/actions/index";
 import EmptyConstructorElement from "../EmptyConstructorElement/EmptyConstructorElement";
 /* const initialTotalPrice = { price: 0 };
@@ -37,23 +37,27 @@ function reducer(totalPrice, action) {
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { bun, filling } = useSelector(
+  /* const { bun, filling } = useSelector(
     (state) => state.burgerConstructor.currentIngredients
-  );
-  /*  const filling = useSelector((state) => state.burgerConstructor.filling);
-  const mainBun = useSelector((state) => state.burgerConstructor.mainBun); */
+  ); */
+  const filling = useSelector((state) => state.burgerConstructor.filling);
+  const bun = useSelector((state) => state.burgerConstructor.bun);
 
   console.log(filling);
   console.log(bun);
   console.log(typeof filling);
   console.log(typeof bun);
-  
+
   const [{ isHover }, dropTarget] = useDrop(() => ({
     accept: "ingredient",
-    drop(ingredient) {
+    /* drop(ingredient) {
       dispatch(addToConstructor(ingredient));
+    }, */
+    drop(ingredient) {
+      ingredient.type === "bun"
+        ? dispatch(addToConstructorBun(ingredient))
+        : dispatch(addToConstructorFilling(ingredient));
     },
-    //drop(ingredient) {ingredient.type === "bun" ? dispatch(addToConstructorMainbun(ingredient)) : dispatch(addToConstructorFilling(ingredient))},
     /*     drop: (ingredient) => {
       if (ingredient.type !== "bun") {
         dispatch(addToConstructorFilling(ingredient));
@@ -116,6 +120,9 @@ function BurgerConstructor() {
                     text={ingredient.name}
                     price={ingredient.price}
                     thumbnail={ingredient.image}
+                    handleClose={() =>
+                      dispatch(deleteFromConstructor(ingredient.id))
+                    }
                   />
                 </div>
               </li>

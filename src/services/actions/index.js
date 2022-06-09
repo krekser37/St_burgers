@@ -82,28 +82,22 @@ export function getOrder(orderIngredients) {
 }
 
 //burgerConstructorReducer
-/* export const ADD_MAINBUN = "GET_MAINBUN";
-export const ADD_FILLING = "GET_FILLING"; */
-export const ADD_ITEM = "ADD_ITEM";
-export const DELETE_ITEM = "DELETE_ITEM";
+export const ADD_BUN = "ADD_BUN";
+export const ADD_FILLING = "ADD_FILLING";
+export const DELETE_FILLING = "DELETE_FILLING";
 export const CHANGE_ITEM_POSITION = "CHANGE_ITEM_POSITION";
 
-/* export const addToConstructorFilling = (ingredient) => {
-  return {
-    type: ADD_FILLING,
-    payload: {
-      ...ingredient,
-      id: nanoid(),
-    },
-  };
-}; */
+export const addToConstructorBun = (ingredient) => ({
+  type: ADD_BUN,
+  ingredient: { ...ingredient},
+});
 
-export const addToConstructor = (ingredient) => ({
-  type: ADD_ITEM,
+export const addToConstructorFilling = (ingredient) => ({
+  type: ADD_FILLING,
   ingredient: { ...ingredient, id: nanoid(), },
 });
 
 export const deleteFromConstructor = (id) => ({
-    type: DELETE_ITEM,
+    type: DELETE_FILLING,
     id,
   });
