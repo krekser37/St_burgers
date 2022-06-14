@@ -17,7 +17,6 @@ import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
-  /*  const selectIngredients = useContext(IngredientsContext); */
   const [bunsRef, inViewBuns] = useInView({ threshold: 1 });
   const [saucesRef, inViewSauces] = useInView({ threshold: 0.5 });
   const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });

@@ -2,15 +2,16 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
+  SET_ORDER_MODAL,
+  RESET_ORDER_MODAL,
 } from "../actions/index";
 
 const initialOrderState = {
-  totalprice: 0,
-  orderIngredients: [],
-  orderNumber: null,
+  order: {},
   orderRequest: false,
   orderSucces: false,
   orderFailed: false,
+  modalIsOpen: false,
 };
 
 export const orderReducer = (state = initialOrderState, action) => {
@@ -19,27 +20,37 @@ export const orderReducer = (state = initialOrderState, action) => {
       return {
         ...state,
         orderRequest: true,
-        orderIngredients: action.orderIngredients
       };
     }
     case GET_ORDER_SUCCESS: {
       return {
         ...state,
-        totalprice: action.totalprice,
-        orderNumber: action.res.order.number,
+        order: action.order,
         orderRequest: false,
         orderSucces: 'success',
-        orderFailed: false
+        orderFailed: false,
       };
     }
     case GET_ORDER_FAILED: {
       return {
         ...state,
-        orderIngredients: [],
         orderRequest: false,
-        orderFailed: false,
+        orderFailed: true,
       };
     }
+    case SET_ORDER_MODAL: {
+      return {
+          ...state,
+          modalIsOpen: true
+      }
+  }
+  case RESET_ORDER_MODAL: {
+    return {
+        ...state,
+        modalIsOpen: false,
+        order: {},
+    }
+}
     default:
       return state;
   }

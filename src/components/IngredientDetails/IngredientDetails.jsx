@@ -1,6 +1,5 @@
 import React from "react";
 import Styles from "./IngredientDetails.module.css";
-import PropTypes from "prop-types";
 import { useSelector } from 'react-redux';
 
 const IngredientDetails = () => {
@@ -53,10 +52,6 @@ const IngredientDetails = () => {
       </ul>
     </div>
   );
-};
-
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.shape.isRequired,
 };
 
 export default IngredientDetails;

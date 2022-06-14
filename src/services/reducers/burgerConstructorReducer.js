@@ -4,6 +4,7 @@ import {
   DELETE_FILLING,
   CHANGE_FILLING_POSITION,
 } from "../actions/index";
+import update from 'immutability-helper';
 
 const initialState = {
   bun: {},
@@ -33,8 +34,14 @@ export const burgerConstructorReducer = (state = initialState, action) => {
     case CHANGE_FILLING_POSITION: {
       return {
         ...state,
-        filling: action.newFilling,
-      };
+          filling: update(state.filling, {
+            $splice: [
+              [action.dragIndex, 1],
+              [action.hoverIndex, 0,
+                state.filling[action.dragIndex]],
+            ],
+          }),
+        }
     }
 
     default:

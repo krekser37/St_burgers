@@ -54,31 +54,44 @@ export const SWITCH_TAB = "SWITCH_TAB";
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
+export const SET_ORDER_MODAL = 'SET_ORDER_MODAL';
+export const RESET_ORDER_MODAL = 'RESET_ORDER_MODAL';
 
 export function getOrder(orderIngredients) {
   return function (dispatch) {
     dispatch({
       type: GET_ORDER_REQUEST,
-      orderIngredients,
-      /*  payload: true, */
     });
+    const ids = orderIngredients.map((ingredient) => ingredient._id);
+    /* console.log(ids); */
     getApiOrder(orderIngredients)
       .then((res) => {
         if (res && res.success) {
           dispatch({
             type: GET_ORDER_SUCCESS,
-            order: res.data,
+            order: res.order.number,
           });
+          console.log(order); 
         }
       })
+      .then(
+        dispatch({
+            type: SET_ORDER_MODAL
+        })
+    )
       .catch((err) => {
         dispatch({
           type: GET_ORDER_FAILED,
-          /* payload: false, */
+          payload: err,
         });
-        console.log(err);
       });
   };
+}
+
+export const resetOrderModal = () => {
+  return {
+      type: RESET_ORDER_MODAL,     
+  }
 }
 
 //burgerConstructorReducer
@@ -102,7 +115,8 @@ export const deleteFromConstructor = (id) => ({
   id,
 });
 
-export const changeFillingPosition = (newFilling) => ({
+export const changeFillingPosition = (dragIndex, hoverIndex) => ({
   type: CHANGE_FILLING_POSITION,
-  newFilling,
+  dragIndex: dragIndex,
+  hoverIndex: hoverIndex,
 });

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useCallback } from "react";
 import Styles from "./OrderTotal.module.css";
 import Modal from "../Modal/Modal";
 import {
@@ -11,63 +11,26 @@ import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import {getOrder} from "../../services/actions/index";
+import { getOrder, resetOrderModal } from "../../services/actions/index";
 
-function OrderTotal({ totalPrice }) {
+function OrderTotal({ orderIngredients, totalPrice }) {
   const dispatch = useDispatch();
-  const orderIngredients = useSelector((state) => state.order.orderIngredients);
-  /* const totalPrice = useSelector(state => state.order.totalPrice); */
-  const [isOpenOrderDetailsModal, setOpenOrderDetailsModal] = useState(false);
-  const [ingredientsLoading, setIngredientsLoading] = useState(true);
-  const [orderNumber, setOrderNumber] = useState(null);
-  //const selectIngredients = useContext(IngredientsContext);
-  //const selectingredientsId = selectIngredients.map((item) => item._id);
-  /*   console.log(selectIngredients); 
-  console.log(selectingredientsId);  */
+  const order = useSelector((store) => store.order);
+  const orderNumber = order.order;
 
-  const handleOpenOrderDetailsModal = () => {
-    setIngredientsLoading(true);
-    setOpenOrderDetailsModal(true);
-    (orderIngredients && dispatch(getOrder(orderIngredients)));
+ /*  console.log(order.order);
+  console.log(orderNumber);
+  console.log(orderIngredients); */
+
+  const handleOpenOrderModal = () => {
+    dispatch(getOrder(orderIngredients));
   };
 
-  const handleCloseOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(false);
-  };
-
-/*   const ingredientsId = selectIngredients.map((item) => {
-    return item._id;
-  }); */
-
-/*   function getOrder() {
-    fetch("https://norma.nomoreparties.space/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        ingredients: ingredientsId,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .then((res) => {
-        setOrderNumber(res.order.number);
-        setIngredientsLoading(false);
-      })
-      .catch((err) => console.log(err));
-  } */
+  const handleCloseOrderModal = useCallback(() => {
+    dispatch(resetOrderModal(false));
+  }, [dispatch]);
 
   const ordertTitle = " ";
-
-/*   const totalPrice = useSelector(store =>
-    store.selectedIngredients.items.reduce((acc, item) => acc + item.price * item.qty, 0)
-  ); */
 
   return (
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
@@ -75,28 +38,34 @@ function OrderTotal({ totalPrice }) {
       <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
         <CurrencyIcon />
       </div>
-      <Button type="primary" size="large" onClick={handleOpenOrderDetailsModal}>
+      <Button type="primary" size="large" onClick={handleOpenOrderModal}>
         Оформить заказ
       </Button>
-      {isOpenOrderDetailsModal && (
-        <Modal onClose={handleCloseOrderDetailsModal} title={ordertTitle}>
-          <div className={Styles.OrderDetails}>
-            {ingredientsLoading ? (
-              <Preloader />
-            ) : (
-              <OrderNumber orderNumber={orderNumber} />
-            )}
-            <p className="text text_type_main-medium mt-8 mb-15">
-              идентификатор заказа
-            </p>
-            <img src={Done} alt="Готовится" />
-            <p className="text text_type_main-default mt-15 mb-2">
-              Ваш заказ начали готовить
-            </p>
+      {order.modalIsOpen && (
+        <Modal onClose={handleCloseOrderModal} title={ordertTitle}>
+          {order.orderRequest ? (
             <p className="text secondary text_type_main-default mb-30">
-              Дождитесь готовности на орбитальной станции
+              Что-то пошло не так... Попробуйте оформить заказ еще раз.
             </p>
-          </div>
+          ) : (
+            <div className={Styles.OrderDetails}>
+              {!order.orderSucces ? (
+                <Preloader />
+              ) : (
+                <OrderNumber orderNumber={order.order} />
+              )}
+              <p className="text text_type_main-medium mt-8 mb-15">
+                идентификатор заказа
+              </p>
+              <img src={Done} alt="Готовится" />
+              <p className="text text_type_main-default mt-15 mb-2">
+                Ваш заказ начали готовить
+              </p>
+              <p className="text secondary text_type_main-default mb-30">
+                Дождитесь готовности на орбитальной станции
+              </p>
+            </div>
+          )}
         </Modal>
       )}
     </section>
