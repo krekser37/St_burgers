@@ -1,18 +1,14 @@
 import React, {
   useMemo,
   useState,
-  useContext,
   useEffect,
-  useCallback,
-  useRef,
 } from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 /* import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../utils/propTypes"; */
-import { IngredientsContext } from "../../services/AppContext";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
@@ -21,7 +17,6 @@ function BurgerIngredients() {
   const [saucesRef, inViewSauces] = useInView({ threshold: 0.5 });
   const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });
 
-  const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   //const current = useSelector((state) => state.ingredients.currentTab);
 

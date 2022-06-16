@@ -5,7 +5,6 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IngredientsContext } from "../../services/AppContext";
 import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
@@ -17,7 +16,6 @@ import { getOrder, resetOrderModal } from "../../services/actions/index";
 function OrderTotal({ orderIngredients, totalPrice }) {
   const dispatch = useDispatch();
   const order = useSelector((store) => store.order);
-  const orderNumber = order.order;
 
   /*  console.log(order.order);
   console.log(orderNumber);

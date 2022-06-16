@@ -1,6 +1,5 @@
 import React,
 { useEffect } from "react";
-import { IngredientsContext } from "../../services/AppContext";
 import "@ya.praktikum/react-developer-burger-ui-components";
 import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";

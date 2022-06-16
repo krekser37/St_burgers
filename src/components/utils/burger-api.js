@@ -1,5 +1,5 @@
 const baseUrl = "https://norma.nomoreparties.space/api";
-const headers = { "Content-Type": "application/json" };
+/* const headers = { "Content-Type": "application/json" }; */
 
 export const getResponseData = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);

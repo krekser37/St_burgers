@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Styles from "./Modal.module.css";
 import PropTypes from "prop-types";
@@ -8,9 +8,10 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 const modalRoot = document.getElementById("modalRoot");
 
 const Modal = ({ onClose, children, title }) => {
-  const onEscDown = (e) => {
-    e.key === "Escape" && onClose();
-  };
+  const onEscDown = useCallback((e) => {
+    if(e.key === "Escape") {
+    onClose()};
+  },[onClose]);
 
   useEffect(() => {
     document.addEventListener("keydown", onEscDown);

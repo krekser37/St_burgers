@@ -62,7 +62,7 @@ export function getOrder(orderIngredients) {
     dispatch({
       type: GET_ORDER_REQUEST,
     });
-    const ids = orderIngredients.map((ingredient) => ingredient._id);
+    /* const ids = orderIngredients.map((ingredient) => ingredient._id); */
     /* console.log(ids); */
     getApiOrder(orderIngredients)
       .then((res) => {
@@ -71,7 +71,6 @@ export function getOrder(orderIngredients) {
             type: GET_ORDER_SUCCESS,
             order: res.order.number,
           });
-          console.log(order); 
         }
       })
       .then(

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import Styles from "./BurgerConstructor.module.css";
@@ -37,19 +37,19 @@ function BurgerConstructor() {
   }
   /* console.log(orderIngredients); */
 
-  const [{ isHover }, dropTarget] = useDrop(() => ({
+  const [/* { isHover } */, dropTarget] = useDrop(() => ({
     accept: "ingredient",
     drop(ingredient) {
       ingredient.type === "bun"
         ? dispatch(addToConstructorBun(ingredient))
         : dispatch(addToConstructorFilling(ingredient));
     },
-    collect: (monitor) => ({
+/*     collect: (monitor) => ({
       isHover: monitor.isOver(),
-    }),
+    }), */
   }));
 
-  const classIsHover = isHover ? "onHover" : "none";
+ /*  const classIsHover = isHover ? "onHover" : "none"; */
   const totalPrice = useMemo(() => {
     return (bun ? bun.price * 2 : 0) + filling.reduce((s, v) => s + v.price, 0);
   }, [bun, filling]);
