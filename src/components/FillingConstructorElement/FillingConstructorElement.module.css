@@ -1,0 +1,12 @@
+.ElementsItem {
+  list-style-type: none;
+  width: 100%;
+  width: 568px;
+  display: flex;
+  align-items: center;
+}
+
+.ElementsConstructor {
+  width: 100%;
+  width: 488px;
+}

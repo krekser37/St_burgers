@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
@@ -7,29 +7,62 @@ import {
 import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { closeIngredientDetails } from "../../services/actions/index";
+import { useDrag } from "react-dnd";
 
-const IngredientsItem = ({ ingredients, count }) => {
+const IngredientsItem = ({ ingredients, handleOpenIngredientInModal}) => {
+  const dispatch = useDispatch();
+
+  const isOpeningredientInModal = useSelector(
+    (store) => store.ingredientDetails.isOpen
+  );
+
   const { name, price, image } = ingredients;
 
-  const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
-  const [currentIngredient, setCurrentIngredient] = useState(null);
+  //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
+  //const [currentIngredient, setCurrentIngredient] = useState(null);
 
-  const handleOpenIngredientInModal = (ingredient) => {
-    setCurrentIngredient(ingredient);
-    setOpeningredientInModal(true);
-  };
+/*   const handleOpenIngredientInModal = useCallback(
+    (item) => {
+      dispatch(openIngredientDetails(item));
+    },
+    [dispatch]
+  ); */
 
-  const handleCloseIngredientInModal = () => {
-    setOpeningredientInModal(false);
-  };
+  const handleCloseIngredientInModal = useCallback(
+    (item) => {
+      dispatch(closeIngredientDetails(item));
+    },
+    [dispatch]
+  );
 
   const ingredientTitle = "Детали ингредиента";
+
+  const [{opacity}, dragRef] = useDrag({
+    type: "ingredient",
+    item: ingredients,
+    collect: monitor => ({
+      opacity: monitor.isDragging()?0.5 :1
+    })
+  }/* , [ingredients] */);
+
+  const filling = useSelector((state) => state.burgerConstructor.filling);
+  const bun = useSelector((state) => state.burgerConstructor.bun);
+
+  let count = filling.filter((item)=> item._id === ingredients._id).length;
+
+  if(ingredients._id === bun._id){
+  count = 2;
+  };
 
   return (
     <>
       <section
+        ref={dragRef}
         className={`${Styles.IngredientsItem} mb-8`}
         onClick={() => handleOpenIngredientInModal(ingredients)}
+        style={{opacity}}
       >
         <img src={image} alt={name} className={Styles.IngredientsImage} />
         <div className={`${Styles.IngredientsItemPrice} mt-1 mb-1`}>
@@ -43,7 +76,7 @@ const IngredientsItem = ({ ingredients, count }) => {
       </section>
       {isOpeningredientInModal && (
         <Modal onClose={handleCloseIngredientInModal} title={ingredientTitle}>
-          <IngredientDetails ingredient={currentIngredient} />
+          <IngredientDetails />
         </Modal>
       )}
     </>
@@ -52,7 +85,7 @@ const IngredientsItem = ({ ingredients, count }) => {
 
 IngredientsItem.propTypes = {
   ingredients: PropTypes.object.isRequired,
-  count: PropTypes.number,
+  handleOpenIngredientInModal: PropTypes.func.isRequired,
 };
 
 export default IngredientsItem;
