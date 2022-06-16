@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Styles from "./BurgerConstructor.module.css";
 import ingredientsDataPropTypes from "../utils/propTypes";
 import OrderTotal from "../OrderTotal/OrderTotal";
-import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
@@ -16,8 +15,8 @@ import FillingConstructorElement from "../FillingConstructorElement/FillingConst
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const filling = useSelector((state) => state.burgerConstructor.filling);
-  const bun = useSelector((state) => state.burgerConstructor.bun);
+  const filling = useSelector((store) => store.burgerConstructor.filling);
+  const bun = useSelector((store) => store.burgerConstructor.bun);
 
 /*   console.log(filling);
   console.log(bun);
@@ -59,11 +58,11 @@ function BurgerConstructor() {
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section
-        сlassName={
+/*         сlassName={
           isHover
             ? `${Styles.elements} mt-25 ${Styles.onHover}`
             : `${Styles.elements} mt-25`
-        }
+        } */
         ref={dropTarget}
         className={`${Styles.elements} mt-25`}
       >
@@ -71,6 +70,7 @@ function BurgerConstructor() {
           <div className="mr-4">
             <ConstructorElement
               type="top"
+              isLocked={true}
               text={bun.name + "(верх)"}
               price={bun.price}
               thumbnail={bun.image}
@@ -88,7 +88,7 @@ function BurgerConstructor() {
               <FillingConstructorElement
                 ingredient={ingredient}
                 index={index}
-                key={(ingredient.id = nanoid())}
+                key={ingredient.id}
               />
             ))}
           </ul>
@@ -101,7 +101,8 @@ function BurgerConstructor() {
           <div className="mr-4">
             <ConstructorElement
               type="bottom"
-              text={bun.name + "(низ_"}
+              isLocked={true}
+              text={bun.name + "(низ)"}
               price={bun.price}
               thumbnail={bun.image}
               /* key={(bun.id = nanoid())} */
@@ -119,7 +120,7 @@ function BurgerConstructor() {
           totalPrice={totalPrice}
         />
       ) : (
-        <OrderTotal totalPrice={"0"} />
+        <OrderTotal totalPrice={0} />
       )}
     </section>
   );

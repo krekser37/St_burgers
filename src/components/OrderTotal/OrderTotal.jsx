@@ -10,6 +10,7 @@ import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
 import PropTypes from "prop-types";
+import ingredientsDataPropTypes from "../utils/propTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder, resetOrderModal } from "../../services/actions/index";
 
@@ -18,12 +19,14 @@ function OrderTotal({ orderIngredients, totalPrice }) {
   const order = useSelector((store) => store.order);
   const orderNumber = order.order;
 
- /*  console.log(order.order);
+  /*  console.log(order.order);
   console.log(orderNumber);
   console.log(orderIngredients); */
-
+ 
   const handleOpenOrderModal = () => {
-    dispatch(getOrder(orderIngredients));
+    if(orderIngredients !== undefined) {
+      dispatch(getOrder(orderIngredients));
+    }
   };
 
   const handleCloseOrderModal = useCallback(() => {
@@ -73,7 +76,8 @@ function OrderTotal({ orderIngredients, totalPrice }) {
 }
 
 OrderTotal.propTypes = {
-  orderNumber: PropTypes.number,
+  totalPrice: PropTypes.number,
+  orderIngredients: PropTypes.arrayOf(ingredientsDataPropTypes),
 };
 
 export default OrderTotal;

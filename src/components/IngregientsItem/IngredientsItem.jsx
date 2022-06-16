@@ -87,8 +87,7 @@ const IngredientsItem = ({ ingredients }) => {
 };
 
 IngredientsItem.propTypes = {
-  /* ingredients: PropTypes.object.isRequired, */
-  count: PropTypes.number,
+  ingredients: PropTypes.object.isRequired,
 };
 
 export default IngredientsItem;

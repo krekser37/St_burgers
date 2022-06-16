@@ -1,5 +1,6 @@
 import React from "react";
 import Styles from "./EmptyConstructorElement.module.css";
+import PropTypes from "prop-types";
 
 function EmptyConstructorElement({ text }) {
   return (
@@ -8,5 +9,9 @@ function EmptyConstructorElement({ text }) {
     </div>
   );
 }
+
+EmptyConstructorElement.propTypes = {
+  orderNumber: PropTypes.string,
+};
 
 export default EmptyConstructorElement;

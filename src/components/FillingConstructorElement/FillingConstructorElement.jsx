@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { changeFillingPosition } from "../../services/actions/index";
 import { nanoid } from "nanoid";
 import { deleteFromConstructor} from "../../services/actions/index";
+import PropTypes from "prop-types";
+import ingredientsDataPropTypes from "../utils/propTypes";
 
 function FillingConstructorElement({ ingredient, index }) {
   const dispatch = useDispatch();
@@ -100,4 +102,11 @@ function FillingConstructorElement({ ingredient, index }) {
   );
 }
 
+FillingConstructorElement.propTypes = {
+  ingredient: PropTypes.shape(ingredientsDataPropTypes.isRequired).isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 export default FillingConstructorElement;
+
+/* PropTypes.object.isRequired, */
