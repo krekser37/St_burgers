@@ -8,13 +8,10 @@ import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  openIngredientDetails,
-  closeIngredientDetails,
-} from "../../services/actions/index";
+import { closeIngredientDetails } from "../../services/actions/index";
 import { useDrag } from "react-dnd";
 
-const IngredientsItem = ({ ingredients }) => {
+const IngredientsItem = ({ ingredients, handleOpenIngredientInModal}) => {
   const dispatch = useDispatch();
 
   const isOpeningredientInModal = useSelector(
@@ -26,12 +23,12 @@ const IngredientsItem = ({ ingredients }) => {
   //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
   //const [currentIngredient, setCurrentIngredient] = useState(null);
 
-  const handleOpenIngredientInModal = useCallback(
+/*   const handleOpenIngredientInModal = useCallback(
     (item) => {
       dispatch(openIngredientDetails(item));
     },
     [dispatch]
-  );
+  ); */
 
   const handleCloseIngredientInModal = useCallback(
     (item) => {
@@ -88,6 +85,7 @@ const IngredientsItem = ({ ingredients }) => {
 
 IngredientsItem.propTypes = {
   ingredients: PropTypes.object.isRequired,
+  handleOpenIngredientInModal: PropTypes.func.isRequired,
 };
 
 export default IngredientsItem;
