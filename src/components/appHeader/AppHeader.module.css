@@ -3,7 +3,7 @@
 }
 
 .AppHeader {
-  background-color: #1C1C21;
+  background-color: #1c1c21;
   max-width: 1280px;
   margin: 0 auto;
   /* width: 100%; */
@@ -20,19 +20,37 @@
 }
 
 .headerButton {
-  display: flex;
-list-style-type: none;
+   display: flex;
+ list-style-type: none;
+  min-width: 56px;
+  text-decoration: none;
+
+}
+
+.headerButton svg {
+  stroke:inherit;
+  stroke-width:inherit;
+    fill:rgb(133, 133, 173)
+}
+
+.headerButton:hover svg{
+  fill: #f2f2f3;
+}
+
+.headerButton:hover span{
+  color: rgb(255, 255, 255);
 }
 
 .headerList {
   display: flex;
   padding: 0;
+  align-items: center;
 }
 
-.headerText{
-  margin-top: 0;
-  margin-bottom: 0;
-}
+/* 
+.headerText:hover {
+  color: #8585AD;
+  } */
 
 .appLogo {
   height: 40vmin;
@@ -60,6 +78,10 @@ list-style-type: none;
 .App-title {
   /* font-size: 25px; */
   /* color: #393a34; */
-  font-family: 'JetBrains_Mono', Arial, sans-serif;
- /*  margin: 5px 0; */
+  font-family: "JetBrains_Mono", Arial, sans-serif;
+  /*  margin: 5px 0; */
+}
+
+.activeNavLink {
+  color: white;
 }

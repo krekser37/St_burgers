@@ -1,5 +1,4 @@
 const baseUrl = "https://norma.nomoreparties.space/api";
-/* const headers = { "Content-Type": "application/json" }; */
 
 export const getResponseData = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -32,6 +31,43 @@ export const getApiOrder = (ids) => {
       },
       method: "POST",
       body: JSON.stringify({ ingredients: ids }),
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
+export const getApiForgotPassword = (emailValue) => {
+  return fetch(`${baseUrl}/password-reset`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({ email: emailValue }),
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
+export const getApiResetPassword = (password, token) => {
+  return fetch(`${baseUrl}/password-reset/reset`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({ password: password,  token: token}),
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
+//регистрация
+export const getApiRegistration= (email, password, name) => {
+  return fetch(`${baseUrl}/auth/register`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({ email: email, password: password,  name: name}),
     })
       .then(getResponseData)
       .catch(getResponseData)

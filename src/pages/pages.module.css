@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  margin: auto;
+  margin-top: 180px;
+}
+
+.form {
+  min-width: 480px;
+  text-align: center;
+}
+
+.form div {
+  width: 100%;
+}
+
+.form div div div div {
+  max-width: 24px;
+}
+
+.text button {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 10px;
+  margin-right: 0;
+}
+
+.NotFoundImage {
+  max-width: 700px;
+  background-size: cover;
+}
+
