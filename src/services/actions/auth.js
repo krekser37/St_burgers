@@ -2,7 +2,67 @@ import {
   getApiForgotPassword,
   getApiResetPassword,
   getApiRegistration,
+  getApiUser,
+  postApiAutorisation,
+  postApiLogout,
 } from "../../components/utils/burger-api";
+import { setCookie, deleteCookie } from "../../components/utils/cookie";
+
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILED = "LOGOUT_FAILED";
+
+export function logOut(refreshToken) {
+  return function (dispatch) {
+    dispatch({
+      type: LOGOUT_REQUEST,
+    });
+    postApiLogout(refreshToken)
+      .then((res) => {
+        deleteCookie('token');
+        localStorage.removeItem('token');
+        dispatch({
+          type: LOGOUT_SUCCESS,
+          "success": true,
+          "message": "Successful logout"
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: LOGOUT_FAILED,
+          payload: err,
+        });
+      });
+  };
+}
+
+
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAILED = "GET_USER_FAILED";
+
+export function getUser() {
+  return function (dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST,
+    });
+    getApiUser()
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: GET_USER_SUCCESS,
+            payload: res.user,
+          });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: GET_USER_FAILED,
+          payload: err,
+        });
+      });
+  };
+}
 
 export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
 export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
@@ -33,6 +93,42 @@ export function registration(email, password, name) {
       .catch((err) => {
         dispatch({
           type: REGISTRATION_FAILED,
+          payload: err,
+        });
+      });
+  };
+}
+
+export const AUTORISATION_REQUEST = "AUTORISATION_REQUEST";
+export const AUTORISATION_SUCCESS = "AUTORISATION_SUCCESS";
+export const AUTORISATION_FAILED = "AUTORISATION_FAILED";
+
+export function authorization(email, password) {
+  return function (dispatch) {
+    dispatch({
+      type: AUTORISATION_REQUEST,
+    });
+    postApiAutorisation(email, password)
+      .then((res) => {
+        const authToken = res.accessToken.split("Bearer ")[1];
+        setCookie("token", authToken);
+        localStorage.setItem("token", res.refreshToken);
+        if (res && res.success) {
+          dispatch({
+            type: AUTORISATION_SUCCESS,
+            success: "true",
+            user: {
+              email: "",
+              name: "",
+            },
+            accessToken: "Bearer ...",
+            refreshToken: "",
+          });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: AUTORISATION_FAILED,
           payload: err,
         });
       });

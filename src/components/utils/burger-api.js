@@ -1,3 +1,5 @@
+import { getCookie } from "./cookie";
+
 const baseUrl = "https://norma.nomoreparties.space/api";
 
 export const getResponseData = (res) => {
@@ -9,20 +11,6 @@ export const getApiResponse = () => {
     .then(getResponseData)
     .catch(getResponseData);
 };
-
-/* const sendRequest = (method, body, url) => {
-  return fetch(`${url}`, {
-    method: method,
-    body: body,
-    headers: headers,
-  }).then(getResponseData);
-};
-
-export const getApiOrder = (ids) => {
-  const body = JSON.stringify({ ingredients: ids });
-  console.log(body);
-  return sendRequest("POST", body, `${baseUrl}/orders`);
-}; */
 
 export const getApiOrder = (ids) => {
   return fetch(`${baseUrl}/orders`, {
@@ -72,3 +60,55 @@ export const getApiRegistration= (email, password, name) => {
       .then(getResponseData)
       .catch(getResponseData)
 };
+
+//авторизация
+export const postApiAutorisation= (email, password) => {
+  return fetch(`${baseUrl}/auth/login`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({ email: email, password: password}),
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
+//получение данных пользователя 
+export const getApiUser= () => {
+  return fetch(`${baseUrl}/auth/user`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        // Отправляем токен и схему авторизации в заголовке при запросе данных
+        Authorization: 'Bearer ' + getCookie('token')
+      },
+      method: "GET",
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
+//выход пользователя
+export const postApiLogout= (refreshToken) => {
+  return fetch(`${baseUrl}/auth/logout`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        token: refreshToken
+    }),
+      method: "POST",
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+}; 
