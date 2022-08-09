@@ -44,7 +44,7 @@ export default function Login() {
               onChange={(e) => setemailValue(e.target.value)}
               value={emailValue}
               name="email"
-              placeholder="email"
+              placeholder="E-mail"
               type="email"
               error={false}
               errorText="Ошибка"

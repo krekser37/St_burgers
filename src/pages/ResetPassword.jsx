@@ -23,14 +23,17 @@ export default function ResetPassword() {
     history.push("/profile");
   };
   
-  const user = useSelector(store => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
+  const forgotPasswordSuccess = useSelector((store) => store.auth.forgotPasswordSuccess)
 
   console.log(user);
   if (user) {
-    return (
-        <Redirect to={ '/'} />
-    );
-}
+    return <Redirect to={"/"} />;
+  }
+
+	if (!forgotPasswordSuccess) {
+		return <Redirect to={"/forgot-password"} />;
+	}
 
   return (
     <>
