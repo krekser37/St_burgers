@@ -1,18 +1,17 @@
-import React, {/*  useEffect, */ useState, useRef /* , useCallback  */ } from "react";
-/* import { useHistory } from "react-router-dom"; */
+import React, { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Styles from "./profile.module.css"; 
+import Styles from "./profile.module.css";
 import { logOut } from "../../services/actions/auth";
 import { updateRegistration } from "../../services/actions/auth";
 
 export default function Profile() {
-  const user = useSelector(store => store.auth.user);
-/* console.log(user.name); */
+  const user = useSelector((store) => store.auth.user);
+  /* console.log(user.name); */
   const [nameValue, setNameValue] = useState(user.name);
   const [emailValue, setEmailValue] = useState(user.email);
   const [passwordValue, setPasswordValue] = useState("");
@@ -21,49 +20,58 @@ export default function Profile() {
   const loginRef = useRef(null);
   const passwordRef = useRef(null);
 
-/*   const [showButtons, setShowButtons] = useState(false); */
+  const [showButtons, setShowButtons] = useState(false);
   const dispatch = useDispatch();
-  /*   const history = useHistory(); */
-  /*   const register = useCallback(() => {
-    history.replace({ pathname: "/register" });
-  }, [history]);
-
-  const forgotPassword = useCallback(() => {
-    history.replace({ pathname: "/forgot-password" });
-  }, [history]); */
-
-/*   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]) */
 
   const updateUser = (e) => {
     e.preventDefault();
-    dispatch (updateRegistration(nameValue, emailValue, passwordValue))
-  }
+    dispatch(updateRegistration(nameValue, emailValue, passwordValue));
+  };
 
   const cancelUpdateUser = (e) => {
     e.preventDefault();
     setNameValue(user.name);
     setEmailValue(user.email);
     setPasswordValue("");
-  }
+    setShowButtons(false);
+  };
+
+  const onChangeName = (e) => {
+    const { value } = e.target;
+    setNameValue(value);
+    value === user.name ? setShowButtons(false) : setShowButtons(true);
+  };
+
+  const onChangeEmail = (e) => {
+    const { value } = e.target;
+    setEmailValue(value);
+    value === user.email ? setShowButtons(false) : setShowButtons(true);
+  };
+
+  const onChangePassword = (e) => {
+    const { value } = e.target;
+    setPasswordValue(value);
+    value === user.password ? setShowButtons(false) : setShowButtons(true);
+  };
 
   const onClickName = () => {
-    setTimeout(() => nameRef.current.focus(), 0)
-  }
+    setTimeout(() => nameRef.current.focus(), 0);
+    setShowButtons(true);
+  };
 
   const onClickEmail = () => {
-    setTimeout(() => loginRef.current.focus(), 0)
-   }
+    setTimeout(() => loginRef.current.focus(), 0);
+    setShowButtons(true);
+  };
 
-   const onClickPassword = () => {
-    setTimeout(() => passwordRef.current.focus(), 0)
-   }
+  const onClickPassword = () => {
+    setTimeout(() => passwordRef.current.focus(), 0);
+    setShowButtons(true);
+  };
 
   const logoutExit = () => {
     dispatch(logOut());
-  }
-
+  };
 
   return (
     <>
@@ -105,7 +113,7 @@ export default function Profile() {
           <Input
             type="text"
             placeholder="Имя"
-            onChange={(e) => setNameValue(e.target.value)}
+            onChange={onChangeName}
             icon="EditIcon"
             value={nameValue}
             name="name"
@@ -119,7 +127,7 @@ export default function Profile() {
             type="email"
             placeholder="Логин"
             size="default"
-            onChange={(e) => setEmailValue(e.target.value)}
+            onChange={onChangeEmail}
             icon="EditIcon"
             value={emailValue}
             name="email"
@@ -132,7 +140,7 @@ export default function Profile() {
             className="text_color_inactive"
             type="password"
             placeholder="Пароль"
-            onChange={(e) => setPasswordValue(e.target.value)}
+            onChange={onChangePassword}
             icon="EditIcon"
             value={passwordValue}
             name="password"
@@ -141,15 +149,19 @@ export default function Profile() {
             onClick={onClickPassword}
             errorText="Ошибка"
           />
-          {/* {showButtons &&  */}
+          {showButtons && (
             <div className={Styles.buttons}>
               <Button type="secondary" size="medium" onClick={cancelUpdateUser}>
                 Отмена
               </Button>
-              <Button type="primary" size="medium" disabled={!(nameValue && emailValue && passwordValue)}>
+              <Button
+                type="primary"
+                size="medium" /* disabled={!(nameValue && emailValue && passwordValue)} */
+              >
                 Cохранить
               </Button>
-            </div> {/* } */}
+            </div>
+          )}
         </form>
       </div>
     </>
