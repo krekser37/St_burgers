@@ -49,27 +49,27 @@ export const getApiResetPassword = (password, token) => {
 };
 
 //регистрация
-export const postApiRegistration = async (email, password, name) => {
+export const postApiRegistration = async (name, email, password) => {
   return fetch(`${baseUrl}/auth/register`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       method: "POST",
-      body: JSON.stringify({ email: email, password: password,  name: name}),
+      body: JSON.stringify({ name: name, email: email, password: password }),
     })
       .then(getResponseData)
       .catch(getResponseData)
 };
 
 //обновление данных о пользователе
-export const patchApiRegistration = async (email, password, name) => {
+export const patchApiRegistration = async (name, email, password) => {
   return fetch(`${baseUrl}/auth/user`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         Authorization: 'Bearer ' + getCookie('token'),
       },
       method: "PATCH",
-      body: JSON.stringify({ email: email, password: password,  name: name}),
+      body: JSON.stringify({ name: name, email: email, password: password }),
     })
       .then(getResponseData)
       .catch(getResponseData)

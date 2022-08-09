@@ -100,12 +100,12 @@ export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
 export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
 export const REGISTRATION_FAILED = "REGISTRATION_FAILED";
 
-export function registration(email, password, name) {
+export function registration(name, email, password) {
   return function (dispatch) {
     dispatch({
       type: REGISTRATION_REQUEST,
     });
-    postApiRegistration(email, password, name)
+    postApiRegistration(name, email, password)
       .then((res) => {
         if (res && res.success) {
           const authToken = res.accessToken.split("Bearer ")[1];
@@ -137,12 +137,12 @@ export const UPDATE_REGISTRATION_REQUEST = "UPDATE_REGISTRATION_REQUEST";
 export const UPDATE_REGISTRATION_SUCCESS = "UPDATE_REGISTRATION_SUCCESS";
 export const UPDATE_REGISTRATION_FAILED = "UPDATE_REGISTRATION_FAILED";
 
-export function updateRegistration(email, password, name) {
+export function updateRegistration(name, email, password) {
   return function (dispatch) {
     dispatch({
       type: UPDATE_REGISTRATION_REQUEST,
     });
-    patchApiRegistration(email, password, name)
+    patchApiRegistration(name, email, password)
       .then((res) => {
         if (res && res.success) {
           dispatch({

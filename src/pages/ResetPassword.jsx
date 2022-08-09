@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import React, { useState,  } from "react";
+import {  useHistory, Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   Button,
@@ -11,19 +11,26 @@ import { resetPassword } from "../services/actions/auth";
 export default function ResetPassword() {
   const [passwordValue, setpasswordValue] = useState("");
   const [token, setToken] = useState("");
-/*   const [icon, setIcon] = useState("ShowIcon"); */
+  /*   const [icon, setIcon] = useState("ShowIcon"); */
   const history = useHistory();
   const dispatch = useDispatch();
-
 
   const sentResetPassword = (e) => {
     e.preventDefault();
     dispatch(resetPassword(passwordValue, token));
-    /*     dispatch(setForgotPasswordState(true)); */
     setpasswordValue("");
     setToken("");
-    history.push("/reset-password");
+    history.push("/profile");
   };
+  
+  const user = useSelector(store => store.auth.user);
+
+  console.log(user);
+  if (user) {
+    return (
+        <Redirect to={ '/'} />
+    );
+}
 
   return (
     <>
@@ -63,7 +70,12 @@ export default function ResetPassword() {
           className={`${Styles.text} text text_type_main-default text_color_inactive`}
         >
           Вспомнили пароль?
-          <Link className={Styles.linkLogin} type="secondary" size="medium" to='/login'>
+          <Link
+            className={Styles.linkLogin}
+            type="secondary"
+            size="medium"
+            to="/login"
+          >
             Войти
           </Link>
         </p>

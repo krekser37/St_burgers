@@ -25,7 +25,7 @@ export default function Register() {
 
   const userRegister = (e) => {
     e.preventDefault();
-    dispatch(registration(emailValue, passwordValue, nameValue));
+    dispatch(registration(nameValue, emailValue, passwordValue));
   };
 
   if (user) {
