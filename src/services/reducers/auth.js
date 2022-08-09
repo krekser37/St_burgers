@@ -1,4 +1,8 @@
 import {
+  TOKEN_REQUEST,
+  TOKEN_SUCCESS,
+  TOKEN_FAILED,
+
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
@@ -10,6 +14,10 @@ import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
+
+  UPDATE_REGISTRATION_REQUEST,
+  UPDATE_REGISTRATION_SUCCESS,
+  UPDATE_REGISTRATION_FAILED,
 
   AUTORISATION_REQUEST,
   AUTORISATION_SUCCESS,
@@ -27,9 +35,13 @@ import {
 const initialState = {
   user: null,
 
+  tokenRequest:false,
+  tokenFailed: false,
+  tokenSuccess: false,
+
   logoutRequest:false,
   logoutFailed: false,
-  logoutSucess: false,
+  logoutSuccess: false,
 
   getUserRequest: false,
   getUserSuccess: false,
@@ -38,6 +50,10 @@ const initialState = {
   registrationRequest: false,
   registrationFailed: false,
   registrationSuccess: false,
+
+  updateregistrationRequest: false,
+  updateregistrationFailed: false,
+  updateregistrationSuccess: false,
 
   autorisationRequest: false,
   autorisationFailed: false,
@@ -55,6 +71,31 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
 
+    case TOKEN_REQUEST: {
+      return {
+        ...state,
+        tokenRequest: true,
+        tokenFailed: false,
+      };
+    }
+    case TOKEN_SUCCESS: {
+      return {
+        ...state,
+        tokenFailed: false,
+        /* tokenSuccess: true, */
+        user: null, 
+        tokenRequest: false,
+
+      };
+    }
+    case TOKEN_FAILED: {
+      return {
+        ...state,
+        tokenRequest: false,
+        tokenFailed: true,
+      };
+    }
+
     case LOGOUT_REQUEST: {
       return {
         ...state,
@@ -66,7 +107,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         logoutFailed: false,
-        logoutSucess: true,
+        /* logoutSuccess: true, */
         user: null, 
         logoutRequest: false,
 
@@ -79,6 +120,7 @@ export const authReducer = (state = initialState, action) => {
         logoutFailed: true,
       };
     }
+
     case GET_USER_REQUEST: {
       return {
         ...state,
@@ -90,7 +132,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         getUserFailed: false,
-        getUserSuccess: true,
+        /* getUserSuccess: true, */
         user: action.payload, 
         getUserRequest: false,
 
@@ -101,6 +143,29 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: false,
         getUserFailed: true,
+      };
+    }
+
+    case UPDATE_REGISTRATION_REQUEST: {
+      return {
+        ...state,
+        updateregistrationRequest: true,
+        updateregistrationFailed: false,
+      };
+    }
+    case UPDATE_REGISTRATION_SUCCESS: {
+      return {
+        ...state,
+        updateregistrationFailed: false,
+        user: action.payload, 
+        updateregistrationRequest: false,
+      };
+    }
+    case UPDATE_REGISTRATION_FAILED: {
+      return {
+        ...state,
+        updateregistrationRequest: false,
+        updateregistrationFailed: true,
       };
     }
 
@@ -118,13 +183,13 @@ export const authReducer = (state = initialState, action) => {
         registrationFailed: false,
         user: action.payload, 
         registrationRequest: false,
-
+        /* registrationSuccess: true, */
       };
     }
     case REGISTRATION_FAILED: {
       return {
         ...state,
-        autorisationRequest: false,
+        registrationRequest: false,
         registrationFailed: true,
       };
     }
@@ -148,7 +213,7 @@ export const authReducer = (state = initialState, action) => {
     case AUTORISATION_FAILED: {
       return {
         ...state,
-        registrationRequest: false,
+        autorisationRequest: false,
         autorisationFailed: true,
       };
     }

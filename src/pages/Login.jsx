@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { useHistory, Redirect, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
@@ -8,34 +8,27 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { authorization } from "../services/actions/auth";
+/* import { getCookie } from "../components/utils/cookie"; */
 
 export default function Login() {
   const [emailValue, setemailValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
-
-  const register = useCallback(() => {
-    history.replace({ pathname: "/register" });
-  }, [history]);
-
-  const forgotPassword = useCallback(() => {
-    history.replace({ pathname: "/forgot-password" });
-  }, [history]);
 
   const submitLogin = (e) => {
     e.preventDefault();
     dispatch(authorization(emailValue, passwordValue));
   };
 
-  const user = useSelector((store) => store.auth.user);
   let location = useLocation();
+
+  const user = useSelector((store) => store.auth.user);
 
   if (user) {
     return (
       <Redirect
         // Если объект state не является undefined, вернём пользователя назад.
-        to={location.state?.from || "/"}
+        to={location?.state?.from || "/"}
       />
     );
   }
@@ -43,31 +36,44 @@ export default function Login() {
   return (
     <>
       <div className={Styles.container}>
-        <form action="" className={Styles.form} onSubmit={submitLogin}>
-          <p className="text text_type_main-medium">Войти</p>
+        <h2 className="text text_type_main-medium">Вход</h2>
+        <form className={Styles.form} onSubmit={submitLogin}>
           <div className={`${Styles.input} mt-6`}>
             <Input
               size="default"
               onChange={(e) => setemailValue(e.target.value)}
               value={emailValue}
-              name={"email"}
-              placeholder={"E-mail"}
+              name="email"
+              placeholder="email"
+              type="email"
+              error={false}
+              errorText="Ошибка"
             />
           </div>
           <div className={`${Styles.input} mt-6`}>
             <PasswordInput
               onChange={(e) => setpasswordValue(e.target.value)}
               value={passwordValue}
-              name={"password"}
+              placeholder="Пароль"
+              name="password"
+              type="password"
+              icon="EditIcon"
+              size="default"
+              error={false}
+              errorText="Ошибка"
             />
           </div>
           <div className="mt-6 mb-20">
-            <Button type="primary" size="large">
+            <Button
+              type="primary"
+              size="large"
+              disabled={!(emailValue && passwordValue)}
+            >
               Войти
             </Button>
           </div>
         </form>
-        <p
+        {/*         <p
           className={`${Styles.text} text text_type_main-default text_color_inactive`}
         >
           Вы — новый пользователь?
@@ -80,9 +86,21 @@ export default function Login() {
           <Button type="secondary" size="medium" onClick={forgotPassword}>
             Восстановить пароль
           </Button>
-        </p>
+          </p> */}
+
+        <span className="text text_type_main-default text_color_inactive">
+          Вы — новый пользователь?
+          <Link className={Styles.linkLogin} to="/register">
+            Зарегистрироваться
+          </Link>
+        </span>
+        <span className="text text_type_main-default text_color_inactive mt-4">
+          Забыли пароль?
+          <Link className={Styles.linkLogin} to="/forgot-password">
+            Восстановить пароль
+          </Link>
+        </span>
       </div>
-      {/* <Navigation /> */}
     </>
   );
 }

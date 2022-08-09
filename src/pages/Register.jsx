@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from "react";
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import React, { useState/* , useCallback  */} from "react";
+import { /* useHistory,  */Link , Redirect} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
+  EmailInput,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -10,24 +11,28 @@ import Styles from "./pages.module.css";
 import { registration } from "../services/actions/auth";
 
 export default function Register() {
-  const [emailValue, setemailValue] = useState('');
-  const [passwordValue, setpasswordValue] = useState('');
-  const [nameValue, setnameValue] = useState('');
+  const user = useSelector(store => store.auth.user);
+  const [emailValue, setemailValue] = useState("");
+  const [passwordValue, setpasswordValue] = useState("");
+  const [nameValue, setnameValue] = useState("");
 
   const dispatch = useDispatch();
-  const history = useHistory();
+/*   const history = useHistory(); */
 
-  const login = useCallback(
-    () => {
-        history.replace({ pathname: '/login' });
-    },
-    [history]
-  );
+/*   const login = useCallback(() => {
+    history.replace({ pathname: "/login" });
+  }, [history]); */
 
-  const userRegister= (e) => {
+  const userRegister = (e) => {
     e.preventDefault();
-    dispatch(registration(emailValue, passwordValue, nameValue))
-  }
+    dispatch(registration(emailValue, passwordValue, nameValue));
+  };
+
+  if (user) {
+    return (
+        <Redirect to={ '/'} />
+    );
+}
 
   return (
     <>
@@ -44,7 +49,7 @@ export default function Register() {
             />
           </div>
           <div className={`${Styles.input} mt-6`}>
-            <Input
+            <EmailInput
               size="default"
               onChange={(e) => setemailValue(e.target.value)}
               value={emailValue}
@@ -60,19 +65,29 @@ export default function Register() {
             />
           </div>
           <div className="mt-6 mb-20">
-            <Button type="primary" size="large" >
+            <Button type="primary" size="large" disabled={! (nameValue && emailValue && passwordValue)} >
               Зарегистрироваться
             </Button>
           </div>
         </form>
-        <p
+
+        <div className={`${Styles.textLink}`}>
+          <span className="text text_type_main-default text_color_inactive">
+            Уже зарегистрированы?
+          </span>
+          <Link className={Styles.buttonLink} to="/login">
+            Войти
+          </Link>
+        </div>
+
+{/*         <p
           className={`${Styles.text} text text_type_main-default text_color_inactive`}
         >
-         Уже зарегистрированы?
+          Уже зарегистрированы?
           <Button type="secondary" size="medium" onClick={login}>
             Войти
           </Button>
-        </p>
+        </p> */}
       </div>
       {/* <Navigation /> */}
     </>

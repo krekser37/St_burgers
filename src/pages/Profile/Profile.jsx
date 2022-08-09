@@ -1,4 +1,4 @@
-import React, { useEffect, useState /* , useCallback  */ } from "react";
+import React, {/*  useEffect, */ useState, useRef /* , useCallback  */ } from "react";
 /* import { useHistory } from "react-router-dom"; */
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,9 +6,9 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Styles from "./profile.module.css";
-import { getUser } from "../../services/actions/auth"; 
+import Styles from "./profile.module.css"; 
 import { logOut } from "../../services/actions/auth";
+import { updateRegistration } from "../../services/actions/auth";
 
 export default function Profile() {
   const user = useSelector(store => store.auth.user);
@@ -17,7 +17,11 @@ export default function Profile() {
   const [emailValue, setEmailValue] = useState(user.email);
   const [passwordValue, setPasswordValue] = useState("");
 
-  const [showButtons, setShowButtons] = useState(false);
+  const nameRef = useRef(null);
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
+
+/*   const [showButtons, setShowButtons] = useState(false); */
   const dispatch = useDispatch();
   /*   const history = useHistory(); */
   /*   const register = useCallback(() => {
@@ -28,40 +32,36 @@ export default function Profile() {
     history.replace({ pathname: "/forgot-password" });
   }, [history]); */
 
-  useEffect(() => {
+/*   useEffect(() => {
     dispatch(getUser());
-  }, [dispatch])
+  }, [dispatch]) */
 
   const updateUser = (e) => {
     e.preventDefault();
+    dispatch (updateRegistration(nameValue, emailValue, passwordValue))
   }
 
-/*   const cancelUpdateUser = (e) => {
+  const cancelUpdateUser = (e) => {
     e.preventDefault();
     setNameValue(user.name);
     setEmailValue(user.email);
     setPasswordValue("");
-    setShowButtons(false);
-  } */
+  }
 
   const onClickName = () => {
-   /*  e.preventDefault(); */
-   setShowButtons(true);
+    setTimeout(() => nameRef.current.focus(), 0)
   }
 
   const onClickEmail = () => {
-    /*  e.preventDefault(); */
-    setShowButtons(true);
+    setTimeout(() => loginRef.current.focus(), 0)
    }
 
    const onClickPassword = () => {
-    /*  e.preventDefault(); */
-    setShowButtons(true);
+    setTimeout(() => passwordRef.current.focus(), 0)
    }
 
   const logoutExit = () => {
-    const refreshToken = localStorage.getItem('token');
-    dispatch(logOut(refreshToken));
+    dispatch(logOut());
   }
 
 
@@ -103,47 +103,53 @@ export default function Profile() {
         </div>
         <form action="" className={Styles.form} onClick={updateUser}>
           <Input
-            type={"text"}
-            placeholder={"Имя"}
+            type="text"
+            placeholder="Имя"
             onChange={(e) => setNameValue(e.target.value)}
-            icon={"EditIcon"}
+            icon="EditIcon"
             value={nameValue}
-            name={"name"}
+            name="name"
             error={false}
-            /* ref={inputRef} */
+            ref={nameRef}
             onClick={onClickName}
-            errorText={"Ошибка"}
-            size={"default"}
+            errorText="Ошибка"
+            size="default"
           />
           <Input
-            type={"email"}
+            type="email"
+            placeholder="Логин"
             size="default"
             onChange={(e) => setEmailValue(e.target.value)}
+            icon="EditIcon"
             value={emailValue}
-            name={"email"}
-            placeholder={"Логин"}
-            icon={"EditIcon"}
+            name="email"
+            error={false}
+            ref={loginRef}
             onClick={onClickEmail}
+            errorText="Ошибка"
           />
           <Input
             className="text_color_inactive"
-            type={"password"}
+            type="password"
+            placeholder="Пароль"
             onChange={(e) => setPasswordValue(e.target.value)}
+            icon="EditIcon"
             value={passwordValue}
-            name={"password"}
-            placeholder={"Пароль"}
-            icon={"EditIcon"}
+            name="password"
+            error={false}
+            ref={passwordRef}
             onClick={onClickPassword}
+            errorText="Ошибка"
           />
-          {showButtons && 
+          {/* {showButtons &&  */}
             <div className={Styles.buttons}>
-              <Button type="secondary" size="medium" /* onClick={cancelUpdateUser} */>
+              <Button type="secondary" size="medium" onClick={cancelUpdateUser}>
                 Отмена
               </Button>
-              <Button type="primary" size="medium">
+              <Button type="primary" size="medium" disabled={!(nameValue && emailValue && passwordValue)}>
                 Cохранить
               </Button>
-            </div> }
+            </div> {/* } */}
         </form>
       </div>
     </>

@@ -49,7 +49,7 @@ export const getApiResetPassword = (password, token) => {
 };
 
 //регистрация
-export const getApiRegistration= (email, password, name) => {
+export const postApiRegistration = async (email, password, name) => {
   return fetch(`${baseUrl}/auth/register`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -61,11 +61,26 @@ export const getApiRegistration= (email, password, name) => {
       .catch(getResponseData)
 };
 
+//обновление данных о пользователе
+export const patchApiRegistration = async (email, password, name) => {
+  return fetch(`${baseUrl}/auth/user`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: 'Bearer ' + getCookie('token'),
+      },
+      method: "PATCH",
+      body: JSON.stringify({ email: email, password: password,  name: name}),
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+};
+
 //авторизация
-export const postApiAutorisation= (email, password) => {
+export const postApiAutorisation = async (email, password) => {
   return fetch(`${baseUrl}/auth/login`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
+        Authorization: 'Bearer ' + getCookie('token'),
       },
       method: "POST",
       body: JSON.stringify({ email: email, password: password}),
@@ -75,12 +90,12 @@ export const postApiAutorisation= (email, password) => {
 };
 
 //получение данных пользователя 
-export const getApiUser= () => {
+export const getApiUser = async  () => {
   return fetch(`${baseUrl}/auth/user`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         // Отправляем токен и схему авторизации в заголовке при запросе данных
-        Authorization: 'Bearer ' + getCookie('token')
+        Authorization: 'Bearer ' + getCookie('token'),
       },
       method: "GET",
       mode: 'cors',
@@ -94,13 +109,34 @@ export const getApiUser= () => {
 };
 
 //выход пользователя
-export const postApiLogout= (refreshToken) => {
+export const postApiLogout= async () => {
   return fetch(`${baseUrl}/auth/logout`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify({
-        token: refreshToken
+        token: localStorage.getItem('refreshToken'),
+    }),
+      method: "POST",
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(getResponseData)
+      .catch(getResponseData)
+}; 
+
+//обновление токена
+export const postUpdateToken= async () => {
+  return fetch(`${baseUrl}/auth/token`, {
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: 'Bearer ' + getCookie('token')
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('refreshToken')
     }),
       method: "POST",
       mode: 'cors',

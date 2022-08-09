@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getIngredients
 } from "../../../src/services/actions/index";
-import { getUser } from "../../services/actions/auth";
+import { getUser, updateToken } from "../../services/actions/auth";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -28,31 +28,32 @@ function App() {
   const cookie = getCookie('token');
 /*   const location = useLocation();
   const history = useHistory(); */
-  const refreshTokenData = localStorage.getItem('token');
+  const refreshTokenData = localStorage.getItem('refreshToken');
+  const tokenSuccess = useSelector(store => store.auth.tokenSuccess);
 console.log(user);
+console.log(refreshTokenData);
+console.log(tokenSuccess);
+console.log(cookie);
+const auth = useSelector(store => store.auth);
+console.log(auth);
+
+
 
   useEffect(() => {
     dispatch(getIngredients());
-/*     dispatch(getUser()); */
   }, [dispatch]);
 
   useEffect(() => {
     if (!user && refreshTokenData && cookie) {
-      dispatch(getUser())
-    }
-  }, [dispatch, user, refreshTokenData, cookie]);
-
-/*   useEffect(() => {
-    if (!user && refreshTokenData && cookie) {
       dispatch(getUser());
     }
     if (!cookie && refreshTokenData) {
-      dispatch(refreshToken());
+      dispatch(updateToken());
     }
-    if (cookie && updateTokenSuccess && refreshTokenData && !user) {
+    if (cookie && tokenSuccess && refreshTokenData && !user) {
       dispatch(getUser());
     }
-  }, [dispatch, refreshTokenData, user, cookie, updateTokenSuccess]); */
+  }, [dispatch, refreshTokenData, user, cookie, tokenSuccess]);
 
   /*   const location = useLocation();
   const background = location.state?.background; */

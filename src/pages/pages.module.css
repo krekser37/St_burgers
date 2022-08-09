@@ -33,3 +33,38 @@
   background-size: cover;
 }
 
+.buttonLink {
+  text-decoration: none;
+  font-family: JetBrains Mono;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #4C4CFF;
+  text-align: center;
+  padding: 0 0 0 8px;
+}
+
+.textLink {
+  width: 480px;
+  display: flex;
+  justify-content: center;
+}
+
+.linkLogin {
+  text-decoration: none;
+   font-family: JetBrains Mono;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #4C4CFF;
+  text-align: center;
+  padding: 0 0 0 8px; 
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  margin: 180px auto 0 auto;
+  align-items: center;
+}

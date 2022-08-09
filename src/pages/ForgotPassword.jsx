@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {
   Input,
@@ -12,9 +12,6 @@ export default function ForgotPassword() {
   const [emailValue, setemailValue] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
-  const login = useCallback(() => {
-    history.replace({ pathname: "/login" });
-  }, [history]);
 
   const sentForgotPassword = (e) => {
     e.preventDefault();
@@ -48,12 +45,11 @@ export default function ForgotPassword() {
           className={`${Styles.text} text text_type_main-default text_color_inactive`}
         >
           Вспомнили пароль?
-          <Button type="secondary" size="medium" onClick={login}>
+          <Link className={Styles.linkLogin} type="secondary" size="medium" to='/login'>
             Войти
-          </Button>
+          </Link>
         </p>
       </div>
-      {/* <Navigation /> */}
     </>
   );
 }
