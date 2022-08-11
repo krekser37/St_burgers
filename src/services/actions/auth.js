@@ -7,8 +7,8 @@ import {
   postApiLogout,
   postUpdateToken,
   patchApiRegistration,
-} from "../../components/utils/burger-api";
-import { setCookie, deleteCookie } from "../../components/utils/cookie";
+} from "../../utils/burger-api";
+import { setCookie, deleteCookie } from "../../utils/cookie";
 
 export const TOKEN_REQUEST = "TOKEN_REQUEST";
 export const TOKEN_SUCCESS = "TOKEN_SUCCESS";

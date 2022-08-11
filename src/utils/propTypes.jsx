@@ -10,6 +10,7 @@ export const ingredientsDataPropTypes = PropTypes.shape({
   carbohydrates: PropTypes.number.isRequired,
   _id: PropTypes.string.isRequired,
   type: PropTypes.oneOf(["bun", "main", "sauce"]).isRequired,
+  __v: PropTypes.number.isRequired,
 });
 
 export default ingredientsDataPropTypes; 

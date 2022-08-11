@@ -10,7 +10,7 @@ import { changeFillingPosition } from "../../services/actions/index";
 import { nanoid } from "nanoid";
 import { deleteFromConstructor} from "../../services/actions/index";
 import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes";
+import ingredientsDataPropTypes from "../../utils/propTypes";
 
 function FillingConstructorElement({ ingredient, index }) {
   const dispatch = useDispatch();

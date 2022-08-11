@@ -1,4 +1,4 @@
-import { getApiResponse, getApiOrder } from "../../components/utils/burger-api";
+import { getApiResponse, getApiOrder } from "../../utils/burger-api";
 import { nanoid } from "nanoid";
 
 //initialReducer
@@ -30,22 +30,7 @@ export function getIngredients() {
   };
 }
 
-//ingredientDetailsReducer
-export const SET_CURRENT_INGREDIENT_MODAL = "SET_CURRENT_INGREDIENT_MODAL";
-export const RESET_CURRENT_INGREDIENT_MODAL = "RESET_CURRENT_INGREDIENT_MODAL";
 
-export function openIngredientDetails(ingredient) {
-  return {
-    type: SET_CURRENT_INGREDIENT_MODAL,
-    payload: ingredient,
-  };
-}
-
-export function closeIngredientDetails() {
-  return {
-    type: RESET_CURRENT_INGREDIENT_MODAL,
-  };
-}
 
 //???
 export const SWITCH_TAB = "SWITCH_TAB";

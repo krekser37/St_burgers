@@ -1,7 +1,7 @@
 import {
   SET_CURRENT_INGREDIENT_MODAL,
   RESET_CURRENT_INGREDIENT_MODAL
-} from "../actions/index";
+} from "../actions/ingredient-details";
 
 const initialState = {
   ingredient: {},

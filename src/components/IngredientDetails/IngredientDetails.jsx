@@ -1,12 +1,18 @@
 import React from "react";
 import Styles from "./IngredientDetails.module.css";
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const IngredientDetails = () => {
-  const ingredient = useSelector((state) => state.ingredientDetails.ingredient);
-    
-  /* console.log(ingredient); */
+  const { id } = useParams();
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
+	const ingredient = ingredients.find(ingredient => ingredient._id === id)  
+/*   console.log(id);
+  console.log(ingredient); */
+
+  if (ingredients.length !== 0) {
   return (
+    <>
     <div className={Styles.IngredientDetails}>
       <img
         className={Styles.IngredientImage}
@@ -51,7 +57,8 @@ const IngredientDetails = () => {
         </li>
       </ul>
     </div>
-  );
+        </>
+  );}
 };
 
 export default IngredientDetails;

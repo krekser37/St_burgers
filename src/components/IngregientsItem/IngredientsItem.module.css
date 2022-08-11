@@ -30,3 +30,8 @@
 .IngridientText {
   text-align: center;
 }
+
+.IngridientLink {
+  color: inherit;
+  text-decoration: none;
+}

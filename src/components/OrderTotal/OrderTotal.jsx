@@ -9,7 +9,7 @@ import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
 import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes";
+import ingredientsDataPropTypes from "../../utils/propTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder, resetOrderModal } from "../../services/actions/index";
 
