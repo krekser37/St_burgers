@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import Styles from "./OrderTotal.module.css";
 import Modal from "../Modal/Modal";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   CurrencyIcon,
@@ -15,17 +16,24 @@ import { getOrder, resetOrderModal } from "../../services/actions/index";
 
 function OrderTotal({ orderIngredients, totalPrice }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const order = useSelector((store) => store.order);
+  const user = useSelector((store) => store.auth.user);
+  console.log(order.order);
+  console.log(orderIngredients);
 
-  /*  console.log(order.order);
-  console.log(orderNumber);
-  console.log(orderIngredients); */
- 
   const handleOpenOrderModal = () => {
-    if(orderIngredients !== undefined) {
+    !user && history.push("/login");
+    user &&
+      orderIngredients !== undefined &&
+      dispatch(getOrder(orderIngredients));
+  };
+
+/*   const handleOpenOrderModal = () => {
+    if (orderIngredients !== undefined) {
       dispatch(getOrder(orderIngredients));
     }
-  };
+  }; */
 
   const handleCloseOrderModal = useCallback(() => {
     dispatch(resetOrderModal(false));

@@ -78,21 +78,18 @@ function App() {
   };
 
   if (!ingredients) {
-    return null;
-  }
-  return (
-    <div className={`${Styles.app}`}>
-      {/*   <Router> */}
-      <AppHeader />
-{/*       {!background && (
-        <Modal
+    <Modal
           title={"Что-то пошло не так."}
           onClose={handleCloseIngredientInModal}
         >
           <p>Попробуйте перезагрузить страницу</p>
         </Modal>
-      )} */}
-      <Switch location={ background || location }>
+  }
+  return (
+    <div className={`${Styles.app}`}>
+      {/*   <Router> */}
+      <AppHeader />
+      <Switch location={background || location}>
         <Route path="/" exact={true}>
           {ingredients && (
             <DndProvider backend={HTML5Backend}>
@@ -126,27 +123,16 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
-
       {/*   </Router> */}
-
-      {background ? (
-        <Route path="/ingredients/:id">
+      {background && 
+        <Route path="/ingredients/:id" exact={true}>
           <Modal
             title="Детали ингредиента"
             onClose={handleCloseIngredientInModal}
           >
             <IngredientDetails />
           </Modal>
-        </Route>) : (
-        <Route path="/ingredients/:id">
-          <Modal
-          title={"Что-то пошло не так."}
-          onClose={handleCloseIngredientInModal}
-        >
-          <p>Попробуйте перезагрузить страницу</p>
-        </Modal>
-        </Route>
-      )};
+        </Route>}
     
     </div>
   

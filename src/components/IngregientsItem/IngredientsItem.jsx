@@ -1,44 +1,21 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import Modal from "../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeIngredientDetails,
-  openIngredientDetails,
-} from "../../services/actions/ingredient-details";
+import { openIngredientDetails } from "../../services/actions/ingredient-details";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 
-const IngredientsItem = ({ingredient /* , handleOpenIngredientInModal */}) => {
+const IngredientsItem = ({ingredient}) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
-/*   const isOpeningredientInModal = useSelector(
-    (store) => store.ingredientDetails.isOpen
-  );
-console.log(isOpeningredientInModal); */
-/*   const { name, price, image } = ingredient; */
-/* console.log(ingredient.name); */
-  //const [isOpeningredientInModal, setOpeningredientInModal] = useState(false);
-  //const [currentIngredient, setCurrentIngredient] = useState(null);
-
-/*     const handleOpenIngredientInModal = useCallback(
-    (ingredient) => {
-      dispatch(openIngredientDetails(ingredient));
-    },
-    [dispatch]
-  ); */
 
   const handleOpenIngredientInModal = (ingredient) => {
-    /* console.log("click"); */
     dispatch(openIngredientDetails(ingredient));
-    /* console.log(ingredient); */
 };
 
   const [{ opacity }, dragRef] = useDrag(
@@ -48,7 +25,7 @@ console.log(isOpeningredientInModal); */
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.5 : 1,
       }),
-    } /* , [ingredients] */
+    }
   );
 
   const filling = useSelector((state) => state.burgerConstructor.filling);
@@ -73,7 +50,6 @@ console.log(isOpeningredientInModal); */
         <section
           ref={dragRef}
           className={`${Styles.IngredientsItem} mb-8`}
-          /* onClick={() => handleOpenIngredientInModal(ingredient)} */
           style={{ opacity }}
         >
           <img src={ingredient.image} alt={ingredient.name} className={Styles.IngredientsImage} />
@@ -95,7 +71,6 @@ console.log(isOpeningredientInModal); */
 
 IngredientsItem.propTypes = {
   ingredient: PropTypes.object.isRequired,
-  /*   handleOpenIngredientInModal: PropTypes.func.isRequired, */
 };
 
 export default IngredientsItem;

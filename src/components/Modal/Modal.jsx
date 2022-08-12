@@ -8,8 +8,8 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 const modalRoot = document.getElementById("modalRoot");
 
 const Modal = ({ title, onClose, children }) => {
-/*   console.log(title);
-  console.log(onClose);
+  console.log(title);
+ /*  console.log(onClose);
   console.log(children); */
 
 /*   useEffect(() => {

@@ -71,6 +71,7 @@ export default function Profile() {
 
   const logoutExit = () => {
     dispatch(logOut());
+
   };
 
   return (
@@ -96,7 +97,7 @@ export default function Profile() {
             </NavLink>
             <NavLink
               exact
-              to="/"
+              to='/login'
               className="text text_type_main-medium text_color_inactive"
               onClick={logoutExit}
             >
