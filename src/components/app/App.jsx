@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect} from "react";
 import "@ya.praktikum/react-developer-burger-ui-components";
 import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
@@ -25,9 +25,9 @@ import Profile from "../../pages/Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import IngredientsItem from "../IngregientsItem/IngredientsItem";
 import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
+import Orders from "../../pages/Profile/Orders/Orders";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,13 +40,6 @@ function App() {
   const refreshTokenData = localStorage.getItem("refreshToken");
   const tokenSuccess = useSelector((store) => store.auth.tokenSuccess);
   const history = useHistory();
-
-  /*  const auth = useSelector((store) => store.auth); */
-  /*   console.log(user);
-  console.log(refreshTokenData);
-  console.log(tokenSuccess);*/
-  console.log(location); 
-  console.log(background);
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -64,12 +57,6 @@ function App() {
     }
   }, [dispatch, refreshTokenData, user, cookie, tokenSuccess]);
 
-  /*   const handleCloseIngredientInModal = useCallback(() => {
-    dispatch(closeIngredientDetails());
-    /* history.replace("/");
-    history.goBack();
-  }, [dispatch]); */
-
   const handleCloseIngredientInModal = () => {
     console.log("click");
     dispatch(closeIngredientDetails());
@@ -79,15 +66,14 @@ function App() {
 
   if (!ingredients) {
     <Modal
-          title={"Что-то пошло не так."}
-          onClose={handleCloseIngredientInModal}
-        >
-          <p>Попробуйте перезагрузить страницу</p>
-        </Modal>
+      title={"Что-то пошло не так."}
+      onClose={handleCloseIngredientInModal}
+    >
+      <p>Попробуйте перезагрузить страницу</p>
+    </Modal>;
   }
   return (
     <div className={`${Styles.app}`}>
-      {/*   <Router> */}
       <AppHeader />
       <Switch location={background || location}>
         <Route path="/" exact={true}>
@@ -112,18 +98,19 @@ function App() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
-        <ProtectedRoute path="/profile">
+        <ProtectedRoute path="/profile" exact>
           <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders" exact>
+          <Orders />
         </ProtectedRoute>
         <Route path="/ingredients/:id">
           <IngredientDetails />
         </Route>
-
         <Route path="*" exact={true}>
           <NotFound />
         </Route>
       </Switch>
-      {/*   </Router> */}
       {background && 
         <Route path="/ingredients/:id" exact={true}>
           <Modal
@@ -133,9 +120,7 @@ function App() {
             <IngredientDetails />
           </Modal>
         </Route>}
-    
     </div>
-  
   );
 }
 

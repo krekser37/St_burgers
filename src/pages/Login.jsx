@@ -8,7 +8,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { authorization } from "../services/actions/auth";
-/* import { getCookie } from "../components/utils/cookie"; */
 
 export default function Login() {
   const [emailValue, setemailValue] = useState("");
@@ -73,21 +72,6 @@ export default function Login() {
             </Button>
           </div>
         </form>
-        {/*         <p
-          className={`${Styles.text} text text_type_main-default text_color_inactive`}
-        >
-          Вы — новый пользователь?
-          <Button type="secondary" size="medium" onClick={register}>
-            Зарегистрироваться
-          </Button>
-        </p>
-        <p className="text text_type_main-default text_color_inactive">
-          Забыли пароль?
-          <Button type="secondary" size="medium" onClick={forgotPassword}>
-            Восстановить пароль
-          </Button>
-          </p> */}
-
         <span className="text text_type_main-default text_color_inactive">
           Вы — новый пользователь?
           <Link className={Styles.linkLogin} to="/register">

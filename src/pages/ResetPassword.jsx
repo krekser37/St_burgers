@@ -11,7 +11,7 @@ import { resetPassword } from "../services/actions/auth";
 export default function ResetPassword() {
   const [passwordValue, setpasswordValue] = useState("");
   const [token, setToken] = useState("");
-  /*   const [icon, setIcon] = useState("ShowIcon"); */
+
   const history = useHistory();
   const dispatch = useDispatch();
 

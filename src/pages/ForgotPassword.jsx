@@ -27,8 +27,6 @@ export default function ForgotPassword() {
     return <Redirect to={"/"} />;
   }
 
-
-
   return (
     <>
       <div className={Styles.container}>

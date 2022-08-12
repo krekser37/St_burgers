@@ -1,5 +1,5 @@
-import React, { useState/* , useCallback  */} from "react";
-import { /* useHistory,  */Link , Redirect} from "react-router-dom";
+import React, { useState } from "react";
+import { Link , Redirect} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
@@ -17,11 +17,6 @@ export default function Register() {
   const [nameValue, setnameValue] = useState("");
 
   const dispatch = useDispatch();
-/*   const history = useHistory(); */
-
-/*   const login = useCallback(() => {
-    history.replace({ pathname: "/login" });
-  }, [history]); */
 
   const userRegister = (e) => {
     e.preventDefault();
@@ -79,17 +74,7 @@ export default function Register() {
             Войти
           </Link>
         </div>
-
-{/*         <p
-          className={`${Styles.text} text text_type_main-default text_color_inactive`}
-        >
-          Уже зарегистрированы?
-          <Button type="secondary" size="medium" onClick={login}>
-            Войти
-          </Button>
-        </p> */}
       </div>
-      {/* <Navigation /> */}
     </>
   );
 }

@@ -19,8 +19,6 @@ function OrderTotal({ orderIngredients, totalPrice }) {
   const history = useHistory();
   const order = useSelector((store) => store.order);
   const user = useSelector((store) => store.auth.user);
-  console.log(order.order);
-  console.log(orderIngredients);
 
   const handleOpenOrderModal = () => {
     !user && history.push("/login");
@@ -28,12 +26,6 @@ function OrderTotal({ orderIngredients, totalPrice }) {
       orderIngredients !== undefined &&
       dispatch(getOrder(orderIngredients));
   };
-
-/*   const handleOpenOrderModal = () => {
-    if (orderIngredients !== undefined) {
-      dispatch(getOrder(orderIngredients));
-    }
-  }; */
 
   const handleCloseOrderModal = useCallback(() => {
     dispatch(resetOrderModal(false));

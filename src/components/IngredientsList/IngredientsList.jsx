@@ -1,20 +1,9 @@
-import React, { forwardRef, useCallback }from "react";
+import React, { forwardRef }from "react";
 import Styles from "./IngredientsList.module.css";
 import IngredientsItem from "../IngregientsItem/IngredientsItem";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-/* import { openIngredientDetails } from "../../services/actions/ingredient-details"; */
 
 const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {
-/*   const dispatch = useDispatch(); */
-/* 
-  const handleOpenIngredientInModal = useCallback(
-    (item) => {
-      dispatch(openIngredientDetails(item));
-    },
-    [dispatch]
-  ); */
-
   return (
     <section className={`${Styles.IngredientsList}`} ref={ref}>
       <h3
@@ -29,7 +18,6 @@ const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {
             <IngredientsItem
               ingredient={ingredient}
               key={ingredient._id}
-              /* handleOpenIngredientInModal = {()=>{handleOpenIngredientInModal(ingredients)} }*/
             />
           );
         })}

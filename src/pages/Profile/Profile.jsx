@@ -11,7 +11,6 @@ import { updateRegistration } from "../../services/actions/auth";
 
 export default function Profile() {
   const user = useSelector((store) => store.auth.user);
-  /* console.log(user.name); */
   const [nameValue, setNameValue] = useState(user.name);
   const [emailValue, setEmailValue] = useState(user.email);
   const [passwordValue, setPasswordValue] = useState("");
@@ -89,7 +88,7 @@ export default function Profile() {
             </NavLink>
             <NavLink
               exact
-              to="/profile/order"
+              to='/profile/orders'
               className="text text_type_main-medium text_color_inactive"
               activeClassName={Styles.activeNavLink}
             >

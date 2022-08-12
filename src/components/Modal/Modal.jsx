@@ -9,16 +9,6 @@ const modalRoot = document.getElementById("modalRoot");
 
 const Modal = ({ title, onClose, children }) => {
   console.log(title);
- /*  console.log(onClose);
-  console.log(children); */
-
-/*   useEffect(() => {
-    const onEscDown = (event) => event.key === "Escape" && onClose();
-
-    document.addEventListener("keydown", onEscDown);
-
-    return () => document.removeEventListener("keydown", onEscDown);
-  }, [onClose]); */
 
   const onEscDown = useCallback((e) => {
     if(e.key === "Escape") {
@@ -34,7 +24,7 @@ const Modal = ({ title, onClose, children }) => {
 
   return ReactDOM.createPortal(
     <>
-      <div className={`${Styles.Modal} pl-10 pr-10`} /* onClick={onClose} */>
+      <div className={`${Styles.Modal} pl-10 pr-10`} >
         <div className={`${Styles.ModalHeader} mt-10`}>
           <h2 className={`${Styles.ModalTitle} text text_type_main-large `}>
             {title}

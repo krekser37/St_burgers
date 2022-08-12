@@ -6,12 +6,9 @@ import {
   ListIcon,
   BurgerIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink/* , useRouteMatch */ } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const AppHeader = () => {
-/*   const isMathConstructor = !!useRouteMatch({ path: "/", exact: true });
-  const isMathProfile = !!useRouteMatch("/profile"); */
-
   return (
     <header className={`${Styles.AppHeader}`}>
       <nav className={`${Styles.AppNav}`}>
@@ -25,7 +22,7 @@ const AppHeader = () => {
             <span className="text_color_inactive ml-2">Конструктор</span>
           </NavLink>
           <NavLink
-            to="/"
+            to="/profile/orders"
             activeClassName={Styles.activeNavLink}
             className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
           >
