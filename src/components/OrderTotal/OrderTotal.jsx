@@ -12,14 +12,14 @@ import Done from "./img/done.svg";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../../utils/propTypes";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder, resetOrderModal } from "../../services/actions/index";
+import { getOrder, resetOrderModal, deleteFromOrder } from "../../services/actions/index";
 
 function OrderTotal({ orderIngredients, totalPrice }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const order = useSelector((store) => store.order);
   const user = useSelector((store) => store.auth.user);
-
+console.log(orderIngredients);
   const handleOpenOrderModal = () => {
     !user && history.push("/login");
     user &&
@@ -29,6 +29,7 @@ function OrderTotal({ orderIngredients, totalPrice }) {
 
   const handleCloseOrderModal = useCallback(() => {
     dispatch(resetOrderModal(false));
+    dispatch(deleteFromOrder());
   }, [dispatch]);
 
   const ordertTitle = " ";

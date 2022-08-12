@@ -3,6 +3,7 @@ import {
   ADD_FILLING,
   DELETE_FILLING,
   CHANGE_FILLING_POSITION,
+  DELETE_INGREDIENT,
 } from "../actions/index";
 import update from 'immutability-helper';
 
@@ -29,6 +30,13 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         filling: [...state.filling].filter((item) => item.id !== action.id),
+      };
+    }
+    case DELETE_INGREDIENT: {
+      return {
+        ...state,
+        bun: {},
+        filling: [],
       };
     }
     case CHANGE_FILLING_POSITION: {

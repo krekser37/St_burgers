@@ -109,7 +109,7 @@ export default function Profile() {
             В этом разделе вы можете изменить свои персональные данные
           </p>
         </div>
-        <form action="" className={Styles.form} onClick={updateUser}>
+        <form action="" className={Styles.form} onSubmit={updateUser}>
           <Input
             type="text"
             placeholder="Имя"

@@ -33,7 +33,6 @@ export default function Login() {
   }
 
   return (
-    <>
       <div className={Styles.container}>
         <h2 className="text text_type_main-medium">Вход</h2>
         <form className={Styles.form} onSubmit={submitLogin}>
@@ -85,6 +84,5 @@ export default function Login() {
           </Link>
         </span>
       </div>
-    </>
   );
 }

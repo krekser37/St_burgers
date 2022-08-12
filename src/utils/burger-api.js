@@ -9,7 +9,6 @@ export const getResponseData = (res) => {
 export const getApiResponse = () => {
   return fetch(`${baseUrl}/ingredients`)
     .then(getResponseData)
-    .catch(getResponseData);
 };
 
 export const getApiOrder = (ids) => {
@@ -21,7 +20,6 @@ export const getApiOrder = (ids) => {
       body: JSON.stringify({ ingredients: ids }),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 export const getApiForgotPassword = (emailValue) => {
@@ -33,7 +31,6 @@ export const getApiForgotPassword = (emailValue) => {
       body: JSON.stringify({ email: emailValue }),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 export const getApiResetPassword = (password, token) => {
@@ -45,7 +42,6 @@ export const getApiResetPassword = (password, token) => {
       body: JSON.stringify({ password: password,  token: token}),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 //регистрация
@@ -58,7 +54,6 @@ export const postApiRegistration = async (name, email, password) => {
       body: JSON.stringify({ name: name, email: email, password: password }),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 //обновление данных о пользователе
@@ -72,7 +67,6 @@ export const patchApiRegistration = async (name, email, password) => {
       body: JSON.stringify({ name: name, email: email, password: password }),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 //авторизация
@@ -86,7 +80,6 @@ export const postApiAutorisation = async (email, password) => {
       body: JSON.stringify({ email: email, password: password}),
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 //получение данных пользователя 
@@ -105,7 +98,6 @@ export const getApiUser = async  () => {
       referrerPolicy: 'no-referrer'
     })
       .then(getResponseData)
-      .catch(getResponseData)
 };
 
 //выход пользователя
@@ -125,7 +117,6 @@ export const postApiLogout= async () => {
       referrerPolicy: 'no-referrer'
     })
       .then(getResponseData)
-      .catch(getResponseData)
 }; 
 
 //обновление токена
@@ -146,5 +137,4 @@ export const postUpdateToken= async () => {
       referrerPolicy: 'no-referrer'
     })
       .then(getResponseData)
-      .catch(getResponseData)
 }; 

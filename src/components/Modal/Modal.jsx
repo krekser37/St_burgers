@@ -8,7 +8,6 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 const modalRoot = document.getElementById("modalRoot");
 
 const Modal = ({ title, onClose, children }) => {
-  console.log(title);
 
   const onEscDown = useCallback((e) => {
     if(e.key === "Escape") {

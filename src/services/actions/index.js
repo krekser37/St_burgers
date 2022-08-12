@@ -83,6 +83,7 @@ export const ADD_BUN = "ADD_BUN";
 export const ADD_FILLING = "ADD_FILLING";
 export const DELETE_FILLING = "DELETE_FILLING";
 export const CHANGE_FILLING_POSITION = "CHANGE_FILLING_POSITION";
+export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
 
 export const addToConstructorBun = (ingredient) => ({
   type: ADD_BUN,
@@ -97,6 +98,10 @@ export const addToConstructorFilling = (ingredient) => ({
 export const deleteFromConstructor = (id) => ({
   type: DELETE_FILLING,
   id,
+});
+
+export const deleteFromOrder = () => ({
+  type: DELETE_INGREDIENT,
 });
 
 export const changeFillingPosition = (dragIndex, hoverIndex) => ({
