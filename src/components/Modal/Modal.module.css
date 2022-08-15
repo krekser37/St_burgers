@@ -1,5 +1,5 @@
 .Modal {
-  z-index: 2;
+  z-index: 10;
   position: absolute;
   background: #1c1c21;
   min-width: 640px;

@@ -23,11 +23,13 @@ import ForgotPassword from "../../pages/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword";
 import Profile from "../../pages/Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Feed from "../../pages/Feed/Feed";
 import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
 import Orders from "../../pages/Profile/Orders/Orders";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -98,13 +100,22 @@ function App() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
+        <Route path="/feed" exact>
+          <Feed />
+        </Route>
         <ProtectedRoute path="/profile" exact>
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path="/profile/orders" exact>
           <Orders />
         </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders/:id" exact>
+          <Orders />
+        </ProtectedRoute>
         <Route path="/ingredients/:id">
+          <IngredientDetails />
+        </Route>
+        <Route path="/feed/:id" exact>
           <IngredientDetails />
         </Route>
         <Route path="*" exact={true}>
@@ -118,6 +129,16 @@ function App() {
             onClose={handleCloseIngredientInModal}
           >
             <IngredientDetails />
+          </Modal>
+        </Route>}
+
+        {background && 
+        <Route path="/feed/:id" exact={true}>
+          <Modal
+            title=""
+            onClose={handleCloseIngredientInModal}
+          >
+            <OrderDetails />
           </Modal>
         </Route>}
     </div>
