@@ -1,4 +1,4 @@
-import { getApiResponse, getApiOrder } from "../../components/utils/burger-api";
+import { getApiResponse, getApiOrder } from "../../utils/burger-api";
 import { nanoid } from "nanoid";
 
 //initialReducer
@@ -30,22 +30,7 @@ export function getIngredients() {
   };
 }
 
-//ingredientDetailsReducer
-export const SET_CURRENT_INGREDIENT_MODAL = "SET_CURRENT_INGREDIENT_MODAL";
-export const RESET_CURRENT_INGREDIENT_MODAL = "RESET_CURRENT_INGREDIENT_MODAL";
 
-export function openIngredientDetails(ingredient) {
-  return {
-    type: SET_CURRENT_INGREDIENT_MODAL,
-    payload: ingredient,
-  };
-}
-
-export function closeIngredientDetails() {
-  return {
-    type: RESET_CURRENT_INGREDIENT_MODAL,
-  };
-}
 
 //???
 export const SWITCH_TAB = "SWITCH_TAB";
@@ -98,6 +83,7 @@ export const ADD_BUN = "ADD_BUN";
 export const ADD_FILLING = "ADD_FILLING";
 export const DELETE_FILLING = "DELETE_FILLING";
 export const CHANGE_FILLING_POSITION = "CHANGE_FILLING_POSITION";
+export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
 
 export const addToConstructorBun = (ingredient) => ({
   type: ADD_BUN,
@@ -112,6 +98,10 @@ export const addToConstructorFilling = (ingredient) => ({
 export const deleteFromConstructor = (id) => ({
   type: DELETE_FILLING,
   id,
+});
+
+export const deleteFromOrder = () => ({
+  type: DELETE_INGREDIENT,
 });
 
 export const changeFillingPosition = (dragIndex, hoverIndex) => ({

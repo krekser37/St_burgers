@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import Styles from "./BurgerConstructor.module.css";
-import ingredientsDataPropTypes from "../utils/propTypes";
+import ingredientsDataPropTypes from "../../utils/propTypes";
 import OrderTotal from "../OrderTotal/OrderTotal";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";

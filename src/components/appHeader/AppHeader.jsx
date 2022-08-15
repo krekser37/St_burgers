@@ -6,28 +6,44 @@ import {
   ListIcon,
   BurgerIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { NavLink } from "react-router-dom";
 
 const AppHeader = () => {
   return (
     <header className={`${Styles.AppHeader}`}>
       <nav className={`${Styles.AppNav}`}>
         <ul className={`${Styles.headerList}`}>
-          <li className={`${Styles.headerButton} pr-5 pl-5 pt-4 pb-4`}>
-            <BurgerIcon className={`ml-5`}/>
-            <p className={`${Styles.headerText} ml-2`}>Конструктор</p>
-          </li>
-          <li className={`${Styles.headerButton} pr-5 pl-5 pt-4 pb-4`}>
+          <NavLink
+            to="/"
+            activeClassName={Styles.activeNavLink}
+            className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
+          >
+            <BurgerIcon /* type={isMathConstructor ? "primary" : "secondary"}  *//>
+            <span className="text_color_inactive ml-2">Конструктор</span>
+          </NavLink>
+          <NavLink
+            to="/profile/orders"
+            activeClassName={Styles.activeNavLink}
+            className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
+          >
             <ListIcon />
-            <p className={`${Styles.headerText} ml-2 text text_color_inactive`}>Лента заказов</p>
-          </li>
+            <span className="text_color_inactive  ml-2">Лента заказов</span>
+          </NavLink>
         </ul>
-          <Logo />
+        <NavLink exact to="/">
+          <Logo  />
+        </NavLink>
         <img src="" alt="" />
         <ul className={`${Styles.headerList}`}>
-          <li className={`${Styles.headerButton} pr-5 pl-5 pt-4 pb-4 `}>
-            <ProfileIcon />
-            <p className={`${Styles.headerText} ml-2 text text_color_inactive`}>Личный кабинет</p>
-          </li>
+          <NavLink
+            to="/profile"
+            exact
+            activeClassName={Styles.activeNavLink}
+            className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
+          >
+            <ProfileIcon /* type={isMathProfile ? "primary" : "secondary"}  *//>
+            <span className="text_color_inactive ml-2">Личный кабинет</span>
+          </NavLink>
         </ul>
       </nav>
     </header>

@@ -7,7 +7,8 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const modalRoot = document.getElementById("modalRoot");
 
-const Modal = ({ onClose, children, title }) => {
+const Modal = ({ title, onClose, children }) => {
+
   const onEscDown = useCallback((e) => {
     if(e.key === "Escape") {
     onClose()};
@@ -22,7 +23,7 @@ const Modal = ({ onClose, children, title }) => {
 
   return ReactDOM.createPortal(
     <>
-      <div className={`${Styles.Modal} pl-10 pr-10`} /* onClick={onClose} */>
+      <div className={`${Styles.Modal} pl-10 pr-10`} >
         <div className={`${Styles.ModalHeader} mt-10`}>
           <h2 className={`${Styles.ModalTitle} text text_type_main-large `}>
             {title}

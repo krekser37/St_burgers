@@ -6,8 +6,6 @@ import React, {
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-/* import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../utils/propTypes"; */
 import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
@@ -18,7 +16,6 @@ function BurgerIngredients() {
   const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  //const current = useSelector((state) => state.ingredients.currentTab);
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
