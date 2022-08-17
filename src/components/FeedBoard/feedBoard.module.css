@@ -10,6 +10,16 @@
 
 .list {
     width: 272px;
+   
+}
+
+.numbers{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-height: 328px;
 }
 
 .done {

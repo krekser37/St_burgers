@@ -7,24 +7,5 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
-  column-gap: 60px;
-}
-
-.ElementsOrders {
-  overflow-y: scroll;
-  max-height: 550px;
-  scroll-snap-type: x proximity;
-}
-
-.ElementsOrders::-webkit-scrollbar {
-  width: 8px;
-}
-
-.ElementsOrders::-webkit-scrollbar-track {
-  background: #2f2f37;
-}
-
-.ElementsOrders::-webkit-scrollbar-thumb {
-  background-color: #8585ad;
-  border: 3px solid #8585ad;
+  column-gap: 56px;
 }

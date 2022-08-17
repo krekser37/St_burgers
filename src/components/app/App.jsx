@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import "@ya.praktikum/react-developer-burger-ui-components";
 import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
@@ -28,7 +28,6 @@ import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
-import Orders from "../../pages/Profile/Orders/Orders";
 import OrderDetails from "../OrderDetails/OrderDetails";
 
 function App() {
@@ -103,26 +102,23 @@ function App() {
         <Route path="/feed" exact>
           <Feed />
         </Route>
-        <ProtectedRoute path="/profile" exact>
+        <ProtectedRoute path="/profile">
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" exact>
-          <Orders />
-        </ProtectedRoute>
         <ProtectedRoute path="/profile/orders/:id" exact>
-          <Orders />
+          <OrderDetails />
         </ProtectedRoute>
         <Route path="/ingredients/:id">
           <IngredientDetails />
         </Route>
         <Route path="/feed/:id" exact>
-          <IngredientDetails />
+          <OrderDetails />
         </Route>
         <Route path="*" exact={true}>
           <NotFound />
         </Route>
       </Switch>
-      {background && 
+      {background && (
         <Route path="/ingredients/:id" exact={true}>
           <Modal
             title="Детали ингредиента"
@@ -130,17 +126,24 @@ function App() {
           >
             <IngredientDetails />
           </Modal>
-        </Route>}
+        </Route>
+      )}
 
-        {background && 
+      {background && (
         <Route path="/feed/:id" exact={true}>
-          <Modal
-            title=""
-            onClose={handleCloseIngredientInModal}
-          >
+          <Modal title="" onClose={handleCloseIngredientInModal}>
             <OrderDetails />
           </Modal>
-        </Route>}
+        </Route>
+      )}
+
+      {background && (
+        <Route path="/profile/orders/:id" exact={true}>
+          <Modal title="" onClose={handleCloseIngredientInModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ const IngredientDetails = ({ title }) => {
   const location = useLocation();
   const background = location?.state?.background;
 
+
   if (ingredients.length !== 0) {
     return (
       <>
@@ -24,8 +25,8 @@ const IngredientDetails = ({ title }) => {
           )}
           <img
             className={Styles.IngredientImage}
-            src={ingredient.image}
-            alt={ingredient.name}
+/*             src={ingredient.image}*/
+            alt={ingredient.name} 
           />
           <h3 className="text text_type_main-medium mt-4 mb-8">
             {ingredient.name}

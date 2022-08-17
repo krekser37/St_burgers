@@ -7,34 +7,104 @@ export default function FeedBoard() {
       <section className={`${Styles.FeedBoard}`}>
         <div className={`${Styles.statys} mb-15`}>
           <div className={`${Styles.list}`}>
-            <h2 className='text text_type_main-medium pb-6'>Готовы:</h2>
-            <li
-              className={`${Styles.numberDone} text text_type_digits-default mb-2`}
-              /* key={order._id} */
-            >
-              034533{/* {order.number} */}
-            </li>
-            <li
-              className={`${Styles.numberDone} text text_type_digits-default mb-2`}
-              /* key={order._id} */
-            >
-              034532{/* {order.number} */}
-            </li>
+            <h2 className="text text_type_main-medium pb-6">Готовы:</h2>
+            <ul className={`${Styles.numbers}`}>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034533{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberDone} text text_type_digits-default mb-2`}
+                /* key={order._id} */
+              >
+                034532{/* {order.number} */}
+              </li>
+            </ul>
           </div>
           <div className={`${Styles.list}`}>
-            <h2 className='text text_type_main-medium pb-6'>В работе:</h2>
-            <li
-              className={`${Styles.numberWork} text text_type_digits-default mb-2`}
-             /*  key={order._id} */
-            >
-              034538{/* {order.number} */}
-            </li>
-            <li
-              className={`${Styles.numberWork} text text_type_digits-default mb-2`}
-            /*   key={order._id} */
-            >
-              034588{/* {order.number} */}
-            </li>
+            <h2 className="text text_type_main-medium pb-6">В работе:</h2>
+            <ul className={`${Styles.numbers}`}>
+              <li
+                className={`${Styles.numberWork} text text_type_digits-default mb-2`}
+                /*  key={order._id} */
+              >
+                034538{/* {order.number} */}
+              </li>
+              <li
+                className={`${Styles.numberWork} text text_type_digits-default mb-2`}
+                /*   key={order._id} */
+              >
+                034588{/* {order.number} */}
+              </li>
+            </ul>
           </div>
         </div>
         <div className={`${Styles.digits} mb-15`}>
