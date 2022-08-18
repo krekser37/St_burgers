@@ -66,7 +66,7 @@ export default function OrdersCard({ order, status }) {
                     </span>
                   </li>
                 );
-              }
+              } return null;
             })}
           </ul>
           <div className={`${Styles.Price} ml-6`}>
