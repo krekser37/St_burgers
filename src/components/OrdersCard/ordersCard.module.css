@@ -20,6 +20,7 @@
 .Ingredients {
   display: flex;
   flex-direction: row;
+  /* flex-direction: row-reverse; */
   align-items: center;
   justify-content: center;
   list-style: none;
@@ -36,7 +37,7 @@
     linear-gradient(45deg, #801ab2, #4c4cff) border-box;
   display: flex;
   align-items: center;
-  /*   padding: 2px; */
+    padding: 2px;
   box-sizing: border-box;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,10 +49,6 @@
   margin-left: -16px;
 }
 
-/* .Ingredients.Ingredient:not(:first-child) {
-      margin-right: -20px;
-  }
-   */
 .Ingredient_last {
   width: 64px;
   height: 64px;
@@ -61,11 +58,25 @@
     linear-gradient(45deg, #801ab2, #4c4cff) border-box;
   display: flex;
   align-items: center;
-  /*   padding: 2px; */
+    padding: 2px;
   box-sizing: border-box;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
+}
+
+.IngredientCount {
+  margin-left: -40px;
+  z-index: 1;
+}
+
+.IngredientOverlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  border-radius: 50%;
 }
 
 .Price {
