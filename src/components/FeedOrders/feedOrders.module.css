@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 844px;
   overflow-y: auto;
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .FeedLink {
@@ -12,7 +12,7 @@
 
 .ElementsOrders {
   overflow-y: scroll;
-  max-height: 550px;
+  max-height: 848px;
   scroll-snap-type: x none;
 }
 

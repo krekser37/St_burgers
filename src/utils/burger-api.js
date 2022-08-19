@@ -15,6 +15,7 @@ export const getApiOrder = (ids) => {
   return fetch(`${baseUrl}/orders`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
+        Authorization: 'Bearer ' + getCookie('token'),
       },
       method: "POST",
       body: JSON.stringify({ ingredients: ids }),

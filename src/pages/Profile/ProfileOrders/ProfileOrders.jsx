@@ -2,24 +2,45 @@ import React from "react";
 import Styles from "./profileOrders.module.css";
 import { Link, useLocation } from "react-router-dom";
 import OrdersCard from "../../../components/OrdersCard/OrdersCard";
+import { useSelector } from "react-redux";
 
 export default function ProfileOrders() {
   const location = useLocation();
+  const wsOrdersOwner = useSelector((store) => store.wsOrdersOwner);
+  const orders = useSelector((store) => store.wsOrdersOwner.orders);
+  /*   const total = useSelector((store) => store.wsOrders.total);
+  const totalToday = useSelector((store) => store.wsOrders.totalToday); */
+
+  console.log(wsOrdersOwner);
+
   return (
     <div className={`${Styles.container}`}>
-      <Link
-        to={{
-          pathname: `/profile/orders/:id`,
-          /*       pathname: path + `${order._id}`, */
-          state: { background: location },
-        }}
-        /*     onClick={() => handleOpenOrderId(feed._id)} */
-        className={`${Styles.FeedLink}`}
-      >
-        <div className={`${Styles.ElementsOrders}`}>
-          <OrdersCard />
-        </div>
-      </Link>
+      <div className={`${Styles.ElementsOrders}`}>
+        {orders.length > 0 ? (
+          orders.map((order, index) => {
+            return (
+              <Link
+                to={{
+                  pathname: `/profile/orders/${order._id}`,
+                  state: { background: location },
+                }}
+                className={`${Styles.FeedLink}`}
+              >
+                <OrdersCard order={order} key={index} />
+              </Link>
+            );
+          })
+        ) : (
+          <div className={`${Styles.container_empty}`}>
+            <p className={`text text_type_main-medium mt-8`}>
+              Вы еще не сделали ни одного заказа
+            </p>
+            <p className={`text text_type_main-large mt-8`}>
+              Пожалуйста, сделайте заказ
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

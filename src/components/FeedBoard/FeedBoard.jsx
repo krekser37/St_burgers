@@ -6,7 +6,7 @@ export default function FeedBoard() {
   const total = useSelector((store) => store.wsOrders.total);
   const totalToday = useSelector((store) => store.wsOrders.totalToday);
   const orders = useSelector((store) => store.wsOrders.orders);
-  console.log(orders);
+/*   console.log(orders); */
 
   return (
     <>

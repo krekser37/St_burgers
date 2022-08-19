@@ -15,6 +15,7 @@ const IngredientsItem = ({ingredient}) => {
   const location = useLocation();
 
   const handleOpenIngredientInModal = (ingredient) => {
+    console.log(ingredient);
     dispatch(openIngredientDetails(ingredient));
 };
 

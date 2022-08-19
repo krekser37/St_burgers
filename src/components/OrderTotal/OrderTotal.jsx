@@ -45,7 +45,7 @@ function OrderTotal({ orderIngredients, totalPrice }) {
       </Button>
       {order.modalIsOpen && (
         <Modal onClose={handleCloseOrderModal} title={ordertTitle}>
-          {order.orderRequest ? (
+          {order.orderFailed ? (
             <p className="text secondary text_type_main-default mb-30">
               Что-то пошло не так... Попробуйте оформить заказ еще раз.
             </p>

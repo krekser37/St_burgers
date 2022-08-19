@@ -1,5 +1,5 @@
 .feed {
-/*   display: flex; */
+  /*   display: flex; */
   max-width: 1280px;
   margin: 40px auto;
 }
@@ -8,4 +8,10 @@
   justify-content: space-between;
   align-items: start;
   column-gap: 56px;
+}
+
+.containerPreloader {
+  display: flex;
+  justify-content: center;
+  background-color: #131316;;
 }

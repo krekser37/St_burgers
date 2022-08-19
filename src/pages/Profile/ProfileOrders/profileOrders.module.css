@@ -5,6 +5,11 @@
       overflow-x: hidden;
   }
 
+  .container_empty {
+    width: 100%;
+    max-width: 500px;
+  }
+
   .FeedLink {
     color: white;
     text-decoration: none;

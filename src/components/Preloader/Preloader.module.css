@@ -1,5 +1,6 @@
-.PreloaderImage {
-    background: transparent;
-    background: black;
-    height: 120px;
+.Preloader {
+  height: 240px;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  border-radius: 50%;
 }
+

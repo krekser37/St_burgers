@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -13,6 +13,10 @@ import { logOut } from "../../services/actions/auth";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import ProfileOrders from "./ProfileOrders/ProfileOrders";
+import {
+  wsConnectionStartOwner,
+  wsConnectionClosedOwner,
+} from "../../services/actions/wsActionsOwner";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -22,6 +26,13 @@ export default function Profile() {
   const logoutExit = () => {
     dispatch(logOut());
   };
+
+  useEffect(() => {
+    dispatch(wsConnectionStartOwner());
+    return () => {
+      dispatch(wsConnectionClosedOwner());
+    };
+  }, [dispatch]);
 
   return (
     <>
@@ -54,17 +65,17 @@ export default function Profile() {
             </NavLink>
           </ul>
           <p
-            className={`${Styles.subtitles} text text_type_main-default text_color_inactive`}
+            className={`${Styles.subtitles} text text_type_main-default text_color_inactive mb-7`}
           >
             В этом разделе вы можете изменить свои персональные данные
           </p>
         </div>
         <Switch location={background || location}>
-          <Route exact path="/profile/orders">
-            <ProfileOrders />
-          </Route>
           <Route exact path="/profile">
             <ProfileForm />
+          </Route>
+          <Route exact path="/profile/orders">
+            <ProfileOrders />
           </Route>
         </Switch>
       </div>

@@ -25,7 +25,7 @@ const IngredientDetails = ({ title }) => {
           )}
           <img
             className={Styles.IngredientImage}
-/*             src={ingredient.image}*/
+            src={ingredient.image}
             alt={ingredient.name} 
           />
           <h3 className="text text_type_main-medium mt-4 mb-8">
