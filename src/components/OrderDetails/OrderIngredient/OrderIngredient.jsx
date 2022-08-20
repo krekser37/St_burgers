@@ -31,8 +31,9 @@ export default function OrderIngredient({ ingredient, index , count}) {
     </section>
   );
 }
-
+/* 
 OrderIngredient.propTypes = {
   ingredient: PropTypes.string,
 
 };
+ */

@@ -15,6 +15,7 @@ import {
   Route,
   useLocation,
   useHistory,
+  useRouteMatch,
 } from "react-router-dom";
 import Login from "../../pages/Login";
 import NotFound from "../../pages/NotFound";
@@ -34,8 +35,8 @@ function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const user = useSelector((store) => store.auth.user);
-  const orderNumber  = useSelector(store => store.order.order);
-  console.log(orderNumber);
+/*   const orderNumber  = useSelector(store => store.order.order);
+  console.log(orderNumber); */
   const cookie = getCookie("token");
   const location = useLocation();
   const background = location?.state?.background;
@@ -43,6 +44,10 @@ function App() {
   const refreshTokenData = localStorage.getItem("refreshToken");
   const tokenSuccess = useSelector((store) => store.auth.tokenSuccess);
   const history = useHistory();
+  const idOrderInfo = useRouteMatch([
+    '/profile/orders/:id',
+    '/feed/:id',
+  ])?.params?.id;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -131,7 +136,7 @@ function App() {
         </Route>
       )}
 
-      {background && (
+      {background && idOrderInfo &&(
         <Route path="/feed/:id" exact={true}>
           <Modal title="" onClose={handleCloseIngredientInModal}>
             <OrderDetails />
@@ -139,12 +144,12 @@ function App() {
         </Route>
       )}
 
-      {background && (
-        <Route path="/profile/orders/:id" exact={true}>
+      {background && idOrderInfo &&(
+        <ProtectedRoute path="/profile/orders/:id" exact={true}>
           <Modal title="" onClose={handleCloseIngredientInModal}>
             <OrderDetails />
           </Modal>
-        </Route>
+        </ProtectedRoute>
       )}
     </div>
   );

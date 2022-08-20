@@ -17,6 +17,7 @@ import {
   wsConnectionStartOwner,
   wsConnectionClosedOwner,
 } from "../../services/actions/wsActionsOwner";
+import OrderDetails from "../../components/OrderDetails/OrderDetails";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -77,6 +78,9 @@ export default function Profile() {
           <Route exact path="/profile/orders">
             <ProfileOrders />
           </Route>
+{/*           <Route path="/profile/orders/:id" exact>
+            <OrderDetails />
+          </Route> */}
         </Switch>
       </div>
     </>

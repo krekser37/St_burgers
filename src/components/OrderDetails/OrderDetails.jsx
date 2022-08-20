@@ -1,16 +1,28 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import Styles from "./orderDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderIngredient from "./OrderIngredient/OrderIngredient";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useParams, useLocation, useRouteMatch  } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { formatDate } from "../../utils/formatDate";
+import Preloader from "../Preloader/Preloader";
+import { wsConnectionClosedOwner,  wsConnectionStartOwner} from "../../services/actions/wsActionsOwner";
+import { wsConnectionClosed,  wsConnectionStart} from "../../services/actions/wsActions";
 
 export default function OrderDetails() {
-  const { id } = useParams();
-  const orders = useSelector((state) => state.wsOrders.orders);
+  const dispatch = useDispatch();
+  let { id } = useParams();
+  let match = useRouteMatch();
+  const isProfile = '/profile/orders/:id';
+	const isFeed = '/feed/:id';
+
+  const ordersAll = useSelector((state) => state.wsOrders.orders);
+  const ordersOwner = useSelector((state) => state.wsOrdersOwner.orders);
+  let orders = match.path === isProfile ? ordersOwner : ordersAll;
+  let order = orders.find((order) => order._id === id);
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
-  const order = orders.find((order) => order._id === id);
+/*   const location = useLocation();
+  const background = location?.state?.background; */
 
   const orderIngredients = useMemo(() => {
     return order?.ingredients.map(
@@ -32,11 +44,31 @@ export default function OrderDetails() {
     }, 0);
   }, [orderIngredients]);
 
+	useEffect(() => {
+		if (!order) {
+			if (match.path === isProfile) {
+				dispatch(wsConnectionStartOwner());
+			}
+			if (match.path === isFeed) {
+				dispatch(wsConnectionStart());
+			}
+		}
+		return () => {
+			if (match.path === isProfile) {
+				dispatch(wsConnectionClosedOwner());
+			}
+			if (match.path === isFeed) {
+				dispatch(wsConnectionClosed());
+			}
+		}
+	}, [dispatch, order, match.path, match.url]);
+
   console.log(order);
 
   return (
-    <>
-      <div className="container">
+
+    order? (
+      <div className={`${Styles.OrderDetails}`}>
         <p className={`${Styles.number} text text_type_digits-default`}>
           # {order.number}
         </p>
@@ -67,6 +99,8 @@ export default function OrderDetails() {
           </div>
         </div>
       </div>
-    </>
+
+    ) : (<div className={`${Styles.preloader} mt-20`}><Preloader/></div>)
+
   );
 }

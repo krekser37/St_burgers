@@ -5,6 +5,9 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { formatDate } from "../../utils/formatDate";
 
 export default function OrdersCard({ order, status }) {
+/*   let match = useRouteMatch();
+  const profilePath = '/profile/orders/:id';
+  let isProfile = match.path === profilePath; */
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
   const orderIngredients = useMemo(() => {
@@ -33,8 +36,11 @@ export default function OrdersCard({ order, status }) {
             {formatDate(order.createdAt)}
           </p>
         </div>
-        <h2 className="text text_type_main-medium mb-6">{order.name}</h2>
-
+        <h2 className="text text_type_main-medium mb-2">{order.name}</h2>
+				{!!status &&
+					<p className={`${Styles.status} text text_type_main-default mb-6`}>
+						{order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : 'Выполнен'}
+					</p>}
         <div className={`${Styles.IngredientsPrice} `}>
           <ul className={`${Styles.Ingredients} `}>
             {/* для нахождения одного элемента можно использовать spread оператор [...new Set(orderIngredients)] или Array.from(new Set(orderIngredients)) */}

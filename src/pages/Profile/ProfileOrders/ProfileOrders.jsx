@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 
 export default function ProfileOrders() {
   const location = useLocation();
-  const wsOrdersOwner = useSelector((store) => store.wsOrdersOwner);
+/*   const wsOrdersOwner = useSelector((store) => store.wsOrdersOwner); */
   const orders = useSelector((store) => store.wsOrdersOwner.orders);
   /*   const total = useSelector((store) => store.wsOrders.total);
   const totalToday = useSelector((store) => store.wsOrders.totalToday); */
 
-  console.log(wsOrdersOwner);
+  console.log(orders);
 
   return (
     <div className={`${Styles.container}`}>
@@ -25,8 +25,9 @@ export default function ProfileOrders() {
                   state: { background: location },
                 }}
                 className={`${Styles.FeedLink}`}
+                key={order._id}
               >
-                <OrdersCard order={order} key={index} />
+                <OrdersCard order={order} status={true} key={index} />
               </Link>
             );
           })

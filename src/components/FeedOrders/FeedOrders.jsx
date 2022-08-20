@@ -14,7 +14,7 @@ export default function FeedOrders() {
 /*     const handleOpenOrderId = ({order}) => {
     dispatch(openOrderId(order));
 }; */
-/* console.log(wsOrders); */
+/* console.log(orders); */
   return (
     <div className={`${Styles.container}`}>
       <div className={`${Styles.ElementsOrders}`}>
@@ -30,7 +30,7 @@ export default function FeedOrders() {
             key={order._id}
           >
             
-              <OrdersCard order={order} key={index} />
+              <OrdersCard order={order} status={false} key={index} />
           </Link>
         );
       })}
