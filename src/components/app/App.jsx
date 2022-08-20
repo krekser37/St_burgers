@@ -34,6 +34,8 @@ function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const user = useSelector((store) => store.auth.user);
+  const orderNumber  = useSelector(store => store.order.order);
+  console.log(orderNumber);
   const cookie = getCookie("token");
   const location = useLocation();
   const background = location?.state?.background;
@@ -111,7 +113,7 @@ function App() {
         <Route path="/ingredients/:id">
           <IngredientDetails />
         </Route>
-        <Route path="/feed/:id" exact>
+        <Route path="/feed/:id" >
           <OrderDetails />
         </Route>
         <Route path="*" exact={true}>

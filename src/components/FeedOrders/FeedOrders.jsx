@@ -1,16 +1,18 @@
 import React from "react";
 import Styles from "./feedOrders.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import OrdersCard from "../OrdersCard/OrdersCard";
 
+
 export default function FeedOrders() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const orders = useSelector((store) => store.wsOrders.orders);
-  const wsOrders = useSelector((store) => store.wsOrders);
+/*   const wsOrders = useSelector((store) => store.wsOrders); */
   /*   let path = isProfile ? '/profile/orders/' : '/feed/'; */
-  /*   const handleOpenOrderId = ({order._id}) => {
-    dispatch(openOrderId(order._id));
+/*     const handleOpenOrderId = ({order}) => {
+    dispatch(openOrderId(order));
 }; */
 /* console.log(wsOrders); */
   return (
@@ -23,7 +25,7 @@ export default function FeedOrders() {
               pathname: `/feed/${order._id}`,
               state: { background: location },
             }}
-            /*     onClick={() => handleOpenOrderId(feed._id)} */
+                /* onClick={() => handleOpenOrderId(order._id)} */
             className={`${Styles.FeedLink}`}
             key={order._id}
           >

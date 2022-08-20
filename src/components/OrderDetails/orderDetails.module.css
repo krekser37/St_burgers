@@ -24,7 +24,7 @@
 
   .ElementsIngredients {
     overflow-y: scroll;
-    max-height: 550px;
+    max-height: 312px;
     scroll-snap-type: x proximity;
   }
   

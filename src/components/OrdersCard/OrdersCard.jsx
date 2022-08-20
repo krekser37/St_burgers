@@ -6,7 +6,6 @@ import { formatDate } from "../../utils/formatDate";
 
 export default function OrdersCard({ order, status }) {
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
-  const createdAt = order.createdAt;
 
   const orderIngredients = useMemo(() => {
     return order?.ingredients.map((id) => {
@@ -31,14 +30,15 @@ export default function OrdersCard({ order, status }) {
         <div className={`${Styles.order} mb-6`}>
           <p className="text text_type_digits-default">#{order.number}</p>
           <p className="text text_type_main-default text_color_inactive">
-            {formatDate(createdAt)}
+            {formatDate(order.createdAt)}
           </p>
         </div>
         <h2 className="text text_type_main-medium mb-6">{order.name}</h2>
 
         <div className={`${Styles.IngredientsPrice} `}>
           <ul className={`${Styles.Ingredients} `}>
-            {orderIngredients?.map((ingredient, index) => {
+            {/* для нахождения одного элемента можно использовать spread оператор [...new Set(orderIngredients)] или Array.from(new Set(orderIngredients)) */}
+            {Array.from(new Set(orderIngredients))?.map((ingredient, index) => {
               if (index < 5) {
                 return (
                   <li key={index} className={`${Styles.Ingredient} `}>
