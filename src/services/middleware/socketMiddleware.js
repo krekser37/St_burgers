@@ -15,21 +15,13 @@ export const socketMiddleware = (wsUrl, wsActions/* , isAuth */) => {
         socket = new WebSocket(wsUrl);
        /*  console.log(socket); */
       } else if (type === wsInitOwner) {
-        console.log('Socket with my orders create');
+        /* console.log('Socket with my orders create'); */
         const accessToken = getCookie("token");
-        console.log(accessToken);
+        /* console.log(accessToken); */
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
-        console.log(socket);
+        /* console.log(socket); */
       }
 
-/*       if (type === wsInit) {
-        if (!isAuth) {
-          console.log('Socket with all orders create');
-          socket = new WebSocket(wsUrl);
-        }
-        console.log('Socket with my orders create');
-        socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
-      } */
       if (socket) {
         socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });

@@ -15,7 +15,6 @@ import {
   Route,
   useLocation,
   useHistory,
-  useRouteMatch,
 } from "react-router-dom";
 import Login from "../../pages/Login";
 import NotFound from "../../pages/NotFound";
@@ -35,8 +34,6 @@ function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const user = useSelector((store) => store.auth.user);
-/*   const orderNumber  = useSelector(store => store.order.order);
-  console.log(orderNumber); */
   const cookie = getCookie("token");
   const location = useLocation();
   const background = location?.state?.background;
@@ -44,10 +41,6 @@ function App() {
   const refreshTokenData = localStorage.getItem("refreshToken");
   const tokenSuccess = useSelector((store) => store.auth.tokenSuccess);
   const history = useHistory();
-  const idOrderInfo = useRouteMatch([
-    '/profile/orders/:id',
-    '/feed/:id',
-  ])?.params?.id;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -66,10 +59,8 @@ function App() {
   }, [dispatch, refreshTokenData, user, cookie, tokenSuccess]);
 
   const handleCloseIngredientInModal = () => {
-    console.log("click");
     dispatch(closeIngredientDetails());
     history.goBack();
-    console.log("close");
   };
 
   if (!ingredients) {
@@ -109,16 +100,16 @@ function App() {
         <Route path="/feed" exact>
           <Feed />
         </Route>
+        <ProtectedRoute path="/profile/orders/:id">
+          <OrderDetails />
+        </ProtectedRoute>
         <ProtectedRoute path="/profile">
           <Profile />
-        </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" exact>
-          <OrderDetails />
         </ProtectedRoute>
         <Route path="/ingredients/:id">
           <IngredientDetails />
         </Route>
-        <Route path="/feed/:id" >
+        <Route path="/feed/:id">
           <OrderDetails />
         </Route>
         <Route path="*" exact={true}>
@@ -136,7 +127,7 @@ function App() {
         </Route>
       )}
 
-      {background && idOrderInfo &&(
+      {background && (
         <Route path="/feed/:id" exact={true}>
           <Modal title="" onClose={handleCloseIngredientInModal}>
             <OrderDetails />
@@ -144,7 +135,7 @@ function App() {
         </Route>
       )}
 
-      {background && idOrderInfo &&(
+      {background && (
         <ProtectedRoute path="/profile/orders/:id" exact={true}>
           <Modal title="" onClose={handleCloseIngredientInModal}>
             <OrderDetails />

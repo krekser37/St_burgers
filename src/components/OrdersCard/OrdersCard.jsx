@@ -5,9 +5,6 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { formatDate } from "../../utils/formatDate";
 
 export default function OrdersCard({ order, status }) {
-/*   let match = useRouteMatch();
-  const profilePath = '/profile/orders/:id';
-  let isProfile = match.path === profilePath; */
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
   const orderIngredients = useMemo(() => {

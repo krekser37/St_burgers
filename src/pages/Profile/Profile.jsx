@@ -78,9 +78,6 @@ export default function Profile() {
           <Route exact path="/profile/orders">
             <ProfileOrders />
           </Route>
-{/*           <Route path="/profile/orders/:id" exact>
-            <OrderDetails />
-          </Route> */}
         </Switch>
       </div>
     </>

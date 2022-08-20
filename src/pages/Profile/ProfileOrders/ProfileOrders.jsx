@@ -6,18 +6,13 @@ import { useSelector } from "react-redux";
 
 export default function ProfileOrders() {
   const location = useLocation();
-/*   const wsOrdersOwner = useSelector((store) => store.wsOrdersOwner); */
   const orders = useSelector((store) => store.wsOrdersOwner.orders);
-  /*   const total = useSelector((store) => store.wsOrders.total);
-  const totalToday = useSelector((store) => store.wsOrders.totalToday); */
-
-  console.log(orders);
 
   return (
     <div className={`${Styles.container}`}>
       <div className={`${Styles.ElementsOrders}`}>
         {orders.length > 0 ? (
-          orders.map((order, index) => {
+          orders.reverse().map((order, index) => {
             return (
               <Link
                 to={{
