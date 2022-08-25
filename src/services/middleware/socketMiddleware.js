@@ -7,20 +7,19 @@ export const socketMiddleware = (wsUrl, wsActions/* , isAuth */) => {
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-      const { wsInit, wsInitOwner, wsSendOrders, onOpen, onClose, onError, onOrders } =
+      const { wsInit, wsInitWithToken, wsOnMessage, onOpen, onClose, onError, wsOnSend } =
         wsActions;
 
-      if (type === wsInit) {
-     /*    console.log('Socket with all orders create'); */
+        if (type === wsInit) {
+          socket = new WebSocket(payload);
+        }
+
+/*       if (type === wsInit) {
         socket = new WebSocket(wsUrl);
-       /*  console.log(socket); */
-      } else if (type === wsInitOwner) {
-        /* console.log('Socket with my orders create'); */
+      } else if (type === wsInitWithToken) {
         const accessToken = getCookie("token");
-        /* console.log(accessToken); */
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
-        /* console.log(socket); */
-      }
+      } */
 
       if (socket) {
         socket.onopen = (event) => {
@@ -36,14 +35,14 @@ export const socketMiddleware = (wsUrl, wsActions/* , isAuth */) => {
           const parsedData = JSON.parse(data);
           const { success, ...restParsedData } = parsedData;
 
-          dispatch({ type: onOrders, payload: restParsedData });
+          dispatch({ type: wsOnSend, payload: restParsedData });
         };
 
         socket.onclose = (event) => {
           dispatch({ type: onClose, payload: event });
         };
 
-        if (type === wsSendOrders) {
+        if (type === wsOnMessage) {
           const orders = { ...payload };
           socket.send(JSON.stringify(orders));
         }

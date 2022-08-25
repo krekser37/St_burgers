@@ -30,17 +30,17 @@ const wsActions = {
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
-  onOrders: WS_GET_ORDERS,
-  wsSendOrders: WS_SEND_ORDERS,
+  wsOnSend: WS_GET_ORDERS,
+  wsOnMessage: WS_SEND_ORDERS,
 };
 
 const wsActionsOwner = {
-  wsInitOwner: WS_CONNECTION_START_OWNER,
+  wsInitWithToken: WS_CONNECTION_START_OWNER,
   onOpen: WS_CONNECTION_SUCCESS_OWNER,
   onClose: WS_CONNECTION_CLOSED_OWNER,
   onError: WS_CONNECTION_ERROR_OWNER,
-  onOrders: WS_GET_ORDERS_OWNER,
-  wsSendOrders: WS_SEND_ORDERS_OWNER,
+  wsOnSend: WS_GET_ORDERS_OWNER,
+  wsOnMessage: WS_SEND_ORDERS_OWNER,
 };
 
 const composeEnhancers =

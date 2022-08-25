@@ -6,18 +6,16 @@ import {
   Switch,
   Route,
   useLocation,
-  useHistory,
+
 } from "react-router-dom";
 import Styles from "./profile.module.css";
 import { logOut } from "../../services/actions/auth";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import ProfileOrders from "./ProfileOrders/ProfileOrders";
 import {
   wsConnectionStartOwner,
   wsConnectionClosedOwner,
 } from "../../services/actions/wsActionsOwner";
-import OrderDetails from "../../components/OrderDetails/OrderDetails";
 
 export default function Profile() {
   const dispatch = useDispatch();
