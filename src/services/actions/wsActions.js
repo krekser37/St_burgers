@@ -2,12 +2,13 @@ export const WS_CONNECTION_START = "WS_CONNECTION_START";
 export const WS_CONNECTION_SUCCESS = "WS_CONNECTION_SUCCESS";
 export const WS_CONNECTION_ERROR = "WS_CONNECTION_ERROR";
 export const WS_CONNECTION_CLOSED = "WS_CONNECTION_CLOSED";
-export const WS_GET_ORDERS = "WS_GET_ORDERS";
-export const WS_SEND_ORDERS = "WS_SEND_ORDERS";
+export const WS_GET_MESSAGE = "WS_GET_MESSAGE";
+export const WS_SEND_MESSAGE = "WS_SEND_MESSAGE";
 
-export const wsConnectionStart = () => {
+export const wsConnectionStart = (url) => {
   return {
     type: WS_CONNECTION_START,
+    payload: url,
   };
 };
 
@@ -29,16 +30,16 @@ export const wsConnectionClosed = () => {
   };
 };
 
-export const wsGetOrders = (order) => {
+export const wsGetMessage = (order) => {
   return {
-    type: WS_GET_ORDERS,
+    type: WS_GET_MESSAGE,
     payload: order,
   };
 };
 
-export const wsSendOrders = (order) => {
+export const wsSendMessage = (order) => {
   return {
-    type: WS_SEND_ORDERS,
+    type: WS_SEND_MESSAGE,
     payload: order,
   };
 };

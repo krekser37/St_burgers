@@ -2,7 +2,7 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  WS_GET_ORDERS,
+  WS_GET_MESSAGE,
 } from "../actions/wsActions";
 
 const initialState = {
@@ -32,7 +32,7 @@ export const wsReducer = (state = initialState, action) => {
         wsConnected: false,
       };
 
-    case WS_GET_ORDERS:
+    case WS_GET_MESSAGE:
       return {
         ...state,
         orders: action.payload.orders,

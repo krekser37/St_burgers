@@ -12,10 +12,16 @@ import Styles from "./profile.module.css";
 import { logOut } from "../../services/actions/auth";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import ProfileOrders from "./ProfileOrders/ProfileOrders";
-import {
+/* import {
   wsConnectionStartOwner,
   wsConnectionClosedOwner,
-} from "../../services/actions/wsActionsOwner";
+} from "../../services/actions/wsActionsOwner"; */
+import {
+  wsConnectionStart,
+  wsConnectionClosed,
+} from "../../services/actions/wsActions";
+import {wsUrlOwner} from "../../utils/burger-api";
+import { getCookie } from "../../utils/cookie";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -27,11 +33,20 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    /* dispatch(wsConnectionClosed()); */
+    const accessToken = getCookie("token");
+    dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch]);
+
+/*   useEffect(() => {
     dispatch(wsConnectionStartOwner());
     return () => {
       dispatch(wsConnectionClosedOwner());
     };
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <>

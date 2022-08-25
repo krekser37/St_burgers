@@ -9,14 +9,18 @@ import {
 } from "../../services/actions/wsActions";
 import { useSelector } from "react-redux";
 import Preloader from "../../components/Preloader/Preloader";
+import {wsUrl} from "../../utils/burger-api";
 
 export default function Feed() {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.wsOrders.orders);
   useEffect(() => {
-    dispatch(wsConnectionStart());
+  /*   dispatch(wsConnectionClosed()); */
+    dispatch(
+      wsConnectionStart(wsUrl));
     return () => {
-      dispatch(wsConnectionClosed());
+      dispatch(
+        wsConnectionClosed());
     };
   }, [dispatch]);
 

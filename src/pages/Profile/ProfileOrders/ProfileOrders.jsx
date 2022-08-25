@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Styles from "./profileOrders.module.css";
 import { Link, useLocation } from "react-router-dom";
 import OrdersCard from "../../../components/OrdersCard/OrdersCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "../../../utils/cookie";
+import { wsConnectionClosed, wsConnectionStart } from "../../../services/actions/wsActions";
+import { wsUrlOwner } from "../../../utils/burger-api";
 
 export default function ProfileOrders() {
   const location = useLocation();
-  const orders = useSelector((store) => store.wsOrdersOwner.orders);
+  const dispatch = useDispatch();
+  const orders = useSelector((store) => store.wsOrders.orders);
+
+  useEffect(() => {
+    const accessToken = getCookie("token");
+    dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch]);
 
   return (
     <div className={`${Styles.container}`}>

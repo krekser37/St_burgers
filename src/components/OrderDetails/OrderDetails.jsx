@@ -6,14 +6,16 @@ import { useParams, useLocation, useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { formatDate } from "../../utils/formatDate";
 import Preloader from "../Preloader/Preloader";
-import {
+/* import {
   wsConnectionClosedOwner,
   wsConnectionStartOwner,
-} from "../../services/actions/wsActionsOwner";
+} from "../../services/actions/wsActionsOwner"; */
 import {
   wsConnectionClosed,
   wsConnectionStart,
 } from "../../services/actions/wsActions";
+import {wsUrlOwner, wsUrl} from "../../utils/burger-api";
+import { getCookie } from "../../utils/cookie";
 
 export default function OrderDetails() {
   const dispatch = useDispatch();
@@ -22,9 +24,9 @@ export default function OrderDetails() {
   const isProfile = "/profile/orders/:id";
   const isFeed = "/feed/:id";
 
-  const ordersAll = useSelector((state) => state.wsOrders.orders);
-  const ordersOwner = useSelector((state) => state.wsOrdersOwner.orders);
-  let orders = match.path === isProfile ? ordersOwner : ordersAll;
+  const orders = useSelector((state) => state.wsOrders.orders);
+/*   const ordersOwner = useSelector((state) => state.wsOrdersOwner.orders); */
+/*   let orders = match.path === isProfile ? ordersOwner : ordersAll; */
   let order = orders.find((order) => order._id === id);
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
   const location = useLocation();
@@ -53,6 +55,26 @@ export default function OrderDetails() {
   useEffect(() => {
     if (!order) {
       if (match.path === isProfile) {
+        const accessToken = getCookie("token");
+        dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));
+      }
+      if (match.path === isFeed) {
+        dispatch(wsConnectionStart(wsUrl));
+      }
+    }
+    return () => {
+      if (match.path === isProfile) {
+        dispatch(wsConnectionClosed());
+      }
+      if (match.path === isFeed) {
+        dispatch(wsConnectionClosed());
+      }
+    };
+  }, [dispatch, order, match.path, match.url]);
+
+/*   useEffect(() => {
+    if (!order) {
+      if (match.path === isProfile) {
         dispatch(wsConnectionStartOwner());
       }
       if (match.path === isFeed) {
@@ -67,7 +89,7 @@ export default function OrderDetails() {
         dispatch(wsConnectionClosed());
       }
     };
-  }, [dispatch, order, match.path, match.url]);
+  }, [dispatch, order, match.path, match.url]); */
 
   return order ? (
     <div className={`${Styles.OrderDetails}`}>
