@@ -1,0 +1,98 @@
+.feedOrders {
+  display: flex;
+  flex-direction: column;
+  background: #1c1c21;
+  border-radius: 40px;
+  column-gap: 24px;
+}
+
+.order {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.IngredientsPrice {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Ingredients {
+  display: flex;
+  flex-direction: row;
+  /* flex-direction: row-reverse; */
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Ingredient {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(#1c1c21, #1c1c21) padding-box,
+    linear-gradient(45deg, #801ab2, #4c4cff) border-box;
+  display: flex;
+  align-items: center;
+    padding: 2px;
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Ingredient:not(:first-child),
+.Ingredient_last {
+  margin-left: -16px;
+}
+
+.Ingredient_last {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(#1c1c21, #1c1c21) padding-box,
+    linear-gradient(45deg, #801ab2, #4c4cff) border-box;
+  display: flex;
+  align-items: center;
+    padding: 2px;
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.IngredientCount {
+  margin-left: -40px;
+  z-index: 1;
+}
+
+.IngredientOverlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  border-radius: 50%;
+}
+
+.Price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 76px;
+  padding: auto;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.status {
+	color: #00cccc;
+}

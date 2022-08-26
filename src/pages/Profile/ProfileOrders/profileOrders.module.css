@@ -1,0 +1,35 @@
+.container {
+    width: 100%;
+    max-width: 844px;
+    overflow-y: auto;
+      overflow-x: hidden;
+  }
+
+  .container_empty {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .FeedLink {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .ElementsOrders {
+    overflow-y: scroll;
+    max-height: 550px;
+    scroll-snap-type: x none;
+  }
+  
+  .ElementsOrders::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .ElementsOrders::-webkit-scrollbar-track {
+    background: #2f2f37;
+  }
+  
+  .ElementsOrders::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+    border: 3px solid #8585ad;
+  }

@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import "@ya.praktikum/react-developer-burger-ui-components";
 import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
@@ -23,11 +23,12 @@ import ForgotPassword from "../../pages/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword";
 import Profile from "../../pages/Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Feed from "../../pages/Feed/Feed";
 import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
-import Orders from "../../pages/Profile/Orders/Orders";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,10 +59,8 @@ function App() {
   }, [dispatch, refreshTokenData, user, cookie, tokenSuccess]);
 
   const handleCloseIngredientInModal = () => {
-    console.log("click");
     dispatch(closeIngredientDetails());
     history.goBack();
-    console.log("close");
   };
 
   if (!ingredients) {
@@ -98,20 +97,26 @@ function App() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
-        <ProtectedRoute path="/profile" exact>
-          <Profile />
+        <Route path="/feed" exact>
+          <Feed />
+        </Route>
+        <ProtectedRoute path="/profile/orders/:id">
+          <OrderDetails />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" exact>
-          <Orders />
+        <ProtectedRoute path="/profile">
+          <Profile />
         </ProtectedRoute>
         <Route path="/ingredients/:id">
           <IngredientDetails />
+        </Route>
+        <Route path="/feed/:id">
+          <OrderDetails />
         </Route>
         <Route path="*" exact={true}>
           <NotFound />
         </Route>
       </Switch>
-      {background && 
+      {background && (
         <Route path="/ingredients/:id" exact={true}>
           <Modal
             title="Детали ингредиента"
@@ -119,7 +124,24 @@ function App() {
           >
             <IngredientDetails />
           </Modal>
-        </Route>}
+        </Route>
+      )}
+
+      {background && (
+        <Route path="/feed/:id" exact={true}>
+          <Modal title="" onClose={handleCloseIngredientInModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+      )}
+
+      {background && (
+        <ProtectedRoute path="/profile/orders/:id" exact={true}>
+          <Modal title="" onClose={handleCloseIngredientInModal}>
+            <OrderDetails />
+          </Modal>
+        </ProtectedRoute>
+      )}
     </div>
   );
 }

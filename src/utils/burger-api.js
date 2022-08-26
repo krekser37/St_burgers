@@ -1,6 +1,8 @@
 import { getCookie } from "./cookie";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
+export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const wsUrlOwner = 'wss://norma.nomoreparties.space/orders';
 
 export const getResponseData = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -15,6 +17,7 @@ export const getApiOrder = (ids) => {
   return fetch(`${baseUrl}/orders`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
+        Authorization: 'Bearer ' + getCookie('token'),
       },
       method: "POST",
       body: JSON.stringify({ ingredients: ids }),

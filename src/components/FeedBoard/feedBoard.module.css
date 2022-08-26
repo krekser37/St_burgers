@@ -1,0 +1,39 @@
+.FeedBoard {
+    min-width: 580px;
+}
+
+.statys {
+    display: flex;
+    column-gap: 36px;
+    justify-content: space-between
+}
+
+.list {
+    width: 272px;
+   
+}
+
+.numbers{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-height: 328px;
+    box-sizing: border-box;
+}
+
+.done {
+ /*    color: #F2F2F3; */
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+
+}
+
+.numberDone {
+    list-style-type: none;
+    color: #00CCCC;
+}
+
+.numberWork{
+    list-style-type: none;
+}

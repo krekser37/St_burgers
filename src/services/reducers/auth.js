@@ -132,10 +132,9 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         getUserFailed: false,
-        /* getUserSuccess: true, */
+        getUserSuccess: true,
         user: action.payload, 
         getUserRequest: false,
-
       };
     }
     case GET_USER_FAILED: {

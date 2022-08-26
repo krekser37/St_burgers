@@ -2,7 +2,7 @@
   display: flex;
   margin: auto;
   margin-top: 120px;
-  max-width: 860px;
+  max-width: 1232px;
   align-items: flex-start;
   flex-wrap: wrap;
 }
@@ -28,29 +28,5 @@
   color: white;
 }
 
-.form {
-  min-width: 480px;
-  text-align: center;
-}
-
-.form div {
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-.form div div div {
-  max-width: 24px;
-  margin: auto;
-}
-
-.form input {
-  color: rgb(133, 133, 173);
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
 
 
