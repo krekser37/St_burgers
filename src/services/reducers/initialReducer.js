@@ -3,7 +3,7 @@ import {
   GET_INGREDIENS_SUCCESS,
   GET_INGREDIENS_FAILED,
   SET_CURRENT_TAB,
-} from "../actions/index";
+} from "../constants/ingredients";
 
 const initialIngredients = {
   ingredients: [],

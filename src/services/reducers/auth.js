@@ -30,7 +30,7 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
-} from "../actions/auth";
+} from "../constants/auth";
 
 const initialState = {
   user: null,

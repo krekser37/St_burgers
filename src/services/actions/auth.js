@@ -9,10 +9,32 @@ import {
   patchApiRegistration,
 } from "../../utils/burger-api";
 import { setCookie, deleteCookie } from "../../utils/cookie";
-
-export const TOKEN_REQUEST = "TOKEN_REQUEST";
-export const TOKEN_SUCCESS = "TOKEN_SUCCESS";
-export const TOKEN_FAILED = "TOKEN_FAILED";
+import {
+  TOKEN_REQUEST,
+  TOKEN_SUCCESS,
+  TOKEN_FAILED,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  REGISTRATION_REQUEST,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAILED,
+  UPDATE_REGISTRATION_REQUEST,
+  UPDATE_REGISTRATION_SUCCESS,
+  UPDATE_REGISTRATION_FAILED,
+  AUTORISATION_REQUEST,
+  AUTORISATION_SUCCESS,
+  AUTORISATION_FAILED,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILED,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILED
+} from "../constants/auth";
 
 export function updateToken() {
   return function (dispatch) {
@@ -38,10 +60,6 @@ export function updateToken() {
       });
   };
 }
-
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 export function logOut() {
   return function (dispatch) {
@@ -69,10 +87,6 @@ export function logOut() {
   };
 }
 
-export const GET_USER_REQUEST = "GET_USER_REQUEST";
-export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
-export const GET_USER_FAILED = "GET_USER_FAILED";
-
 export function getUser() {
   return function (dispatch) {
     dispatch({
@@ -95,10 +109,6 @@ export function getUser() {
       });
   };
 }
-
-export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
-export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
-export const REGISTRATION_FAILED = "REGISTRATION_FAILED";
 
 export function registration(name, email, password) {
   return function (dispatch) {
@@ -133,10 +143,6 @@ export function registration(name, email, password) {
   };
 }
 
-export const UPDATE_REGISTRATION_REQUEST = "UPDATE_REGISTRATION_REQUEST";
-export const UPDATE_REGISTRATION_SUCCESS = "UPDATE_REGISTRATION_SUCCESS";
-export const UPDATE_REGISTRATION_FAILED = "UPDATE_REGISTRATION_FAILED";
-
 export function updateRegistration(name, email, password) {
   return function (dispatch) {
     dispatch({
@@ -167,10 +173,6 @@ export function updateRegistration(name, email, password) {
   };
 }
 
-export const AUTORISATION_REQUEST = "AUTORISATION_REQUEST";
-export const AUTORISATION_SUCCESS = "AUTORISATION_SUCCESS";
-export const AUTORISATION_FAILED = "AUTORISATION_FAILED";
-
 export function authorization(email, password) {
   return function (dispatch) {
     dispatch({
@@ -200,10 +202,6 @@ export function authorization(email, password) {
   };
 }
 
-export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
-export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
-export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";
-
 export function forgotPassword(emailValue) {
   return function (dispatch) {
     dispatch({
@@ -227,10 +225,6 @@ export function forgotPassword(emailValue) {
       });
   };
 }
-
-export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
-export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAILED = "RESET_PASSWORD_FAILED";
 
 export function resetPassword(password, token) {
   return function (dispatch) {

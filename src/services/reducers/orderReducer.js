@@ -4,7 +4,7 @@ import {
   GET_ORDER_FAILED,
   SET_ORDER_MODAL,
   RESET_ORDER_MODAL,
-} from "../actions/index";
+} from "../constants/ingredients";
 
 const initialOrderState = {
   order: {},

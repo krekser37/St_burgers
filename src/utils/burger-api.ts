@@ -1,10 +1,11 @@
 import { getCookie } from "./cookie";
+/* import { TUser } from "./types"; */
 
 const baseUrl = "https://norma.nomoreparties.space/api";
 export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
 export const wsUrlOwner = 'wss://norma.nomoreparties.space/orders';
 
-export const getResponseData = (res) => {
+export const getResponseData = <T>(res: Response): Promise<T> => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
@@ -13,7 +14,7 @@ export const getApiResponse = () => {
     .then(getResponseData)
 };
 
-export const getApiOrder = (ids) => {
+export const getApiOrder = (ids: number) => {
   return fetch(`${baseUrl}/orders`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -25,7 +26,7 @@ export const getApiOrder = (ids) => {
       .then(getResponseData)
 };
 
-export const getApiForgotPassword = (emailValue) => {
+export const getApiForgotPassword = (emailValue:string) => {
   return fetch(`${baseUrl}/password-reset`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -36,7 +37,7 @@ export const getApiForgotPassword = (emailValue) => {
       .then(getResponseData)
 };
 
-export const getApiResetPassword = (password, token) => {
+export const getApiResetPassword = (password: string, token: number) => {
   return fetch(`${baseUrl}/password-reset/reset`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -48,7 +49,7 @@ export const getApiResetPassword = (password, token) => {
 };
 
 //регистрация
-export const postApiRegistration = async (name, email, password) => {
+export const postApiRegistration = async (name: string, email: string, password: string) => {
   return fetch(`${baseUrl}/auth/register`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -60,7 +61,7 @@ export const postApiRegistration = async (name, email, password) => {
 };
 
 //обновление данных о пользователе
-export const patchApiRegistration = async (name, email, password) => {
+export const patchApiRegistration = async (name: string, email: string, password: string) => {
   return fetch(`${baseUrl}/auth/user`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -73,7 +74,7 @@ export const patchApiRegistration = async (name, email, password) => {
 };
 
 //авторизация
-export const postApiAutorisation = async (email, password) => {
+export const postApiAutorisation = async (email:string, password: string) => {
   return fetch(`${baseUrl}/auth/login`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",

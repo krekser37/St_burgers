@@ -6,9 +6,9 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop, useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { changeFillingPosition } from "../../services/actions/index";
+import { changeFillingPosition } from "../../services/actions/ingredients";
 import { nanoid } from "nanoid";
-import { deleteFromConstructor} from "../../services/actions/index";
+import { deleteFromConstructor} from "../../services/actions/ingredients";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../../utils/propTypes";
 

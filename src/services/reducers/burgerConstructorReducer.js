@@ -4,7 +4,7 @@ import {
   DELETE_FILLING,
   CHANGE_FILLING_POSITION,
   DELETE_INGREDIENT,
-} from "../actions/index";
+} from "../constants/ingredients";
 import update from 'immutability-helper';
 
 const initialState = {

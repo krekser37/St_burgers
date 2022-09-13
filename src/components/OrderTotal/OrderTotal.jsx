@@ -12,7 +12,7 @@ import Done from "./img/done.svg";
 import PropTypes from "prop-types";
 import ingredientsDataPropTypes from "../../utils/propTypes";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder, resetOrderModal, deleteFromOrder } from "../../services/actions/index";
+import { getOrder, resetOrderModal, deleteFromOrder } from "../../services/actions/ingredients";
 
 function OrderTotal({ orderIngredients, totalPrice }) {
   const dispatch = useDispatch();
