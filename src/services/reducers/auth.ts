@@ -1,3 +1,4 @@
+import { TAuthActions } from "../actions/auth";
 import {
   TOKEN_REQUEST,
   TOKEN_SUCCESS,
@@ -31,8 +32,47 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
 } from "../constants/auth";
+import { TUser } from "../types/types";
 
-const initialState = {
+
+
+type TAuthState ={
+  user: TUser | null,
+
+  tokenRequest:boolean,
+  tokenFailed: boolean,
+  tokenSuccess: boolean,
+
+  logoutRequest:boolean,
+  logoutFailed: boolean,
+  logoutSuccess: boolean,
+
+  getUserRequest: boolean,
+  getUserSuccess: boolean,
+  getUserFailed: boolean,
+
+  registrationRequest: boolean,
+  registrationFailed: boolean,
+  registrationSuccess: boolean,
+
+  updateregistrationRequest: boolean,
+  updateregistrationFailed: boolean,
+  updateregistrationSuccess: boolean,
+
+  autorisationRequest: boolean,
+  autorisationFailed: boolean,
+  autorisationSuccess: boolean,
+
+  forgotPasswordRequest: boolean,
+  forgotPasswordFailed: boolean,
+  forgotPasswordSuccess: boolean,
+
+  resetPasswordRequest: boolean,
+  resetPasswordFailed: boolean,
+  resetPasswordSuccess: boolean,
+}
+
+const initialState: TAuthState = {
   user: null,
 
   tokenRequest:false,
@@ -68,7 +108,7 @@ const initialState = {
   resetPasswordSuccess: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
   switch (action.type) {
 
     case TOKEN_REQUEST: {
@@ -82,10 +122,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         tokenFailed: false,
-        /* tokenSuccess: true, */
-        user: null, 
         tokenRequest: false,
-
       };
     }
     case TOKEN_FAILED: {
@@ -107,8 +144,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         logoutFailed: false,
-        /* logoutSuccess: true, */
-        user: null, 
+        logoutSuccess: true,
         logoutRequest: false,
 
       };
@@ -133,7 +169,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserFailed: false,
         getUserSuccess: true,
-        user: action.payload, 
+        user: action.payload.user, 
         getUserRequest: false,
       };
     }
@@ -156,6 +192,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         updateregistrationFailed: false,
+        updateregistrationSuccess: true,
         user: action.payload, 
         updateregistrationRequest: false,
       };
@@ -180,7 +217,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registrationFailed: false,
-        user: action.payload, 
+        user: action.payload.user, 
         registrationRequest: false,
         /* registrationSuccess: true, */
       };
@@ -204,8 +241,9 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         autorisationFailed: false,
-        user: action.payload, 
+        user: action.payload.user, 
         autorisationRequest: false,
+        autorisationSuccess: true,
 
       };
     }

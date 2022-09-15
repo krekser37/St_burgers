@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux';
 import {orderReducer} from "./orderReducer";
-import { initialReducer } from './initialReducer';
+import { initialReducer } from './ingredientsReducer';
 import { burgerConstructorReducer } from './burgerConstructorReducer';
 import { ingredientDetailsReducer } from './IngredientDetailsReducer';
 import { authReducer } from './auth';

@@ -1,5 +1,5 @@
+import { TAuth, TUser } from "../services/types/types";
 import { getCookie } from "./cookie";
-/* import { TUser } from "./types"; */
 
 const baseUrl = "https://norma.nomoreparties.space/api";
 export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
@@ -49,7 +49,7 @@ export const getApiResetPassword = (password: string, token: number) => {
 };
 
 //регистрация
-export const postApiRegistration = async (name: string, email: string, password: string) => {
+export const postApiRegistration = (name: string, email: string, password: string) => {
   return fetch(`${baseUrl}/auth/register`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -57,7 +57,7 @@ export const postApiRegistration = async (name: string, email: string, password:
       method: "POST",
       body: JSON.stringify({ name: name, email: email, password: password }),
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TAuth>(res))
 };
 
 //обновление данных о пользователе
@@ -83,7 +83,7 @@ export const postApiAutorisation = async (email:string, password: string) => {
       method: "POST",
       body: JSON.stringify({ email: email, password: password}),
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TAuth>(res))
 };
 
 //получение данных пользователя 
@@ -101,7 +101,7 @@ export const getApiUser = async  () => {
       redirect: 'follow',
       referrerPolicy: 'no-referrer'
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TUser>(res))
 };
 
 //выход пользователя
@@ -120,7 +120,7 @@ export const postApiLogout= async () => {
       redirect: 'follow',
       referrerPolicy: 'no-referrer'
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TAuth>(res))
 }; 
 
 //обновление токена
@@ -140,5 +140,5 @@ export const postUpdateToken= async () => {
       redirect: 'follow',
       referrerPolicy: 'no-referrer'
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TAuth>(res))
 }; 

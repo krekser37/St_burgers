@@ -9,7 +9,7 @@ import { useDrop } from "react-dnd";
 import {
   addToConstructorBun,
   addToConstructorFilling,
-} from "../../services/actions/ingredients";
+} from "../../services/actions/burgerConstructor";
 import EmptyConstructorElement from "../EmptyConstructorElement/EmptyConstructorElement";
 import FillingConstructorElement from "../FillingConstructorElement/FillingConstructorElement";
 

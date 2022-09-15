@@ -10,7 +10,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE
-} from './actions/wsActions';
+} from './constants/wsActions';
 
 
 const wsActions = {

@@ -59,7 +59,7 @@ export default function OrderDetails() {
         dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));
       }
       if (match.path === isFeed) {
-        dispatch(wsConnectionStart(wsUrl));
+        dispatch(wsConnectionStart(`${wsUrl}`));
       }
     }
     return () => {

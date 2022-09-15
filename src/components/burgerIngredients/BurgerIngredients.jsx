@@ -16,7 +16,6 @@ function BurgerIngredients() {
   const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
     [ingredients]
