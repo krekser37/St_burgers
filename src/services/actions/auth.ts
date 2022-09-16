@@ -1,4 +1,4 @@
-import { Sign } from "crypto";
+
 import {
   getApiForgotPassword,
   getApiResetPassword,
@@ -297,7 +297,6 @@ export const authorization: AppThunk = (email: string, password: string)=> {
     });
     postApiAutorisation(email, password)
       .then((res) => {
-        console.log(res);
         const authToken = res.accessToken.split("Bearer ")[1];
         setCookie("token", authToken);
         localStorage.setItem("refreshToken", res.refreshToken);

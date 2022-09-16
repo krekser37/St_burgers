@@ -1,4 +1,4 @@
-import { TAuth, TUser } from "../services/types/types";
+import { TAuth, TOrdersResponse, TUser } from "../services/types/types";
 import { getCookie } from "./cookie";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
@@ -14,7 +14,8 @@ export const getApiResponse = () => {
     .then(getResponseData)
 };
 
-export const getApiOrder = (ids: number) => {
+export const getApiOrder = (ids:Array<string>) => {
+  console.log(ids);
   return fetch(`${baseUrl}/orders`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -23,7 +24,7 @@ export const getApiOrder = (ids: number) => {
       method: "POST",
       body: JSON.stringify({ ingredients: ids }),
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TOrdersResponse>(res))
 };
 
 export const getApiForgotPassword = (emailValue:string) => {

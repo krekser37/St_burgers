@@ -24,6 +24,7 @@ function OrderTotal({ orderIngredients, totalPrice }) {
     !user && history.push("/login");
     user &&
       orderIngredients !== undefined &&
+      console.log(orderIngredients);
       dispatch(getOrder(orderIngredients));
   };
 
@@ -33,7 +34,7 @@ function OrderTotal({ orderIngredients, totalPrice }) {
   }, [dispatch]);
 
   const ordertTitle = " ";
-
+console.log(order.order);
   return (
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
       <p className="text text_type_digits-medium">{totalPrice}</p>
@@ -51,11 +52,13 @@ function OrderTotal({ orderIngredients, totalPrice }) {
             </p>
           ) : (
             <div className={Styles.OrderDetails}>
-              {!order.orderSucces ? (
-                <Preloader />
-              ) : (
+
+
+              {order.orderSuccess ? (
                 <OrderNumber orderNumber={order.order} />
-              )}
+              ) : (
+                <Preloader />
+              ) }
               <p className="text text_type_main-medium mt-8 mb-15">
                 идентификатор заказа
               </p>

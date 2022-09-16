@@ -1,3 +1,4 @@
+import { TOrderAction } from "../actions/order";
 import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
@@ -6,21 +7,29 @@ import {
   RESET_ORDER_MODAL,
 } from "../constants/ingredients";
 
-const initialOrderState = {
-  order: {},
+type TOrderState = {
+  order: number |null,
+  orderRequest: boolean,
+  orderSuccess: boolean,
+  orderFailed: boolean,
+  modalIsOpen: boolean,
+};
+
+const initialOrderState: TOrderState = {
+  order: null,
   orderRequest: false,
-  orderSucces: false,
+  orderSuccess: false,
   orderFailed: false,
   modalIsOpen: false,
 };
 
-export const orderReducer = (state = initialOrderState, action) => {
+export const orderReducer = (state = initialOrderState, action:TOrderAction): TOrderState => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return {
         ...state,
         orderRequest: true,
-        orderSucces: false,
+        modalIsOpen: true,
       };
     }
     case GET_ORDER_SUCCESS: {
@@ -28,7 +37,7 @@ export const orderReducer = (state = initialOrderState, action) => {
         ...state,
         order: action.order,
         orderRequest: false,
-        orderSucces: 'success',
+        orderSuccess: true,
         orderFailed: false,
       };
     }
@@ -49,7 +58,7 @@ export const orderReducer = (state = initialOrderState, action) => {
     return {
         ...state,
         modalIsOpen: false,
-        order: {},
+        order: null,
     }
 }
     default:

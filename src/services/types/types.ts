@@ -52,3 +52,9 @@ export type TLogoutResponse = {
   success: boolean;
   message: string;
 }
+
+export type TOrdersResponse= {
+  name: string;
+  order: { number: number } ;
+  success: boolean;
+}
