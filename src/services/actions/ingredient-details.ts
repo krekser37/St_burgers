@@ -13,20 +13,24 @@ export type TIngredientDetailsActions =
 export interface IOpenIngredientModalAction {
   type: typeof SET_CURRENT_INGREDIENT_MODAL;
   ingredient: TIngredient;
+  isOpen: boolean,
 }
 export interface ICloseIngredientModalAction {
   type: typeof RESET_CURRENT_INGREDIENT_MODAL;
+  isOpen: boolean,
 }
 
 export const openIngredientDetails = (ingredient: TIngredient): IOpenIngredientModalAction => {
   return {
     type: SET_CURRENT_INGREDIENT_MODAL,
     ingredient,
+    isOpen: true,
   };
 }
 
 export const closeIngredientDetails = (): ICloseIngredientModalAction => {
   return {
     type: RESET_CURRENT_INGREDIENT_MODAL,
+    isOpen: false
   };
 }
