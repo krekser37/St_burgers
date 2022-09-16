@@ -3,16 +3,24 @@ import {
   ADD_FILLING,
   DELETE_FILLING,
   CHANGE_FILLING_POSITION,
-  DELETE_INGREDIENT,
-} from "../constants/ingredients";
+} from "../constants/burgerConstructor";
 import update from 'immutability-helper';
+import { TBurgerConstructorAction } from "../actions/burgerConstructor";
+import { TIngredient } from "../types/types";
 
-const initialState = {
-  bun: {},
+type TBurgerConstructorState = {
+  bun: TIngredient | null,
+  filling: Array<TIngredient>,
+  id: string| null,
+}
+
+const initialState:TBurgerConstructorState = {
+  bun: null,
   filling: [],
+  id: "",
 };
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorAction): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_BUN: {
       return {
@@ -30,13 +38,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         filling: [...state.filling].filter((item) => item.id !== action.id),
-      };
-    }
-    case DELETE_INGREDIENT: {
-      return {
-        ...state,
-        bun: {},
-        filling: [],
       };
     }
     case CHANGE_FILLING_POSITION: {

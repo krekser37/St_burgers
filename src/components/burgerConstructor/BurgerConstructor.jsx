@@ -19,8 +19,8 @@ function BurgerConstructor() {
   const bun = useSelector((store) => store.burgerConstructor.bun);
 
 /*   console.log(filling);
-  console.log(bun);
- */
+  console.log(bun); */
+
   const orderIngredients = getOrderIngredients();
   function getOrderIngredients() {
     const orderIngredients = [];
@@ -35,7 +35,6 @@ function BurgerConstructor() {
     }
     return orderIngredients;
   }
-  /* console.log(orderIngredients); */
 
   const [/* { isHover } */, dropTarget] = useDrop(() => ({
     accept: "ingredient",
@@ -49,24 +48,17 @@ function BurgerConstructor() {
     }), */
   }));
 
- /*  const classIsHover = isHover ? "onHover" : "none"; */
   const totalPrice = useMemo(() => {
     return (bun ? bun.price * 2 : 0) + filling.reduce((s, v) => s + v.price, 0);
   }, [bun, filling]);
-  /* console.log(totalPrice); */
 
   return (
     <section className={`${Styles.BurgerConstructor} ml-14`}>
       <section
-/*         сlassName={
-          isHover
-            ? `${Styles.elements} mt-25 ${Styles.onHover}`
-            : `${Styles.elements} mt-25`
-        } */
         ref={dropTarget}
         className={`${Styles.elements} mt-25`}
       >
-        {bun._id ? (
+        {bun?._id  ? (
           <div className="mr-4">
             <ConstructorElement
               type="top"
@@ -74,7 +66,6 @@ function BurgerConstructor() {
               text={bun.name + "(верх)"}
               price={bun.price}
               thumbnail={bun.image}
-              /* key={(bun.id = nanoid())} */
             />
           </div>
         ) : (
@@ -97,7 +88,7 @@ function BurgerConstructor() {
             text={`Вы можете добавить выбранные начинки, перетащив их карточку из ингредиентов сюда.`}
           />
         )}
-        {bun._id ? (
+        {bun?._id ? (
           <div className="mr-4">
             <ConstructorElement
               type="bottom"
@@ -105,7 +96,6 @@ function BurgerConstructor() {
               text={bun.name + "(низ)"}
               price={bun.price}
               thumbnail={bun.image}
-              /* key={(bun.id = nanoid())} */
             />
           </div>
         ) : (

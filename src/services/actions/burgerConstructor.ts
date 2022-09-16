@@ -1,8 +1,8 @@
 import { TIngredient } from "../types/types";
 import { nanoid } from "nanoid";
-import { ADD_BUN, ADD_FILLING, DELETE_FILLING,  CHANGE_FILLING_POSITION } from "../constants/ingredients";
+import { ADD_BUN, ADD_FILLING, DELETE_FILLING,  CHANGE_FILLING_POSITION } from "../constants/burgerConstructor";
 
-export type TBurgerConstructor =
+export type TBurgerConstructorAction =
 IAddToConstructorBun
   | IAddToConstructorFilling
   | IDeleteFromConstructor
@@ -21,7 +21,7 @@ IAddToConstructorBun
 
   export interface IDeleteFromConstructor {
     type: typeof DELETE_FILLING;
-    id: number;
+    id: string
   }
 
   export interface IChangeFillingPosition {
@@ -40,7 +40,7 @@ export const addToConstructorFilling = (ingredient: TIngredient): IAddToConstruc
   ingredient: { ...ingredient, id: nanoid() },
 });
 
-export const deleteFromConstructor = (id: number): IDeleteFromConstructor => ({
+export const deleteFromConstructor = (id: string): IDeleteFromConstructor => ({
   type: DELETE_FILLING,
   id,
 });

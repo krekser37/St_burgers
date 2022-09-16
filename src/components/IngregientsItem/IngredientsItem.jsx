@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
@@ -15,7 +15,7 @@ const IngredientsItem = ({ingredient}) => {
   const location = useLocation();
 
   const handleOpenIngredientInModal = (ingredient) => {
-    console.log(ingredient);
+
     dispatch(openIngredientDetails(ingredient));
 };
 
@@ -32,11 +32,13 @@ const IngredientsItem = ({ingredient}) => {
   const filling = useSelector((state) => state.burgerConstructor.filling);
   const bun = useSelector((state) => state.burgerConstructor.bun);
 
-  let count = filling.filter((item) => item._id === ingredient._id).length;
+  const count = useMemo(()=> {
+      if (ingredient.type === "bun") {
+        return bun && ingredient._id === bun._id ? 2 : 0;
+      }
+      return filling && filling.filter((item) => item._id === ingredient._id).length;
 
-  if (ingredient._id === bun._id) {
-    count = 2;
-  }
+  },[bun, filling, ingredient]);
 
   return (
     <>

@@ -15,7 +15,6 @@ export const getApiResponse = () => {
 };
 
 export const getApiOrder = (ids:Array<string>) => {
-  console.log(ids);
   return fetch(`${baseUrl}/orders`, {
       headers: {
         "Content-Type": "application/json;charset=utf-8",

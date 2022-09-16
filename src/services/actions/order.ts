@@ -1,5 +1,5 @@
 import { getApiOrder } from "../../utils/burger-api";
-import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, DELETE_INGREDIENT, GET_ORDER_FAILED, SET_ORDER_MODAL, RESET_ORDER_MODAL } from "../constants/ingredients";
+import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, DELETE_INGREDIENT, GET_ORDER_FAILED, SET_ORDER_MODAL, RESET_ORDER_MODAL } from "../constants/order";
 import { AppDispatch, AppThunk } from "../types";
 
 export type TOrderAction =

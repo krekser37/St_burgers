@@ -4,12 +4,12 @@ import { Action, ActionCreator } from "redux";
 import { ThunkAction/* , ThunkDispatch  */} from "redux-thunk";
 import { TIngredientDetailsActions } from "../actions/ingredient-details";
 import { TWSActions } from "../actions/wsActions";
-import { TBurgerConstructor } from "../actions/burgerConstructor";
+import { TBurgerConstructorAction } from "../actions/burgerConstructor";
 import { TOrderAction } from "../actions/order";
 import { TIngredientsActions } from "../actions/ingredients";
 import { TAuthActions } from "../actions/auth";
 
-type TApplicationActions =  TAuthActions |  TIngredientDetailsActions  | TIngredientsActions | TWSActions | TBurgerConstructor | TOrderAction;
+type TApplicationActions =  TAuthActions |  TIngredientDetailsActions  | TIngredientsActions | TWSActions | TBurgerConstructorAction | TOrderAction;
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppThunk<ReturnType = Promise<any> |void> = ActionCreator<ThunkAction<
