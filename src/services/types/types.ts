@@ -1,3 +1,4 @@
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../constants/wsActions";
 
 
 export type TUser = {
@@ -57,4 +58,13 @@ export type TOrdersResponse= {
   name: string;
   order: { number: number } ;
   success: boolean;
+}
+
+export type TWsUserSocketMiddlewareActions = {
+  wsInit?: typeof WS_CONNECTION_START,
+  onOpen: typeof WS_CONNECTION_SUCCESS,
+  onClose: typeof WS_CONNECTION_CLOSED,
+  onError: typeof WS_CONNECTION_ERROR,
+  wsOnSend: typeof WS_GET_MESSAGE,
+  wsOnMessage: typeof WS_SEND_MESSAGE,
 }

@@ -12,7 +12,6 @@ import {
   WS_SEND_MESSAGE
 } from './constants/wsActions';
 
-
 const wsActions = {
   wsInit: WS_CONNECTION_START,
   onOpen: WS_CONNECTION_SUCCESS,
