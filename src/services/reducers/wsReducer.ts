@@ -9,7 +9,7 @@ import { TOrderDetails } from "../types/types";
 
 type TWsState = {
   wsConnected: boolean;
-  orders: TOrderDetails[];
+  orders: TOrderDetails[] | null;
   total: number | null;
   totalToday: number | null
 };

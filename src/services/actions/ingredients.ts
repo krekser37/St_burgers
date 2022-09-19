@@ -17,10 +17,7 @@ export interface IGetIngredientRequest {
 
 export interface IGetIngredientSuccess {
   readonly type: typeof GET_INGREDIENS_SUCCESS;
-  readonly res: {
-    data: ReadonlyArray<TIngredient>,
-    success: boolean
-  }
+  readonly data: Array<TIngredient>;
 }
 
 export interface IGetIngredientFailed {
@@ -39,11 +36,11 @@ export const getIngredients: AppThunk = () => {
     });
     getApiResponse()
       .then((res) => {
-        if (res /* && res.success */) {
+        if (res && res.success) {
           dispatch({
             type: GET_INGREDIENS_SUCCESS,
-            res,
-            /* ingredients: res.data.ingredients, */
+          /*   res.data, */
+            data: res.data,
           });
         }
       })

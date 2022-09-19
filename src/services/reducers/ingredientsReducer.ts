@@ -46,7 +46,7 @@ export const initialReducer = (state = initialIngredients, action: TIngredientsA
     case GET_INGREDIENS_SUCCESS: {
       return {
         ...state,
-        ingredients: action.res.data,
+        ingredients: action.data,
         ingredientsRequest: false,
         ingredientsFailed: false,
         ingredientsSuccess: true,

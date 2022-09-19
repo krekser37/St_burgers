@@ -47,8 +47,9 @@ export const getOrder: AppThunk = (orderIngredients:Array<string>) => {
     });
     getApiOrder(orderIngredients)
       .then((res) => {
+        console.log(res);
         console.log(res.order.number);
-        if (res /* && res.success */) {
+        if (res && res.success) {
           dispatch({
             type: GET_ORDER_SUCCESS,
            /*  res, */

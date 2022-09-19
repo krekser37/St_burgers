@@ -1,4 +1,4 @@
-import { TAuth, TOrdersResponse, TUser } from "../services/types/types";
+import { TIngredientsResponse, TAuth, TOrdersResponse, TUser } from "../services/types/types";
 import { getCookie } from "./cookie";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
@@ -11,7 +11,7 @@ export const getResponseData = <T>(res: Response): Promise<T> => {
 
 export const getApiResponse = () => {
   return fetch(`${baseUrl}/ingredients`)
-    .then(getResponseData)
+    .then(res=>getResponseData<TIngredientsResponse>(res))
 };
 
 export const getApiOrder = (ids:Array<string>) => {
@@ -70,7 +70,7 @@ export const patchApiRegistration = async (name: string, email: string, password
       method: "PATCH",
       body: JSON.stringify({ name: name, email: email, password: password }),
     })
-      .then(getResponseData)
+      .then(res=>getResponseData<TAuth>(res))
 };
 
 //авторизация

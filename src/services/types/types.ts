@@ -3,9 +3,9 @@ import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONN
 
 export type TUser = {
     readonly id?: number;
-    readonly password?: string;
-    readonly email: string;
     readonly name: string;
+    readonly email: string;
+    readonly password?: string;
   };
 
   export type TAuth = {
@@ -60,11 +60,17 @@ export type TOrdersResponse= {
   success: boolean;
 }
 
-export type TWsUserSocketMiddlewareActions = {
+export type TWsSocketMiddlewareActions = {
   wsInit?: typeof WS_CONNECTION_START,
   onOpen: typeof WS_CONNECTION_SUCCESS,
   onClose: typeof WS_CONNECTION_CLOSED,
   onError: typeof WS_CONNECTION_ERROR,
-  wsOnSend: typeof WS_GET_MESSAGE,
-  wsOnMessage: typeof WS_SEND_MESSAGE,
+  wsOnSend: typeof WS_SEND_MESSAGE ,
+  wsOnMessage: typeof WS_GET_MESSAGE,
+}
+
+export type TIngredientsResponse = {
+readonly data: Array<TIngredient>,
+readonly success:  string,
+
 }

@@ -169,7 +169,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
         ...state,
         getUserFailed: false,
         getUserSuccess: true,
-        user: action.payload.user, 
+        user: action.payload, 
         getUserRequest: false,
       };
     }
@@ -193,7 +193,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
         ...state,
         updateregistrationFailed: false,
         updateregistrationSuccess: true,
-        user: action.payload, 
+        user: action.payload.user, 
         updateregistrationRequest: false,
       };
     }

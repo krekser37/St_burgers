@@ -68,8 +68,8 @@ export type TAuthActions =
 
 export interface ITokenRequest {
   readonly type: typeof TOKEN_REQUEST;
-  readonly success: boolean;
-  readonly message: string;
+/*   readonly success: boolean;
+  readonly message: string; */
 }
 
 export interface ITokenSuccess {
@@ -126,7 +126,6 @@ export const logOut: AppThunk = () => {
     });
     postApiLogout()
       .then((res) => {
-        console.log(res);
         deleteCookie("token");
         localStorage.removeItem("refreshToken");
         if (res /*&&  res.success */) {
@@ -153,7 +152,7 @@ export interface IGetUserRequest {
 export interface IGetUserSuccess {
   readonly type: typeof GET_USER_SUCCESS;
   readonly success : string,
-  readonly payload: TAuth; 
+  readonly payload: TUser; 
 }
 
 export interface IGetUserFailed {
@@ -169,7 +168,6 @@ export const getUser: AppThunk = () => {
     });
     getApiUser()
       .then((res) => {
-        console.log(res);
         if (res) {
           dispatch({
             type: GET_USER_SUCCESS,
@@ -195,12 +193,6 @@ export interface IRegistrationSuccess {
   readonly type: typeof REGISTRATION_SUCCESS;
   readonly success: string;
   readonly payload: TAuth;
-  readonly accessToken: string,
-  readonly refreshToken: string,
-  readonly res: {
-    accessToken: string,
-    refreshToken: string,
-  } 
 }
 
 export interface IRegistrationFailed {
@@ -244,7 +236,7 @@ export interface IUpdateRegistrationRequest {
 export interface IUpdateRegistrationSuccess {
   readonly type: typeof UPDATE_REGISTRATION_SUCCESS;
   readonly success: string;
-  readonly payload: TUser;
+  readonly payload: TAuth;
 }
 
 export interface IUpdateRegistrationFailed {
@@ -258,6 +250,7 @@ export const updateRegistration: AppThunk = (name, email, password) => {
     });
     patchApiRegistration(name, email, password)
       .then((res) => {
+        console.log(res);
         if (res) {
           dispatch({
             type: UPDATE_REGISTRATION_SUCCESS,

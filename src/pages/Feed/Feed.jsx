@@ -14,6 +14,7 @@ import {wsUrl} from "../../utils/burger-api";
 export default function Feed() {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.wsOrders.orders);
+
   useEffect(() => {
   /*   dispatch(wsConnectionClosed()); */
     dispatch(

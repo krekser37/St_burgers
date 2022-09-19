@@ -1,28 +1,27 @@
 import { Middleware, MiddlewareAPI } from "redux";
-import { TWSActions } from "../actions/wsActions";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../constants/wsActions";
+import { TWsSocketMiddlewareActions } from "../types/types";
 
-export const socketMiddleware = (actions:TWSActions): Middleware => {
+export const socketMiddleware = (wsActions:TWsSocketMiddlewareActions): Middleware => {
   return (store: MiddlewareAPI) => {
     let socket: WebSocket | null  = null;
 
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-/*       const { wsInit, wsOnMessage, onOpen, onClose, onError, wsOnSend } =
-        wsActions; */
+      const { wsInit, wsOnMessage, onOpen, onClose, onError, wsOnSend }: TWsSocketMiddlewareActions =
+        wsActions;
 
-        if (type ===  WS_CONNECTION_START) {
+        if (type ===  wsInit) {
           socket = new WebSocket(payload);
         }
 
       if (socket) {
         socket.onopen = (event) => {
-          dispatch({ type : WS_CONNECTION_SUCCESS, payload: event });
+          dispatch({ type : onOpen, payload: event });
         };
 
         socket.onerror = (event) => {
-          dispatch({ type: WS_CONNECTION_ERROR, payload: event });
+          dispatch({ type: onError, payload: event });
         };
 
         socket.onmessage = (event) => {
@@ -30,15 +29,16 @@ export const socketMiddleware = (actions:TWSActions): Middleware => {
           const parsedData = JSON.parse(data);
           const { success, ...restParsedData } = parsedData;
 
-          dispatch({ type: WS_SEND_MESSAGE, payload: restParsedData });
+          dispatch({ type: wsOnMessage, payload: restParsedData });
         };
 
         socket.onclose = (event) => {
-          dispatch({ type: WS_CONNECTION_CLOSED, payload: event });
+          dispatch({ type: onClose, payload: event });
         };
 
-        if (type === WS_GET_MESSAGE) {
+        if (type === wsOnSend) {
           const orders = { ...payload };
+
           socket.send(JSON.stringify(orders));
         }
       }
