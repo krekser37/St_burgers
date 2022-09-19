@@ -8,11 +8,21 @@ import { TBurgerConstructorAction } from "../actions/burgerConstructor";
 import { TOrderAction } from "../actions/order";
 import { TIngredientsActions } from "../actions/ingredients";
 import { TAuthActions } from "../actions/auth";
+import { rootReducer } from "../reducers";
+/* import 'redux-thunk/extend-redux'; */
 
 type TApplicationActions =  TAuthActions |  TIngredientDetailsActions  | TIngredientsActions | TWSActions | TBurgerConstructorAction | TOrderAction;
-export type RootState = ReturnType<typeof store.getState>;
 
-export type AppThunk<ReturnType = Promise<any> |void> = ActionCreator<ThunkAction<
+export type RootState = ReturnType<typeof rootReducer>;
+
+/* export type AppThunk<ReturnType = Promise<any> |void> = ActionCreator<ThunkAction<
+    ReturnType,
+    RootState,
+    Action,
+    TApplicationActions
+>>; */
+
+export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<
     ReturnType,
     RootState,
     Action,
@@ -21,3 +31,6 @@ export type AppThunk<ReturnType = Promise<any> |void> = ActionCreator<ThunkActio
 
 export type AppDispatch = typeof store.dispatch;
 /* export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>; */
+
+
+
