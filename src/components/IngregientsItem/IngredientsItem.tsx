@@ -1,21 +1,26 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import Styles from "./IngredientsItem.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
 import { openIngredientDetails } from "../../services/actions/ingredient-details";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { TIngredient } from "../../services/types/types";
 
-const IngredientsItem = ({ingredient}) => {
-  const dispatch = useDispatch();
+type TIngredientItem = {
+  ingredient: TIngredient,
+}
+
+const IngredientsItem:FC<TIngredientItem> = ({ingredient}) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
-
-  const handleOpenIngredientInModal = (ingredient) => {
-
+  const filling = useAppSelector((state) => state.burgerConstructor.filling);
+  const bun = useAppSelector((state) => state.burgerConstructor.bun);
+  console.log(ingredient);
+  const handleOpenIngredientInModal = (ingredient:TIngredient) => {
     dispatch(openIngredientDetails(ingredient));
 };
 
@@ -28,9 +33,6 @@ const IngredientsItem = ({ingredient}) => {
       }),
     }
   );
-
-  const filling = useSelector((state) => state.burgerConstructor.filling);
-  const bun = useSelector((state) => state.burgerConstructor.bun);
 
   const count = useMemo(()=> {
       if (ingredient.type === "bun") {
@@ -58,7 +60,7 @@ const IngredientsItem = ({ingredient}) => {
           <img src={ingredient.image} alt={ingredient.name} className={Styles.IngredientsImage} />
           <div className={`${Styles.IngredientsItemPrice} mt-1 mb-1`}>
             <p className={`${Styles.IngredientsPrice} mr-2`}>{ingredient.price}</p>
-            <CurrencyIcon />
+            <CurrencyIcon type="primary"/>
           </div>
           <h4
             className={`${Styles.IngridientText} text text_type_main-default`}
@@ -70,10 +72,6 @@ const IngredientsItem = ({ingredient}) => {
       </Link>
     </>
   );
-};
-
-IngredientsItem.propTypes = {
-  ingredient: PropTypes.object.isRequired,
 };
 
 export default IngredientsItem;
