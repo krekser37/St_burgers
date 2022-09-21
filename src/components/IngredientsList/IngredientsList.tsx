@@ -1,9 +1,15 @@
 import React, { forwardRef }from "react";
 import Styles from "./IngredientsList.module.css";
-import IngredientsItem from "../IngregientsItem/IngredientsItem.tsx";
-import PropTypes from "prop-types";
+import IngredientsItem from "../IngregientsItem/IngredientsItem";
+import { TIngredient } from "../../services/types/types";
 
-const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {
+type TIngredientsList ={
+  title: string,
+  titleId: string,
+  ingredients: Array<TIngredient>,
+}
+
+const IngredientsList = forwardRef<HTMLUListElement, TIngredientsList>(({ title, titleId, ingredients }, ref) => {
   return (
     <section className={`${Styles.IngredientsList}`} ref={ref}>
       <h3
@@ -25,11 +31,5 @@ const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {
     </section>
   );
 });
-
-IngredientsList.propTypes = {
-  title: PropTypes.string.isRequired,
-  titleId: PropTypes.string.isRequired,
-  ingredients: PropTypes.array.isRequired,
-};
 
 export default IngredientsList;
