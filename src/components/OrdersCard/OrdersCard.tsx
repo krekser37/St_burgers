@@ -1,14 +1,21 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import Styles from "./ordersCard.module.css";
-import { useSelector } from "react-redux";
+/* import { useSelector } from "react-redux"; */
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { formatDate } from "../../utils/formatDate";
+import { useAppSelector } from "../../services/hooks";
+import { TOrderDetails } from "../../services/types/types";
 
-export default function OrdersCard({ order, status }) {
-  const allIngredients = useSelector((store) => store.ingredients.ingredients);
+type TOrderCard = {
+  order: TOrderDetails,
+  status: boolean,
+}
+
+const OrdersCard: FC<TOrderCard> = ({ order, status }) => {
+  const allIngredients = useAppSelector((store) => store.ingredients.ingredients);
 
   const orderIngredients = useMemo(() => {
-    return order?.ingredients.map((id) => {
+    return order?.ingredients.map((id: string) => {
       return allIngredients?.find((item) => {
         return id === item._id;
       });
@@ -16,7 +23,7 @@ export default function OrdersCard({ order, status }) {
   }, [order?.ingredients, allIngredients]);
 
   const totalOrder = useMemo(() => {
-    return orderIngredients?.reduce((sum, item) => {
+    return orderIngredients?.reduce((sum: number, item) => {
       if (item?.type === "bun") {
         return (sum += item.price * 2);
       }
@@ -74,10 +81,12 @@ export default function OrdersCard({ order, status }) {
           </ul>
           <div className={`${Styles.Price} ml-6`}>
             <p className="text text_type_digits-default mr-2">{totalOrder}</p>
-            <CurrencyIcon />
+            <CurrencyIcon type="primary"/>
           </div>
         </div>
       </section>
     </>
   );
 }
+
+export default OrdersCard;

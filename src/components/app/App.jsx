@@ -30,6 +30,12 @@ import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
 import OrderDetails from "../OrderDetails/OrderDetails";
 
+/* declare module 'react' {
+  interface FunctionComponent<P = {}> {
+    (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
+  }
+} */
+
 function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);

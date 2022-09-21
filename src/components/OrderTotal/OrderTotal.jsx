@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import Styles from "./OrderTotal.module.css";
 import Modal from "../Modal/Modal";
 import { useHistory } from "react-router-dom";
@@ -9,27 +9,30 @@ import {
 import OrderNumber from "../OrderNumber/OrderNumber";
 import Preloader from "../Preloader/Preloader";
 import Done from "./img/done.svg";
-import PropTypes from "prop-types";
-import ingredientsDataPropTypes from "../../utils/propTypes";
-import { useDispatch, useSelector } from "react-redux";
 import { getOrder, resetOrderModal, deleteFromOrder } from "../../services/actions/order";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { TIngredient } from "../../services/types/types";
 
-function OrderTotal({ orderIngredients, totalPrice }) {
-  const dispatch = useDispatch();
+/* type TOrderTotal = {
+  orderIngredients: Array<TIngredient>,
+  totalPrice: number,
+} */
+
+const OrderTotal/* : FC <TOrderTotal>  */= ({ orderIngredients, totalPrice }) =>{
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const order = useSelector((store) => store.order);
-  const user = useSelector((store) => store.auth.user);
-
+  const order = useAppSelector((store) => store.order);
+  const user = useAppSelector((store) => store.auth.user);
+console.log(orderIngredients);
   const handleOpenOrderModal = () => {
     !user && history.push("/login");
     user &&
       orderIngredients !== undefined &&
-      console.log(orderIngredients);
       dispatch(getOrder(orderIngredients));
   };
 
   const handleCloseOrderModal = useCallback(() => {
-    dispatch(resetOrderModal(false));
+    dispatch(resetOrderModal());
     dispatch(deleteFromOrder());
   }, [dispatch]);
 
@@ -54,8 +57,8 @@ function OrderTotal({ orderIngredients, totalPrice }) {
             <div className={Styles.OrderDetails}>
 
 
-              {order.orderSuccess ? (
-                <OrderNumber orderNumber={order.order} />
+              {order?.orderSuccess ? (
+                <OrderNumber orderNumber={order.order}/>
               ) : (
                 <Preloader />
               ) }
@@ -77,9 +80,9 @@ function OrderTotal({ orderIngredients, totalPrice }) {
   );
 }
 
-OrderTotal.propTypes = {
+/* OrderTotal.propTypes = {
   totalPrice: PropTypes.number,
   orderIngredients: PropTypes.arrayOf(ingredientsDataPropTypes),
-};
+}; */
 
 export default OrderTotal;

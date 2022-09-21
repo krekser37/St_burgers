@@ -3,16 +3,16 @@ import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONN
 
 export type TUser = {
     readonly id?: number;
-    readonly name: string;
-    readonly email: string;
-    readonly password?: string;
+    readonly name?: string | undefined;
+    readonly email?: string| undefined;
+    readonly password?: string| undefined;
   };
 
   export type TAuth = {
     readonly accessToken: string;
     readonly refreshToken: string;
     readonly success: boolean;
-    readonly user: TUser;
+    user?: TUser | undefined;
   };
 
 export type TIngredient = {

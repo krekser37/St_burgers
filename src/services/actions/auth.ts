@@ -243,7 +243,7 @@ export interface IUpdateRegistrationFailed {
   readonly type: typeof UPDATE_REGISTRATION_FAILED;
 }
 
-export const updateRegistration: AppThunk = (name, email, password) => {
+export const updateRegistration: AppThunk = (name: string , email: string, password: string ) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_REGISTRATION_REQUEST,

@@ -32,7 +32,7 @@ export interface IGetOrderFailed {
 export interface IResetOrderModal {
   readonly type: typeof RESET_ORDER_MODAL;
   readonly modalIsOpen: boolean,
-  order: null;
+  order?: null;
 }
 
 export interface IDeleteFromOrder {

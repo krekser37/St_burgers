@@ -1,6 +1,6 @@
 import React, { forwardRef }from "react";
 import Styles from "./IngredientsList.module.css";
-import IngredientsItem from "../IngregientsItem/IngredientsItem";
+import IngredientsItem from "../IngregientsItem/IngredientsItem.jsx";
 import PropTypes from "prop-types";
 
 const IngredientsList = forwardRef(({ title, titleId, ingredients }, ref) => {

@@ -1,8 +1,16 @@
+import { FC, ReactNode } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+/* import { useSelector } from "react-redux"; */
+import { useAppSelector } from "../../services/hooks";
 
-function ProtectedRoute({ children, ...rest }) {
-  const user = useSelector(store => store.auth.user);
+type TProtectedRoute = {
+  children: ReactNode;
+/* 	path: string; */
+	/* exact?: boolean; */
+}
+
+const ProtectedRoute: FC<TProtectedRoute> = ({ children, ...rest }) => {
+  const user = useAppSelector(store => store.auth.user);
 
   return (
     <Route

@@ -1,9 +1,9 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, FC } from "react";
 import Styles from "./orderDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderIngredient from "./OrderIngredient/OrderIngredient";
 import { useParams, useLocation, useRouteMatch } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+/* import { useSelector, useDispatch } from "react-redux"; */
 import { formatDate } from "../../utils/formatDate";
 import Preloader from "../Preloader/Preloader";
 /* import {
@@ -16,20 +16,22 @@ import {
 } from "../../services/actions/wsActions";
 import {wsUrlOwner, wsUrl} from "../../utils/burger-api";
 import { getCookie } from "../../utils/cookie";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { Location } from 'history';
 
-export default function OrderDetails() {
-  const dispatch = useDispatch();
-  let { id } = useParams();
+const OrderDetails: FC = () => {
+  const dispatch = useAppDispatch();
+  let { id } = useParams<{id: string}>();
   let match = useRouteMatch();
   const isProfile = "/profile/orders/:id";
   const isFeed = "/feed/:id";
 
-  const orders = useSelector((state) => state.wsOrders.orders);
+  const orders = useAppSelector((state) => state.wsOrders.orders);
 /*   const ordersOwner = useSelector((state) => state.wsOrdersOwner.orders); */
 /*   let orders = match.path === isProfile ? ordersOwner : ordersAll; */
-  let order = orders.find((order) => order._id === id);
-  const allIngredients = useSelector((store) => store.ingredients.ingredients);
-  const location = useLocation();
+  let order = orders?.find((order) => order._id === id);
+  const allIngredients = useAppSelector((store) => store.ingredients.ingredients);
+  const location = useLocation<{background: Location}>();
   const background = location?.state?.background;
 
   const orderIngredients = useMemo(() => {
@@ -42,7 +44,7 @@ export default function OrderDetails() {
       [order?.ingredients, allIngredients]
     );
   }, [order, allIngredients]);
-
+console.log(orderIngredients);
   const totalOrder = useMemo(() => {
     return orderIngredients?.reduce((sum, item) => {
       if (item?.type === "bun") {
@@ -117,7 +119,7 @@ export default function OrderDetails() {
         {[...new Set(orderIngredients)]?.map((ingredient, index) => {
           return (
             <OrderIngredient
-              ingredient={ingredient}
+            ingredient={ingredient}
               key={index}
               count={
                 orderIngredients?.filter(
@@ -134,7 +136,7 @@ export default function OrderDetails() {
         </p>
         <div className={`${Styles.price} ml-6`}>
           <p className="text text_type_digits-default mr-2">{totalOrder}</p>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary"/>
         </div>
       </div>
     </div>
@@ -144,3 +146,6 @@ export default function OrderDetails() {
     </div>
   );
 }
+
+
+export default OrderDetails;
