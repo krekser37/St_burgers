@@ -1,7 +1,7 @@
 import Styles from "./pages.module.css";
 import NotFoundImage from "./img/NotFoundImage.jpeg";
 
-export default function NotFound() {
+const NotFound = () => {
   return (
     <>
       <div className={Styles.container}>
@@ -17,3 +17,5 @@ export default function NotFound() {
     </>
   );
 }
+
+export default NotFound;

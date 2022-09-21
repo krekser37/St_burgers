@@ -37,7 +37,6 @@ import { TAuth } from "../types/types";
 
 
 type TAuthState ={
-  /* user: TUser | undefined |null, */
   user: TAuth['user'] | null;
   tokenRequest:boolean,
   tokenFailed: boolean,

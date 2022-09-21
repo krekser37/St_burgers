@@ -1,11 +1,11 @@
 import React from "react";
 import Styles from "./feedBoard.module.css";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/hooks";
 
-export default function FeedBoard() {
-  const total = useSelector((store) => store.wsOrders.total);
-  const totalToday = useSelector((store) => store.wsOrders.totalToday);
-  const orders = useSelector((store) => store.wsOrders.orders);
+const FeedBoard = () =>{
+  const total = useAppSelector((store) => store.wsOrders.total);
+  const totalToday = useAppSelector((store) => store.wsOrders.totalToday);
+  const orders = useAppSelector((store) => store.wsOrders.orders);
 /*   console.log(orders); */
 
   return (
@@ -67,3 +67,4 @@ export default function FeedBoard() {
     </>
   );
 }
+export default FeedBoard;
