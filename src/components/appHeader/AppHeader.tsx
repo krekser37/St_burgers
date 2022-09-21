@@ -1,4 +1,4 @@
-import React from "react";
+import React , { FC }from "react";
 import Styles from "./AppHeader.module.css";
 import {
   Logo,
@@ -8,7 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
   return (
     <header className={`${Styles.AppHeader}`}>
       <nav className={`${Styles.AppNav}`}>
@@ -18,7 +18,7 @@ const AppHeader = () => {
             activeClassName={Styles.activeNavLink}
             className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
           >
-            <BurgerIcon /* type={isMathConstructor ? "primary" : "secondary"}  *//>
+            <BurgerIcon type="primary"/>
             <span className="text_color_inactive ml-2">Конструктор</span>
           </NavLink>
           <NavLink
@@ -26,7 +26,7 @@ const AppHeader = () => {
             activeClassName={Styles.activeNavLink}
             className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
           >
-            <ListIcon />
+            <ListIcon type="primary"/>
             <span className="text_color_inactive  ml-2">Лента заказов</span>
           </NavLink>
         </ul>
@@ -41,7 +41,7 @@ const AppHeader = () => {
             activeClassName={Styles.activeNavLink}
             className={`${Styles.headerButton} text text_type_main-default text_color_inactive pr-5 pl-5 pt-4 pb-4 `}
           >
-            <ProfileIcon /* type={isMathProfile ? "primary" : "secondary"}  *//>
+            <ProfileIcon type="primary"/>
             <span className="text_color_inactive ml-2">Личный кабинет</span>
           </NavLink>
         </ul>
