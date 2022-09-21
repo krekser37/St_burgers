@@ -28,7 +28,7 @@ export type TIngredient = {
   readonly type: "bun" | "main" | "sauce";
   readonly __v: number;
   readonly _id: string;
-  id?: string;
+  id: string ;
   count?: number;
 };
 
