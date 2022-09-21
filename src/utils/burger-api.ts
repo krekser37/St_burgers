@@ -1,4 +1,4 @@
-import { TIngredientsResponse, TAuth, TOrdersResponse, TUser } from "../services/types/types";
+import { TIngredientsResponse, TAuth, TOrdersResponse} from "../services/types/types";
 import { getCookie } from "./cookie";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
@@ -101,7 +101,7 @@ export const getApiUser = async  () => {
       redirect: 'follow',
       referrerPolicy: 'no-referrer'
     })
-      .then(res=>getResponseData<TUser>(res))
+      .then(res=>getResponseData<TAuth>(res))
 };
 
 //выход пользователя

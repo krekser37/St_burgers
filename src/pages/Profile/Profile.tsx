@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,10 +21,12 @@ import {
 } from "../../services/actions/wsActions";
 import {wsUrlOwner} from "../../utils/burger-api";
 import { getCookie } from "../../utils/cookie";
+import { useAppDispatch } from "../../services/hooks";
+import { Location } from 'history';
 
-export default function Profile() {
-  const dispatch = useDispatch();
-  const location = useLocation();
+const Profile = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation<{background: Location}>();
   const background = location?.state?.background;
 
   const logoutExit = () => {
@@ -96,3 +97,5 @@ export default function Profile() {
     </>
   );
 }
+
+export default Profile;

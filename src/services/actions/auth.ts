@@ -37,7 +37,7 @@ import {
   RESET_PASSWORD_FAILED
 } from "../constants/auth";
 import { AppDispatch, AppThunk } from "../types";
-import { TAuth, TUser } from "../types/types";
+import { TAuth } from "../types/types";
 
 export type TAuthActions =
   ITokenRequest
@@ -128,7 +128,8 @@ export const logOut: AppThunk = () => {
       .then((res) => {
         deleteCookie("token");
         localStorage.removeItem("refreshToken");
-        if (res /*&&  res.success */) {
+        if (res &&  res.success) {
+          console.log(res);
           dispatch({
             type: LOGOUT_SUCCESS,
             success: true,
@@ -151,8 +152,7 @@ export interface IGetUserRequest {
 
 export interface IGetUserSuccess {
   readonly type: typeof GET_USER_SUCCESS;
-  readonly success : string,
-  readonly payload: TUser; 
+  readonly payload: TAuth['user']; 
 }
 
 export interface IGetUserFailed {
@@ -168,11 +168,11 @@ export const getUser: AppThunk = () => {
     });
     getApiUser()
       .then((res) => {
+        console.log(res);
         if (res) {
           dispatch({
             type: GET_USER_SUCCESS,
-            success: "get user success true",
-            payload: res,
+            payload: res.user,
           });
         }
       })
@@ -191,7 +191,7 @@ export interface IRegistrationRequest {
 
 export interface IRegistrationSuccess {
   readonly type: typeof REGISTRATION_SUCCESS;
-  readonly success: string;
+  /* readonly success: string; */
   readonly payload: TAuth;
 }
 
@@ -215,7 +215,7 @@ export const registration: AppThunk = (name: string, email: string, password: st
           localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: REGISTRATION_SUCCESS,
-            success: "true",
+            /* success: "true", */
             payload: res,
           });
         }
@@ -293,7 +293,7 @@ export const authorization: AppThunk = (email: string, password: string)=> {
         const authToken = res.accessToken.split("Bearer ")[1];
         setCookie("token", authToken);
         localStorage.setItem("refreshToken", res.refreshToken);
-        if (res /* && res.success */) {
+        if (res && res.success) {
           dispatch({
             type: AUTORISATION_SUCCESS,
             success: "true",

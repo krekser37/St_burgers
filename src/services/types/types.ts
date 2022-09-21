@@ -3,16 +3,16 @@ import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONN
 
 export type TUser = {
     readonly id?: number;
-    readonly name?: string | undefined;
-    readonly email?: string| undefined;
-    readonly password?: string| undefined;
+    readonly name: string;
+    readonly email: string;
+    readonly password?: string;
   };
 
   export type TAuth = {
     readonly accessToken: string;
     readonly refreshToken: string;
     readonly success: boolean;
-    user?: TUser | undefined;
+    user?: TUser ;
   };
 
 export type TIngredient = {
@@ -44,7 +44,7 @@ export type TOrderDetails = {
 
 export type TOrder = {
   wsConnected: boolean;
-  orders: TOrderDetails[];
+  orders: TOrderDetails;
   total: number;
   totalToday: number;
 };

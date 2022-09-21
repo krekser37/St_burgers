@@ -2,16 +2,16 @@ import React, { useEffect } from "react";
 import Styles from "./profileOrders.module.css";
 import { Link, useLocation } from "react-router-dom";
 import OrdersCard from "../../../components/OrdersCard/OrdersCard";
-import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../../utils/cookie";
 import { wsConnectionClosed, wsConnectionStart } from "../../../services/actions/wsActions";
 import { wsUrlOwner } from "../../../utils/burger-api";
+import { useAppDispatch, useAppSelector } from "../../../services/hooks";
 
-export default function ProfileOrders() {
+const ProfileOrders =() =>{
   const location = useLocation();
-  const dispatch = useDispatch();
-  const orders = useSelector((store) => store.wsOrders.orders);
-
+  const dispatch = useAppDispatch();
+  const orders = useAppSelector((store) => store.wsOrders.orders);
+console.log(orders);
   useEffect(() => {
     const accessToken = getCookie("token");
     dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));
@@ -23,7 +23,7 @@ export default function ProfileOrders() {
   return (
     <div className={`${Styles.container}`}>
       <div className={`${Styles.ElementsOrders}`}>
-        {orders.length > 0 ? (
+        {orders/* .length > 0 */ ? (
           orders.reverse().map((order, index) => {
             return (
               <Link
@@ -52,3 +52,6 @@ export default function ProfileOrders() {
     </div>
   );
 }
+
+
+export default ProfileOrders;

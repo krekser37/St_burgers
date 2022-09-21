@@ -17,12 +17,13 @@ import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { TUser } from "../../services/types/types";
 
 const ProfileForm: FC = () => {
-  const {user} = useAppSelector((store) => store.auth.user) as {user: TUser};
-  console.log(user);
 
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState("");
+  const {user} = useAppSelector((store) => store.auth) as {user: TUser}
+  console.log(user?.name);
+
+  const [nameValue, setNameValue] = useState(user?.name);
+  const [emailValue, setEmailValue] = useState(user?.email);
+  const [passwordValue, setPasswordValue] = useState('');
 
   const nameRef = useRef(null);
   const loginRef = useRef(null);
@@ -33,8 +34,8 @@ const ProfileForm: FC = () => {
 
   useEffect(() => {
     if (user) {
-      setNameValue(user.name);
-      setEmailValue(user.email);
+      user &&  setNameValue(user?.name);
+      user &&  setEmailValue(user?.email);
     }
   }, [user]);
 
@@ -45,8 +46,8 @@ const ProfileForm: FC = () => {
   /*   onClick?: (() => void) | ((e: SyntheticEvent) => void) | undefined; */
   const cancelUpdateUser = (e: SyntheticEvent): void => {
     e.preventDefault();
-    setNameValue(nameValue);
-    setEmailValue(emailValue);
+    user && setNameValue(nameValue);
+    user && setEmailValue(emailValue);
     setPasswordValue("");
     setShowButtons(false);
   };

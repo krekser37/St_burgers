@@ -32,13 +32,13 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
 } from "../constants/auth";
-import { TUser } from "../types/types";
+import { TAuth } from "../types/types";
 
 
 
 type TAuthState ={
-  user: TUser | null,
-
+  /* user: TUser | undefined |null, */
+  user: TAuth['user'] | null;
   tokenRequest:boolean,
   tokenFailed: boolean,
   tokenSuccess: boolean,
@@ -146,7 +146,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthSt
         logoutFailed: false,
         logoutSuccess: true,
         logoutRequest: false,
-
+        user: null,
       };
     }
     case LOGOUT_FAILED: {
