@@ -19,7 +19,6 @@ const IngredientsItem:FC<TIngredientItem> = ({ingredient}) => {
   const location = useLocation();
   const filling = useAppSelector((state) => state.burgerConstructor.filling);
   const bun = useAppSelector((state) => state.burgerConstructor.bun);
-  console.log(ingredient);
   const handleOpenIngredientInModal = (ingredient:TIngredient) => {
     dispatch(openIngredientDetails(ingredient));
 };

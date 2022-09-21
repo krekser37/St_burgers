@@ -23,7 +23,6 @@ const OrderTotal: FC <TOrderTotal> = ({ orderIngredients, totalPrice }) =>{
   const history = useHistory();
   const order = useAppSelector((store) => store.order);
   const user = useAppSelector((store) => store.auth.user);
-console.log(orderIngredients);
   const handleOpenOrderModal = () => {
     !user && history.push("/login");
     user &&

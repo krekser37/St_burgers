@@ -1,35 +1,24 @@
 import React from "react";
 import Styles from "./IngredientDetails.module.css";
-import { useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useParams} from "react-router-dom";
+import { useAppSelector } from "../../services/hooks";
 
-const IngredientDetails = ({ title }) => {
-  const { id } = useParams();
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
+const IngredientDetails  = () => {
+  const { id } = useParams<{ id: string }>();
+  const ingredients = useAppSelector((state) => state.ingredients.ingredients);
   const ingredient = ingredients.find((ingredient) => ingredient._id === id);
-  const location = useLocation();
-  const background = location?.state?.background;
-
 
   if (ingredients.length !== 0) {
     return (
       <>
         <div className={Styles.IngredientDetails}>
-          {!background && (
-            <h2
-              className={`${Styles.IngredientTitle} text text_type_main-large `}
-            >
-              {title}
-            </h2>
-          )}
           <img
             className={Styles.IngredientImage}
-            src={ingredient.image}
-            alt={ingredient.name} 
+            src={ingredient?.image}
+            alt={ingredient?.name} 
           />
           <h3 className="text text_type_main-medium mt-4 mb-8">
-            {ingredient.name}
+            {ingredient?.name}
           </h3>
           <ul className={`${Styles.IngredientDetailsList} mb-15`}>
             <li className={`${Styles.IngredientDetailsItem} mr-5`}>
@@ -37,7 +26,7 @@ const IngredientDetails = ({ title }) => {
                 Калории, ккал
               </p>
               <p className="text text_type_main-default text_centre text_color_inactive">
-                {ingredient.calories}
+                {ingredient?.calories}
               </p>
             </li>
             <li className={`${Styles.IngredientDetailsItem} mr-5`}>
@@ -45,7 +34,7 @@ const IngredientDetails = ({ title }) => {
                 Белки, г
               </p>
               <p className="text text_type_main-default text_color_inactive">
-                {ingredient.proteins}
+                {ingredient?.proteins}
               </p>
             </li>
             <li className={`${Styles.IngredientDetailsItem} mr-5`}>
@@ -53,7 +42,7 @@ const IngredientDetails = ({ title }) => {
                 Жиры, г
               </p>
               <p className="text text_type_main-default text_color_inactive">
-                {ingredient.fat}
+                {ingredient?.fat}
               </p>
             </li>
             <li className={`${Styles.IngredientDetailsItem} mr-5`}>
@@ -61,7 +50,7 @@ const IngredientDetails = ({ title }) => {
                 Углеводы, г
               </p>
               <p className="text text_type_main-default text_color_inactive">
-                {ingredient.carbohydrates}
+                {ingredient?.carbohydrates}
               </p>
             </li>
           </ul>
@@ -69,10 +58,6 @@ const IngredientDetails = ({ title }) => {
       </>
     );
   }
-};
-
-IngredientDetails.propTypes = {
-  title: PropTypes.string,
 };
 
 export default IngredientDetails;
