@@ -2,7 +2,7 @@ import React, { FC } from "react";
 /* import PropTypes from "prop-types"; */
 
 interface IOrderNumber {
-  orderNumber?: number |undefined;
+  orderNumber?: number |null;
 }
 
 const OrderNumber: FC <IOrderNumber> = ({ orderNumber }) => {

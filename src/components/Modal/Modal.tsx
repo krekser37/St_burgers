@@ -9,7 +9,7 @@ const modalRoot = document.getElementById("modalRoot") as HTMLElement;
 
 type TModal = {
   title: string,
-  onClose: ()=>string,
+  onClose: ()=>void,
   children: ReactNode;
 }
 

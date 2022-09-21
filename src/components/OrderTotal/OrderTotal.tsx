@@ -13,12 +13,12 @@ import { getOrder, resetOrderModal, deleteFromOrder } from "../../services/actio
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { TIngredient } from "../../services/types/types";
 
-/* type TOrderTotal = {
+type TOrderTotal = {
   orderIngredients: Array<TIngredient>,
   totalPrice: number,
-} */
+} 
 
-const OrderTotal/* : FC <TOrderTotal>  */= ({ orderIngredients, totalPrice }) =>{
+const OrderTotal: FC <TOrderTotal> = ({ orderIngredients, totalPrice }) =>{
   const dispatch = useAppDispatch();
   const history = useHistory();
   const order = useAppSelector((store) => store.order);
@@ -42,7 +42,7 @@ console.log(orderIngredients);
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
       <p className="text text_type_digits-medium">{totalPrice}</p>
       <div className={`${Styles.totalCurrencyIcon}  ml-2 mt-3 mr-10`}>
-        <CurrencyIcon />
+        <CurrencyIcon type="primary"/>
       </div>
       <Button type="primary" size="large" onClick={handleOpenOrderModal}>
         Оформить заказ
@@ -55,8 +55,6 @@ console.log(orderIngredients);
             </p>
           ) : (
             <div className={Styles.OrderDetails}>
-
-
               {order?.orderSuccess ? (
                 <OrderNumber orderNumber={order.order}/>
               ) : (
@@ -79,10 +77,5 @@ console.log(orderIngredients);
     </section>
   );
 }
-
-/* OrderTotal.propTypes = {
-  totalPrice: PropTypes.number,
-  orderIngredients: PropTypes.arrayOf(ingredientsDataPropTypes),
-}; */
 
 export default OrderTotal;

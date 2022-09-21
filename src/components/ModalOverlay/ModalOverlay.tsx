@@ -3,7 +3,7 @@ import Styles from "./ModalOverlay.module.css";
 /* import PropTypes from "prop-types"; */
 
 type TOnClose = {
-  onClose: () => string,
+  onClose: () => void,
 }
 
 const ModalOverlay: FC<TOnClose> = ({ onClose }) => {
