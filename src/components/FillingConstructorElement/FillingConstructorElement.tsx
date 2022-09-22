@@ -16,7 +16,7 @@ type TFillingConstructorElement ={
   index: number,
 }
 
-type TDragItem = {
+export type TDragItem = {
 	index: number;
 	type: string;
 	id?: string;

@@ -33,20 +33,20 @@ export type TIngredient = {
 };
 
 export type TOrderDetails = {
-  ingredients: Array<string>;
-  _id: string;
-  name: string;
-  status: string;
-  number: number;
   createdAt: string;
-  id?: string;
+  ingredients: Array<string>;
+  name: string;
+  number: number;
+  status: string;
+  updatedAt :string;
+  _id: string;
 };
 
 export type TOrder = {
-  wsConnected: boolean;
-  orders: TOrderDetails;
-  total: number;
-  totalToday: number;
+  readonly wsConnected: boolean;
+  readonly orders: TOrderDetails[];
+  readonly total: number;
+  readonly totalToday: number;
 };
 
 export type TLogoutResponse = {
@@ -74,3 +74,5 @@ readonly data: Array<TIngredient>,
 readonly success:  string,
 
 }
+
+

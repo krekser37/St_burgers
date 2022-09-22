@@ -1,21 +1,27 @@
 import React, {
+  FC,
   useMemo,
   useState,
   useEffect,
+  DetailedHTMLProps,
+  HTMLAttributes,
 } from "react";
 import Styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
-import { Tab } from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import { useSelector } from "react-redux";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import { useInView } from "react-intersection-observer";
+import { useAppSelector } from "../../services/hooks";
 
-function BurgerIngredients() {
-  const [current, setCurrent] = useState("buns");
+export interface IBurgerIngredients
+  extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {}
+
+const BurgerIngredients: FC<IBurgerIngredients> = () => {
+  const [current, setCurrent] = useState<string>("buns");
   const [bunsRef, inViewBuns] = useInView({ threshold: 1 });
   const [saucesRef, inViewSauces] = useInView({ threshold: 0.5 });
   const [mainsRef, inViewMains] = useInView({ threshold: 0.5 });
 
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const ingredients = useAppSelector((state) => state.ingredients.ingredients);
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
     [ingredients]
@@ -40,9 +46,11 @@ function BurgerIngredients() {
     }
   }, [inViewBuns, inViewMains, inViewSauces]);
 
-  const switchTab = (tab) => {
+  const switchTab = (tab: string) => {
+    console.log(tab);
     setCurrent(tab);
-    const element = document.getElementById(tab);
+    const element: HTMLElement | null = document.getElementById(tab);
+    console.log(element);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -54,38 +62,29 @@ function BurgerIngredients() {
       <div className={`${Styles.list}`}>
         <a href="#buns" className={`${Styles.item}`}>
           <Tab
-          inViewBuns={inViewBuns}
-            value={"buns"}
             active={current === "buns"}
-            onClick={switchTab}
+            value={"buns"}
+            onClick={() => switchTab("bun")}
           >
             Булки
           </Tab>
         </a>
         <a href="#sauces" className={`${Styles.item}`}>
           <Tab
-          inViewSauces={inViewSauces}
-            value={"sauces"}
             active={current === "sauces"}
+            value={"sauces"}
             onClick={switchTab}
           >
             Соусы
           </Tab>
         </a>
         <a href="#mains" className={`${Styles.item}`}>
-          <Tab
-          inViewMains={inViewMains}
-            value={"mains"}
-            active={current === "mains"}
-            onClick={switchTab}
-          >
+          <Tab active={current === "mains"} value={"mains"} onClick={switchTab}>
             Начинки
           </Tab>
         </a>
       </div>
-      <div
-        className={`${Styles.ElementsName}`}
-      >
+      <div className={`${Styles.ElementsName}`}>
         <IngredientsList
           ref={bunsRef}
           title="Булки"
@@ -107,10 +106,6 @@ function BurgerIngredients() {
       </div>
     </section>
   );
-}
-
-/* BurgerIngredients.propTypes = {
-  selectIngredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
-}; */
+};
 
 export default BurgerIngredients;

@@ -1,10 +1,7 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import Styles from "./BurgerConstructor.module.css";
-import ingredientsDataPropTypes from "../../utils/propTypes";
 import OrderTotal from "../OrderTotal/OrderTotal";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   addToConstructorBun,
@@ -12,11 +9,13 @@ import {
 } from "../../services/actions/burgerConstructor";
 import EmptyConstructorElement from "../EmptyConstructorElement/EmptyConstructorElement";
 import FillingConstructorElement from "../FillingConstructorElement/FillingConstructorElement";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { TIngredient } from "../../services/types/types";
 
-function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const filling = useSelector((store) => store.burgerConstructor.filling);
-  const bun = useSelector((store) => store.burgerConstructor.bun);
+const BurgerConstructor:FC = () => {
+  const dispatch = useAppDispatch();
+  const filling = useAppSelector((store) => store.burgerConstructor.filling);
+  const bun = useAppSelector((store) => store.burgerConstructor.bun);
 
 /*   console.log(filling);
   console.log(bun); */
@@ -36,16 +35,13 @@ function BurgerConstructor() {
     return orderIngredients;
   }
 
-  const [/* { isHover } */, dropTarget] = useDrop(() => ({
+  const [, dropTarget] = useDrop(() => ({
     accept: "ingredient",
-    drop(ingredient) {
+    drop(ingredient: TIngredient) {
       ingredient.type === "bun"
         ? dispatch(addToConstructorBun(ingredient))
         : dispatch(addToConstructorFilling(ingredient));
     },
-/*     collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }), */
   }));
 
   const totalPrice = useMemo(() => {
@@ -110,14 +106,10 @@ function BurgerConstructor() {
           totalPrice={totalPrice}
         />
       ) : (
-        <OrderTotal totalPrice={0} />
+        <OrderTotal orderIngredients={orderIngredients} totalPrice={0} />
       )}
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientsDataPropTypes.isRequired),
-};
 
 export default BurgerConstructor;
