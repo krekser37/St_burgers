@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import { Link , Redirect} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   EmailInput,
@@ -9,16 +8,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { registration } from "../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../services/hooks";
 
-export default function Register() {
-  const user = useSelector(store => store.auth.user);
+ const Register: FC = () =>{
+  const user = useAppSelector(store => store.auth.user);
   const [emailValue, setemailValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
   const [nameValue, setnameValue] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const userRegister = (e) => {
+  const userRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registration(nameValue, emailValue, passwordValue));
   };
@@ -49,7 +49,7 @@ export default function Register() {
               onChange={(e) => setemailValue(e.target.value)}
               value={emailValue}
               name={"email"}
-              placeholder={"E-mail"}
+/*               placeholder={"E-mail"} */
             />
           </div>
           <div className={`${Styles.input} mt-6`}>
@@ -78,3 +78,4 @@ export default function Register() {
     </>
   );
 }
+export default  Register;

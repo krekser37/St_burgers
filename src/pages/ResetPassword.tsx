@@ -1,21 +1,23 @@
-import React, { useState,  } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import {  useHistory, Link, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { resetPassword } from "../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../services/hooks";
 
-export default function ResetPassword() {
+const ResetPassword: FC = () => {
+  const user = useAppSelector((store) => store.auth.user);
+  const forgotPasswordSuccess = useAppSelector((store) => store.auth.forgotPasswordSuccess)
   const [passwordValue, setpasswordValue] = useState("");
   const [token, setToken] = useState("");
 
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const sentResetPassword = (e) => {
+  const sentResetPassword = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetPassword(passwordValue, token));
     setpasswordValue("");
@@ -23,10 +25,6 @@ export default function ResetPassword() {
     history.push("/profile");
   };
   
-  const user = useSelector((store) => store.auth.user);
-  const forgotPasswordSuccess = useSelector((store) => store.auth.forgotPasswordSuccess)
-
-  console.log(user);
   if (user) {
     return <Redirect to={"/"} />;
   }
@@ -76,7 +74,6 @@ export default function ResetPassword() {
           <Link
             className={Styles.linkLogin}
             type="secondary"
-            size="medium"
             to="/login"
           >
             Войти
@@ -86,3 +83,5 @@ export default function ResetPassword() {
     </>
   );
 }
+
+export default ResetPassword;
