@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import { Redirect, useLocation, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   PasswordInput,
@@ -8,20 +7,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { authorization } from "../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../services/hooks";
 
-export default function Login() {
+const Login: FC = ()=> {
   const [emailValue, setemailValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const submitLogin = (e) => {
+  const submitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(authorization(emailValue, passwordValue));
   };
+  const location = useLocation<{from: string}>();
 
-  let location = useLocation();
-
-  const user = useSelector((store) => store.auth.user);
+  const user = useAppSelector((store) => store.auth.user);
 
   if (user) {
     return (
@@ -52,13 +51,8 @@ export default function Login() {
             <PasswordInput
               onChange={(e) => setpasswordValue(e.target.value)}
               value={passwordValue}
-              placeholder="Пароль"
               name="password"
-              type="password"
-              icon="EditIcon"
               size="default"
-              error={false}
-              errorText="Ошибка"
             />
           </div>
           <div className="mt-6 mb-20">
@@ -86,3 +80,4 @@ export default function Login() {
       </div>
   );
 }
+export default  Login;
