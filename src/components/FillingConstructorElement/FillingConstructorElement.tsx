@@ -26,14 +26,10 @@ const FillingConstructorElement:FC<TFillingConstructorElement> = ({ ingredient, 
   const dispatch = useDispatch();
   const ref = useRef(null);
   const id = nanoid();
-  const idItem = ingredient.id;
-console.log(typeof idItem);
-
 
   const [, dropRef] = useDrop<TDragItem>({
     accept: "newIndex",
     hover(item) {
-      console.log(item);
       if (!ref.current) {
         return;
       }

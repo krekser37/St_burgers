@@ -44,7 +44,7 @@ const OrderDetails: FC = () => {
       [order?.ingredients, allIngredients]
     );
   }, [order, allIngredients]);
-console.log(orderIngredients);
+
   const totalOrder = useMemo(() => {
     return orderIngredients?.reduce((sum, item) => {
       if (item?.type === "bun") {

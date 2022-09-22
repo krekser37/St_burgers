@@ -19,7 +19,6 @@ import { TUser } from "../../services/types/types";
 const ProfileForm: FC = () => {
 
   const {user} = useAppSelector((store) => store.auth) as {user: TUser}
-  console.log(user?.name);
 
   const [nameValue, setNameValue] = useState(user?.name);
   const [emailValue, setEmailValue] = useState(user?.email);

@@ -88,7 +88,6 @@ export const updateToken: AppThunk = () => {
     });
     postUpdateToken()
       .then((res) => {
-        console.log(res);
         const authToken = res.accessToken.split("Bearer ")[1];
         setCookie("token", authToken);
         localStorage.setItem("refreshToken", res.refreshToken);
@@ -129,7 +128,6 @@ export const logOut: AppThunk = () => {
         deleteCookie("token");
         localStorage.removeItem("refreshToken");
         if (res &&  res.success) {
-          console.log(res);
           dispatch({
             type: LOGOUT_SUCCESS,
             success: true,
@@ -168,7 +166,6 @@ export const getUser: AppThunk = () => {
     });
     getApiUser()
       .then((res) => {
-        console.log(res);
         if (res) {
           dispatch({
             type: GET_USER_SUCCESS,
@@ -208,7 +205,6 @@ export const registration: AppThunk = (name: string, email: string, password: st
     });
     postApiRegistration(name, email, password)
       .then((res) => {
-        console.log(res);
         if (res) {
           const authToken = res.accessToken.split("Bearer ")[1];
           setCookie("token", authToken);
@@ -250,7 +246,6 @@ export const updateRegistration: AppThunk = (name: string , email: string, passw
     });
     patchApiRegistration(name, email, password)
       .then((res) => {
-        console.log(res);
         if (res) {
           dispatch({
             type: UPDATE_REGISTRATION_SUCCESS,

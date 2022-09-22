@@ -11,7 +11,7 @@ const ProfileOrders =() =>{
   const location = useLocation();
   const dispatch = useAppDispatch();
   const orders = useAppSelector((store) => store.wsOrders.orders);
-console.log(orders);
+  
   useEffect(() => {
     const accessToken = getCookie("token");
     dispatch(wsConnectionStart(`${wsUrlOwner}?token=${accessToken}`));

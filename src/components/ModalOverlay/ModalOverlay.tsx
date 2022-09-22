@@ -7,7 +7,6 @@ type TOnClose = {
 }
 
 const ModalOverlay: FC<TOnClose> = ({ onClose }) => {
-  console.log(onClose);
   return <div className={`${Styles.ModalOverlay}`} onClick={onClose}></div>;
 };
 

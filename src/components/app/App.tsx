@@ -4,7 +4,6 @@ import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 import Styles from "./App.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../../services/actions/ingredients";
 import { getUser, updateToken } from "../../services/actions/auth";
 import { DndProvider } from "react-dnd";
@@ -29,23 +28,36 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 
-/* declare module 'react' {
+declare module 'react' {
   interface FunctionComponent<P = {}> {
     (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
   }
-} */
+}
 
-function App() {
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const user = useSelector((store) => store.auth.user);
+type TLocation = {
+  background: {
+      pathname: string;
+      search: string;
+      hash: string;
+      state: null;
+      key: string;
+  }
+  from: string;
+  state?: object;
+};
+
+const App = () =>{
+  const dispatch = useAppDispatch();
+  const ingredients = useAppSelector((state) => state.ingredients.ingredients);
+  const user = useAppSelector((store) => store.auth.user);
   const cookie = getCookie("token");
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const background = location?.state?.background;
   /* const background = location.state && location.state.background; */
   const refreshTokenData = localStorage.getItem("refreshToken");
-  const tokenSuccess = useSelector((store) => store.auth.tokenSuccess);
+  const tokenSuccess = useAppSelector((store) => store.auth.tokenSuccess);
   const history = useHistory();
 
   useEffect(() => {

@@ -5,12 +5,12 @@ import { useAppSelector } from "../../services/hooks";
 
 type TProtectedRoute = {
   children: ReactNode;
-/* 	path: string; */
-	/* exact?: boolean; */
-}
+  path: string;
+  exact?: boolean;
+};
 
 const ProtectedRoute: FC<TProtectedRoute> = ({ children, ...rest }) => {
-  const user = useAppSelector(store => store.auth.user);
+  const user = useAppSelector((store) => store.auth.user);
 
   return (
     <Route
@@ -29,6 +29,6 @@ const ProtectedRoute: FC<TProtectedRoute> = ({ children, ...rest }) => {
       }
     />
   );
-}
+};
 
 export default ProtectedRoute;

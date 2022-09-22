@@ -14,7 +14,6 @@ type TModal = {
 }
 
 const Modal : FC<TModal> = ({ title, onClose, children }) => {
-console.log(children);
   const onEscDown = useCallback((e: {key: string}) => {
     if(e.key === "Escape") {
     onClose()};

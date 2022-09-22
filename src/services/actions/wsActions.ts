@@ -69,7 +69,6 @@ export const wsConnectionClosed = (): IWsConnectionClosed => {
 };
 
 export const wsGetMessage = (payload: TOrder): IWsGetMessage => {
-  console.log(payload);
   return {
     type: WS_GET_MESSAGE,
     payload,
@@ -77,7 +76,6 @@ export const wsGetMessage = (payload: TOrder): IWsGetMessage => {
 };
 
 export const wsSendMessage = (payload: TOrder): IWsSendWessage => {
-  console.log(payload);
   return {
     type: WS_SEND_MESSAGE,
     payload,

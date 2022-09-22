@@ -36,7 +36,6 @@ const OrderTotal: FC <TOrderTotal> = ({ orderIngredients, totalPrice }) =>{
   }, [dispatch]);
 
   const ordertTitle = " ";
-/* console.log(order.order); */
   return (
     <section className={`${Styles.totalElements} mt-10 mr-4`}>
       <p className="text text_type_digits-medium">{totalPrice}</p>

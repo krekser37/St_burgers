@@ -22,7 +22,6 @@ const ForgotPassword:FC = () => {
 
   const user = useAppSelector((store) => store.auth.user);
 
-  console.log(user);
   if (user) {
     return <Redirect to={"/"} />;
   }

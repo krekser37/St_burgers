@@ -6,7 +6,6 @@ const FeedBoard = () =>{
   const total = useAppSelector((store) => store.wsOrders.total);
   const totalToday = useAppSelector((store) => store.wsOrders.totalToday);
   const orders = useAppSelector((store) => store.wsOrders.orders);
-/*   console.log(orders); */
 
   return (
     <>

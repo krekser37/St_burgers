@@ -47,10 +47,8 @@ const BurgerIngredients: FC<IBurgerIngredients> = () => {
   }, [inViewBuns, inViewMains, inViewSauces]);
 
   const switchTab = (tab: string) => {
-    console.log(tab);
     setCurrent(tab);
     const element: HTMLElement | null = document.getElementById(tab);
-    console.log(element);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 

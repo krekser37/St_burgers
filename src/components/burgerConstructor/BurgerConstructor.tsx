@@ -17,9 +17,6 @@ const BurgerConstructor:FC = () => {
   const filling = useAppSelector((store) => store.burgerConstructor.filling);
   const bun = useAppSelector((store) => store.burgerConstructor.bun);
 
-/*   console.log(filling);
-  console.log(bun); */
-
   const orderIngredients = getOrderIngredients();
   function getOrderIngredients() {
     const orderIngredients = [];
