@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, {FC, useState, FormEvent } from "react";
 import { useHistory, Link, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./pages.module.css";
 import { forgotPassword } from "../services/actions/auth";
+import { useAppDispatch, useAppSelector } from "../services/hooks";
 
-export default function ForgotPassword() {
+const ForgotPassword:FC = () => {
   const [emailValue, setemailValue] = useState("");
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const sentForgotPassword = (e) => {
+  const sentForgotPassword = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(forgotPassword(emailValue));
     setemailValue("");
     history.push("/reset-password");
   };
 
-  const user = useSelector((store) => store.auth.user);
+  const user = useAppSelector((store) => store.auth.user);
 
   console.log(user);
   if (user) {
@@ -54,7 +54,6 @@ export default function ForgotPassword() {
           <Link
             className={Styles.linkLogin}
             type="secondary"
-            size="medium"
             to="/login"
           >
             Войти
@@ -63,4 +62,5 @@ export default function ForgotPassword() {
       </div>
     </>
   );
-}
+};
+export default ForgotPassword;
