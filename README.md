@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-[Ссылка на проект](https://krekser37.github.io/St_burgers/)
+[Ссылка на проект](https://krekser37.github.io)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
