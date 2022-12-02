@@ -1,47 +1,38 @@
-# Getting Started with Create React App
-[Ссылка на проект](https://krekser37.github.io/St_burgers/)
+# Проект: St_burgers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* [Макет в Figma](#figma)
+* [Какие навыки приобрела в этом спринте](#skills)
+* [Стэк технологий](#stack)
+* [Ссылка на проект GitHub Pages](#project)
 
-## Available Scripts
+<a name='figma'>**Макет в Figma**</a>
 
-In the project directory, you can run:
+[Ссылка на макет в Figma-1](https://www.figma.com/file/zFGN2O5xktHl9VmoOieq5E/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8_external_link?node-id=0%3A1&t=qBUXKEWUBfPmuzNs-0)
 
-### `npm start`
+[Ссылка на макет в Figma-2](https://www.figma.com/file/ocw9a6hNGeAejl4F3G9fp8/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8-(3-%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0)_external_link?node-id=6291%3A2799&t=JqRPagspyuHp1Yn8-0)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<a name='skills'>**Какие навыки приобрела в этом спринте**</a>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Научилась создавать и структурировать проект на React. 
+2. Научилась создавать компоненты и управлять потоками данных. А также использовать [готовые UI-компоненты](https://www.npmjs.com/package/@ya.praktikum/react-developer-burger-ui-components).
+3. Освоила функциональный подход к разработке на React и написала код с помощью хуков.
+4. Научилась взаимодействовать с API с помощью усилителей в Redux и обрабатывать несколько результатов выполнения запроса.
+5. Воспользовалась Redux для работы с состоянием в приложении и создания глобального хранилища, к которому получают доступ все подписанные компоненты приложения.
+6. Структурировала всю бизнес-логику приложения и использовала ее.
+7. Реализовала Drag and Drop с помощью библиотеки React DnD.
+8. Реализовала авторизацию в приложении, в том числе с помощью токенов.
+9. Создала роутинг приложения.
+10. Настроила защищенные авторизацией маршруты и переадресацию пользователей.
+11. Создала непрерывное соединение с бэкэндом при помощи WebSocket, а также работала с событиями WebSocket (отправка и получение данных).
+12. Научилась применять TypeScript.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<a name='stack'>**Стэк технологий**</a>
 
-### `npm run build`
+  <img src="https://img.shields.io/badge/HTML-696969?style=for-the-badge&logo=HTML5&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/CSS3-696969?style=for-the-badge&logo=CSS3&logoColor=blue">  <img src="https://img.shields.io/badge/JavaScript-696969?style=for-the-badge&logo=JavaScript&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/React-696969?style=for-the-badge&logo=React&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/React Router-696969?style=for-the-badge&logo=React Router&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/Redux-696969?style=for-the-badge&logo=Redux&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/Webpack-696969?style=for-the-badge&logo=Webpack&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/TypeScript-696969?style=for-the-badge&logo=TypeScript&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/npm-696969?style=for-the-badge&logo=npm&logoColor=#F7DF1E">  <img src="https://img.shields.io/badge/github-696969?style=for-the-badge&logo=github&logoColor=#F7DF1E"> <img src="https://img.shields.io/badge/Visual Studio Code-696969?style=for-the-badge&logo=Visual Studio Code&logoColor=#F7DF1E">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<a name='project'>**Ссылка на GitHub Pages**</a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [Ссылка на проект GitHub Pages](https://krekser37.github.io/St_burgers/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Спасибо!
