@@ -3,7 +3,7 @@
 * [Макет в Figma](#figma)
 * [Какие навыки приобрела в этом спринте](#skills)
 * [Стэк технологий](#stack)
-* [Ссылка на проект GitHub Pages](#project)
+* [Ссылка на проект GitHub Pages](https://krekser37.github.io/St_burgers/)
 
 <a name='figma'>**Макет в Figma**</a>
 
