@@ -9,7 +9,6 @@ import { getUser, updateToken } from "../../services/actions/auth";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   useLocation,

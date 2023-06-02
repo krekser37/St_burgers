@@ -49,7 +49,7 @@ const BurgerIngredients: FC<IBurgerIngredients> = () => {
   const switchTab = (tab: string) => {
     setCurrent(tab);
     const element: HTMLElement | null = document.getElementById(tab);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -71,13 +71,13 @@ const BurgerIngredients: FC<IBurgerIngredients> = () => {
           <Tab
             active={current === "sauces"}
             value={"sauces"}
-            onClick={switchTab}
+            onClick={() => switchTab("sauces")}
           >
             Соусы
           </Tab>
         </a>
         <a href="#mains" className={`${Styles.item}`}>
-          <Tab active={current === "mains"} value={"mains"} onClick={switchTab}>
+          <Tab active={current === "mains"} value={"mains"} onClick={() => switchTab("mains")}>
             Начинки
           </Tab>
         </a>
