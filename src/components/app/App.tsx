@@ -92,7 +92,7 @@ const App = () =>{
     <div className={`${Styles.app}`}>
       <AppHeader />
       <Switch location={background || location}>
-        <Route path="/">
+        <Route path="/" exact>
           {ingredients && (
             <DndProvider backend={HTML5Backend}>
               <main className={Styles.appMain}>
