@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/St_burgers/static/css/main.f3d58a5f.css",
-    "main.js": "/St_burgers/static/js/main.11ceaab2.js",
+    "main.js": "/St_burgers/static/js/main.0a45b765.js",
     "static/js/787.2b4cbca8.chunk.js": "/St_burgers/static/js/787.2b4cbca8.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/St_burgers/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/St_burgers/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -14,11 +14,11 @@
     "static/media/preloader.svg": "/St_burgers/static/media/preloader.22cb2753f385388712da90655962a377.svg",
     "index.html": "/St_burgers/index.html",
     "main.f3d58a5f.css.map": "/St_burgers/static/css/main.f3d58a5f.css.map",
-    "main.11ceaab2.js.map": "/St_burgers/static/js/main.11ceaab2.js.map",
+    "main.0a45b765.js.map": "/St_burgers/static/js/main.0a45b765.js.map",
     "787.2b4cbca8.chunk.js.map": "/St_burgers/static/js/787.2b4cbca8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f3d58a5f.css",
-    "static/js/main.11ceaab2.js"
+    "static/js/main.0a45b765.js"
   ]
 }
