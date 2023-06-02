@@ -62,7 +62,7 @@ const BurgerIngredients: FC<IBurgerIngredients> = () => {
           <Tab
             active={current === "buns"}
             value={"buns"}
-            onClick={() => switchTab("bun")}
+            onClick={() => switchTab("buns")}
           >
             Булки
           </Tab>
